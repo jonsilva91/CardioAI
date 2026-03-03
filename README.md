@@ -1,72 +1,245 @@
-# FIAP - Faculdade de Informática e Administração Paulista
+# CardioIA: A Nova Era da Cardiologia Inteligente – Fase 1
 
 <p align="center">
-<a href= "https://www.fiap.com.br/"><img src="assets/logo-fiap.png" alt="FIAP - Faculdade de Informática e Admnistração Paulista" border="0" width=40% height=40%></a>
+<a href="https://www.fiap.com.br/"><img src="assets/logo-fiap.png" alt="FIAP - Faculdade de Informática e Administração Paulista" border="0" width=40% height=40%></a>
 </p>
 
-<br>
+---
 
-# Nome do projeto
+## Visão Geral
 
-## Nome do grupo
+O **CardioIA** é um ecossistema de IA integrado para análise de dados cardiovasculares, combinando:
 
-## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 1</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 5</a>
+- **Dados Numéricos**: Sinais vitais, exames laboratoriais, telemonitoramento IoT
+- **Dados Textuais**: Relatórios clínicos, diretrizes, anamnese estruturada  
+- **Dados Visuais**: ECG, radiografias, ecocardiogramas, angiogramas
+- **Modelos IA**: ML supervisionado, deep learning (CNN, RNN), NLP, agentes autônomos
 
-## 👩‍🏫 Professores:
-### Tutor(a) 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Tutor</a>
-### Coordenador(a)
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Coordenador</a>
+### Objetivo Fase 1
+Coleta e governança de bases multimodais com 100+ registros numéricos, 2+ textos clínicos e 100+ imagens de exames, garantindo privacidade, rastreabilidade e alinhamento com requisitos PBL FIAP.
 
+---
 
-## 📜 Descrição
+## Estrutura do Repositório
 
-*Descreva seu projeto com base no texto do PBL (até 600 palavras)*
+```
+CardioAI/
+├── assets/
+│   ├── docs/                                    # Dados textuais clínicos
+│   │   ├── diagnostico_insuficiencia_cardiaca.txt
+│   │   ├── arritmias_classificacao_tratamento.txt  
+│   │   └── infarto_agudo_miocardio.txt
+│   └── logo-fiap.png
+├── data/
+│   ├── pacientes_cardio.csv                     # Dataset numérico (150 x 20)
+│   └── images/                                  # Exames visuais (120 imagens)
+├── document/                                    # Documentação oficial
+│   └── ai_project_document_fiap.md
+├── scripts/
+│   ├── check_assets.py                          # Validação de integridade
+│   └── readme.md
+├── src/                                         # Código fonte futuro
+├── config/                                      # Configurações
+├── requirements.txt                             # Dependências
+└── README.md                                    # Este arquivo
+```
 
+---
 
-## 📁 Estrutura de pastas
+## Parte 1: Dados Numéricos
 
-Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
+**Arquivo**: `data/pacientes_cardio.csv`  
+**Tamanho**: 150 registros × 20 variáveis  
+**Status**: ✅ Atende mínimo de 100 linhas  
+**Link Público**: [INSERIR_LINK_PUBLICO_DADOS_NUMERICOS]
 
-- <b>.github</b>: Nesta pasta ficarão os arquivos de configuração específicos do GitHub que ajudam a gerenciar e automatizar processos no repositório.
+### Variáveis
+- ID_Paciente, Data_Consulta, Idade, Sexo
+- PA_Sistolica, PA_Diastolica, Frequencia_Cardiaca, IMC  
+- Colesterol_Total, HDL, LDL, Triglicerides, Glicemia
+- Historico_Familiar_ICC, Tabagismo, Diabetes, Hipertensao
+- Sopro_Cardiaco, Arritmia, Sintomas_Principal, Risco_Cardiovascular
 
-- <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
+### Aplicações IA
+- **Triagem**: Classificação automática de risco cardiovascular
+- **Regressão**: Previsão de PA sistólica, colesterol
+- **Classificação**: Presença de arritmia (binária), risco (multiclasse)
+- **Clustering**: Identificar subgrupos de pacientes
+- **Feature Selection**: Importância de variáveis para downstream
 
-- <b>config</b>: Posicione aqui arquivos de configuração que são usados para definir parâmetros e ajustes do projeto.
+### Origem
+Simulado, fins acadêmicos, repositório público, licença MIT
 
-- <b>document</b>: aqui estão todos os documentos do projeto que as atividades poderão pedir. Na subpasta "other", adicione documentos complementares e menos importantes.
+---
 
-- <b>scripts</b>: Posicione aqui scripts auxiliares para tarefas específicas do seu projeto. Exemplo: deploy, migrações de banco de dados, backups.
+## Parte 2: Dados Textuais
 
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto ao longo das 7 fases.
+**Pasta**: `assets/docs/`  
+**Quantidade**: 3 arquivos .txt  
+**Status**: ✅ Atende mínimo de 2 arquivos  
 
-- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+### Documentos
+1. **diagnostico_insuficiencia_cardiaca.txt**
+2. **arritmias_classificacao_tratamento.txt**
+3. **infarto_agudo_miocardio.txt**
 
-## 🔧 Como executar o código
+### Aplicações NLP
+- **NER**: Extração de entidades clínicas (diagnósticos, medicamentos, achados)
+- **Classificação**: Agrupar por diagnóstico, triagem automática
+- **Sumarização**: Resumo de relatórios e histórico clínico
+- **Busca Semântica**: Linking sintoma-diagnóstico, recuperação de informação
+- **Urgência**: Detecção automática de sinais de alerta
+- **Normalização**: Padronização de terminologia (SNOMED CT, ICD-10)
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório. Considere a explicação organizada em fase.*
+### Fonte
+Diretrizes de cardiologia compiladas (SBC, ACC/AHA, ESC)
 
+---
 
-## 🗃 Histórico de lançamentos
+## Parte 3: Dados Visuais
 
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
-    *
+**Pasta**: `data/images/`  
+**Quantidade**: 120 imagens PNG  
+**Status**: ✅ Atende mínimo de 100 imagens  
+**Link Público**: [INSERIR_LINK_PUBLICO_IMAGENS]
 
-## 📋 Licença
+### Tipos (4 exames × 30 imagens)
+- **ECG**: Eletrocardiogramas (arritmias, isquemia, infarto, bloqueios)
+- **RX Tórax**: Radiografias (cardiomegalia, edema, derrame)
+- **ECO**: Ecocardiogramas (função sis/dias, estruturas valvulares)
+- **Angiografia**: Coronariografia (estenoses, oclusões)
 
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/agodoi/template">MODELO GIT FIAP</a> por <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://fiap.com.br">Fiap</a> está licenciado sobre <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
+### Aplicações VC
+- **Detecção**: Alterações de ST, ondas Q, arritmias
+- **Classificação**: Normal vs patológico (CNN)
+- **Segmentação**: Contornos de câmaras (U-Net, DeepLab)
+- **Medição**: Diâmetros, espessuras, fração de ejeção
+- **Interpretabilidade**: Heatmaps (Grad-CAM)
 
+### Importância Clínica
+Triagem rápida, suporte diagnóstico, redução tempo resposta, prevenção, educação médica
 
+---
+
+## Governança de Dados
+
+### Privacidade
+✅ Sem PII (nomes, RG, CPF, endereços)  
+✅ IDs anonimizados (P0001, P0002, ...)  
+✅ Datas genéricas  
+
+### Licenças
+✅ Dataset: Public Domain / MIT  
+✅ Imagens: Creative Commons / Simuladas  
+✅ Textos: Diretrizes públicas (SciELO, BVS)  
+
+### Rastreabilidade
+✅ Metadados por arquivo  
+✅ Versionamento Git  
+✅ Changelog mantido  
+
+### Balanceamento
+**Risco**: Baixo 23%, Moderado 30%, Alto 30%, M.Alto 17%  
+**Sexo**: M 52%, F 48% (equilibrado)  
+**Idade**: 25-39: 20%, 40-54: 40%, 55-69: 30%, 70+: 10%
+
+### Vieses Identificados
+| Viés | Mitigação |
+|------|-----------|
+| Selection | Validar com SUS/IBGE |
+| Age | Coletar >70 anos |
+| Sex | Estratificar análise |
+| Measurement | Padronizar protocolo |
+
+---
+
+## Validação Rápida
+
+### Sem instalação
+```bash
+# Linhas CSV (esperado: 151)
+wc -l data/pacientes_cardio.csv
+
+# Textos (esperado: 3)
+ls assets/docs/*.txt | wc -l
+
+# Imagens (esperado: 120)
+ls data/images/ | wc -l
+```
+
+### Com Python
+```bash
+pip install -r requirements.txt
+python scripts/check_assets.py
+```
+
+Resultado esperado: [SUCESSO] Todos os requisitos atendidos!
+
+### Análise exploratória
+```python
+import pandas as pd
+df = pd.read_csv('data/pacientes_cardio.csv')
+print(df.shape)  # (150, 20)
+print(df['Risco_Cardiovascular'].value_counts())
+```
+
+---
+
+## Roadmap
+
+### Fase 1 (Atual) ✅
+- Data collection & governance
+- Asset validation
+- Clinical documentation
+
+### Fase 2: Feature Engineering (Q2 2024)
+- Data cleaning & standardization
+- Feature engineering
+- EDA & visualization
+
+### Fase 3: Supervised Learning (Q3 2024)
+- Classification models
+- Regression models
+- Model evaluation & comparison
+
+### Fase 4: Computer Vision (Q4 2024)
+- CNN classification
+- U-Net segmentation
+- Transfer Learning (ResNet, VGG)
+
+### Fase 5: NLP (Q1 2025)
+- NER, topic modeling
+- BERT embeddings
+- Text summarization
+
+### Fase 6: IoT & Real-time (Q2 2025)
+- REST API
+- Real-time pipeline (Kafka)
+- Automated alerts
+
+### Fase 7: LLM Agents (Q3 2025)
+- Chatbot (GPT, Claude, Llama)
+- RAG (Retrieval-Augmented Generation)
+- Web UI (Streamlit)
+
+---
+
+## Referências
+
+**Diretrizes**: [SBC](http://www.arquivosonline.com.br/) | [ACC/AHA](https://www.acc.org/) | [ESC](https://www.escardio.org/)
+
+**Datasets**: [UCI ML](https://archive.ics.uci.edu/) | [Kaggle](https://www.kaggle.com/) | [PhysioNet](https://physionet.org/) 
+
+**Ferramentas**: Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch, spaCy, FastAPI
+
+---
+
+## Licença
+
+MIT License
+
+---
+
+**Versão**: 1.0-phase1 | **Data**: 03/03/2024 | Status: Fase 1 ✅
+
+*Desenvolvido para FIAP – Faculdade de Informática e Administração Paulista*

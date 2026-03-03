@@ -1,0 +1,106 @@
+INSUFICIÊNCIA CARDÍACA: DIAGNÓSTICO E MANEJO CLÍNICO
+
+1. DEFINIÇÃO
+A insuficiência cardíaca (IC) é uma síndrome complexa que resulta de qualquer alteração estrutural ou funcional do coração, impedindo o preenchimento ou a ejeção de sangue. Caracteriza-se pela incapacidade do coração em fornecer fluxo sanguíneo adequado para satisfazer as necessidades metabólicas do organismo.
+
+2. FISIOPATOLOGIA
+A IC pode ser classificada em:
+- IC com fração de ejeção reduzida (ICFEr): FE <= 40%
+- IC com fração de ejeção preservada (ICFEp): FE >= 50%
+- IC com fração de ejeção intermediária: FE 41-49%
+
+Os mecanismos compensatórios incluem ativação do sistema nervoso simpático, sistema renina-angiotensina-aldosterona (SRAA) e dilatação ventricular. Porém, estes levam a remodelamento adverso e progressão da doença.
+
+3. ETIOLOGIA
+Causas mais frequentes:
+- Doença arterial coronariana (>50% dos casos)
+- Hipertensão arterial sistêmica
+- Cardiomiopatia dilatada idiopática
+- Valvopatia
+- Miocardite
+- Cardiomiopatia restritiva
+- Pericardite constritiva
+
+4. APRESENTAÇÃO CLÍNICA
+Sintomas:
+- Dispneia (de esforço ou em repouso)
+- Ortopneia
+- Dispneia paroxística noturna
+- Fadiga
+- Limitação ao exercício
+- Edema de membros inferiores
+- Ganho de peso
+
+Sinais:
+- Elevação da pressão venosa central
+- Hepatomegalia
+- Edema periférico
+- Crepitações à ausculta pulmonar
+- Bulhas cardíacas S3 ou S4
+- Sopro de regurgitação mitral
+
+5. DIAGNÓSTICO
+Investigação diagnóstica:
+- ECG: pode mostrar alterações de condução, isquemia, hipertrofia
+- Ecocardiografia: avalia estrutura e função ventricular, valvular; mede FE
+- Biomarquadores: BNP (peptídeo natriurético B), NT-proBNP (fragmento N-terminal)
+- Radiografia de tórax: cardiomegalia, edema pulmonar
+- Hemograma, eletrólitos, função renal, perfil lipídico
+- Teste ergométrico ou cintilografia miocárdica se IC isquêmica
+
+Critério de Framingham para diagnóstico clínico.
+
+6. ESTRATIFICAÇÃO DE RISCO
+Classes funcionais (NYHA):
+- Classe I: sem sintomas nem limitação
+- Classe II: sintomas com esforço moderado a intenso
+- Classe III: sintomas com esforço leve
+- Classe IV: sintomas em repouso
+
+Estadiamento (ACC/AHA):
+- Estágio A: risco mas sem estrutura/função alterada
+- Estágio B: estrutura alterada mas sem sintomas
+- Estágio C: estrutura alterada + sintomas
+- Estágio D: sintomas refratários
+
+7. MANEJO FARMACOLÓGICO
+Bloqueadores neuro-hormonais:
+- IECA/BRA: primeira linha, reduzem mortalidade
+- Beta-bloqueadores: essenciais, comprovado benefício
+- Antagonistas de aldosterona: em FEr
+- Inibidores SGLT2: nova classe com benefícios
+
+Terapias adicionais:
+- Diuréticos: alívio de congestão
+- Inotrópicos: apenas em descompensação
+- Anticoagulação: se arritmia ou trombose
+
+8. MONITORAMENTO
+Seguimento clínico periódico com:
+- Avaliação de sintomas e tolerância ao exercício
+- Pressão arterial e frequência cardíaca
+- Eletrólitos e função renal regulares
+- Ecocardiografia anual ou conforme indicado
+- BNP/NT-proBNP para ajustes terapêuticos
+
+9. PROGNÓSTICO
+A mortalidade depende de:
+- Grau de disfunção ventricular
+- Etiologia (isquêmica vs não-isquêmica)
+- Comorbidades
+- Adesão ao tratamento
+- Classificação funcional
+
+Pacientes com ICFEr não tratada têm mortalidade 50% em 5 anos. Com tratamento otimizado, a sobrevivência melhora significativamente.
+
+10. EDUCAÇÃO DO PACIENTE
+Fundamental para adesão terapêutica:
+- Restrição de sódio (<2g/dia)
+- Restrição hídrica em casos graves
+- Monitoramento de peso diário
+- Atividade física supervisionada
+- Vacinação (influenza, pneumococo)
+- Evitar álcool e tabagismo
+- Alerta para procurar medico em caso de piora
+
+Referência: Diretrizes de Insuficiência Cardíaca (Arquivos Brasileiros de Cardiologia)

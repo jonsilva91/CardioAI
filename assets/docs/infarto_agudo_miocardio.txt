@@ -1,0 +1,233 @@
+INFARTO AGUDO DO MIOCÁRDIO: EVALUAÇÃO ÀS HORAS
+
+1. DEFINIÇÃO
+Infarto agudo do miocárdio (IAM) é a morte de células miocárdicas (necrose coagulativa) decorrente de isquemia prolongada, geralmente causada por oclusão trombótica aguda de artéria coronária epicárdica.
+
+2. EPIDEMIOLOGIA E FATORES DE RISCO
+- Primeira causa de morte em países desenvolvidos
+- 50% dos casos ocorrem fora do hospital (morte súbita)
+
+Fatores de risco tradicionais (modificáveis):
+- Tabagismo
+- Hipertensão arterial sistêmica
+- Dislipidemias
+- Diabetes mellitus
+- Sobrepeso/obesidade
+- Sedentarismo
+- Consumo excessivo de álcool
+
+Fatores de risco não-modificáveis:
+- Idade (homens >45 anos, mulheres >55 anos)
+- Sexo masculino
+- História familiar de cardiopatia isquêmica precoce
+- Raça/etnia
+
+Fatores de risco emergentes:
+- Biomarquadores inflamatórios (proteína C reativa)
+- Fibrinogênio elevado
+- Homocisteína elevada
+- Apneia obstrutiva do sono
+- Poluição do ar
+- Eventos psicossociais/estresse
+
+3. FISIOPATOLOGIA
+Progressão da aterosclerose:
+- Formação de placa aterosclerótica
+- Erosão ou ruptura da placa
+- Ativação plaquetária e coagulação
+- Formação de trombo
+- Oclusão da artéria coronária
+- Cessação do fluxo sanguíneo miocárdico
+- Isquemia miocárdica e subsequente necrose
+
+Evolução temporal:
+- 0-4 horas: isquemia reversível
+- 4-12 horas: início de necrose transmural
+- 12-24 horas: necrose completa em zona subtendida
+- 24-72 horas: pico de liberação de enzimas cardíacas
+
+4. APRESENTAÇÃO CLÍNICA
+Sintomas cardinais:
+- Dor precordial ou retroesternal (tipicamente >20 minutos)
+- Pressão, aperto ou queimação
+- Irradiação para braço esquerdo, pescoço, mandíbula
+- Comumente acompanhado de sudorese, náuseas, vômitos
+
+Variações de apresentação:
+- Mulheres: dispneia, fadiga, dor epigástrica (infartos silenciosos mais frequentes)
+- Idosos: síncope, confusão mental
+- Diabéticos: frequentemente indolores (desnervação)
+- Pós-transplante cardíaco: assintomático (denervação)
+
+Equivalentes anginosos:
+- Dispneia
+- Fadiga extrema
+- Síncope
+- Arritmia com instabilidade hemodinâmica
+
+5. ELETROCARDIOGRAFIA (ECG)
+Alterações evolucionais:
+- 0-2 horas: supradesnivelamento de ST ou bloqueio de ramo novo
+- Onda T apiculada ou simétrica
+- 2-12 horas: ondas Q patológicas aparecem (se necrose transmural)
+- >12 horas: retorno gradual de ST ao baseline
+- 2-8 semanas: ondas T negativas persistem
+
+Localização conforme artéria:
+- IAM anterior: alterações em D1, aVL, V1-V4
+- IAM ínfero-posterior: D2, D3, aVF ± V7-V9
+- IAM lateral: D1, aVL, V5-V6
+- IAM de VD: apresentação atípica com hipotensão
+
+Complicações eletrofisiológicas:
+- Bloqueio AV (completo em IAM inferior)
+- Bloqueio de ramo novo
+- Extrassistoles ventriculares
+- Taquicardia ventricular
+- Fibrilação ventricular
+
+6. BIOMARCADORES CARDÍACOS
+Troponina cardíaca (cTn):
+- Proteína estrutural específica (alta sensibilidade)
+- Eleva em 3-4 horas, pico 48-72 horas
+- Normalizando em 7-14 dias
+- Elevação >99º percentil indica lesão miocárdica
+
+Mioglobina:
+- Eleva em 1-2 horas (mais rápida, menos específica)
+- Normaliza em 24 horas
+
+CK-MB:
+- Proteína de ligação
+- Pico em 24-48 horas
+- Razão CK-MB/CK útil para ressarcir IAM prévio
+
+LDH:
+- Eleva lentamente (24-48 horas)
+- Valor histórico
+
+BNP/NT-proBNP:
+- Proteínas natriuréticas
+- Indicam disfunção ventricular e prognóstico
+
+7. ESTRATIFICAÇÃO DE RISCO
+Escore TIMI para IAM:
+- Pontos: idade >65, fatores risco, doença coronária prévia, ST alterado, troponina elevada
+- Escore 0-3: risco baixo; 6-7: risco alto
+
+Escore GRACE:
+- Inclui idade, frequência cardíaca, pressão sistólica, Killip, creatinina, enzimas
+
+Escore HEART:
+- Utilizado em SCA sem supradesnivelamento de ST
+
+8. DIAGNÓSTICO DIFERENCIAL
+Outras causas de elevação troponina e alterações de ST:
+- Miocardite viral
+- Embolia pulmonar
+- AVC
+- Dissecção aórtica
+- Síndrome de Takotsubo
+- Trauma torácico
+- Sépsis
+- Arritmia rápida
+- Insuficiência renal (troponina basal elevada)
+
+9. MANEJO AGUDO (PRIMEIRAS HORAS)
+Acionamento: ECG e troponina dentro de 10 minutos
+
+Farmacoterapia:
+- Antiagregantes: aspirina (boca) + P2Y12 inhibidor (ticagrelor/prasugrel/clopidogrel)
+- Anticoagulação: heparina fracionada ou não-fracionada
+- Fibrinolíticos: se intervenção coronária não disponível
+- Betabloqueadores, IECA (tardios)
+- Estatinas de alta potência
+- Nitratos: se hipertenso
+
+Estratégia de reperfusão:
+- Angiografia coronária + PCI (stent) dentro de 90 minutos (primária)
+- Ou fibrinólise se >120 minutos para cateterismo
+- Ou trombectomia mecânica em oclusão de vaso proximal
+
+10. COMPLICAÇÕES AGUDAS
+Mecânicas:
+- Ruptura de septo interventricular
+- Ruptura de parede livre
+- Regurgitação mitral aguda (ruptura de músculos papilares)
+- Aneurisma ventricular
+
+Elétricas:
+- Fibrilação ventricular (maior causa de morte súbita nos primeiros minutos)
+- Taquicardia ventricular
+- Bradicardia, bloqueio AV
+
+Estruturais:
+- Insuficiência cardíaca aguda
+- Choque cardiogênico
+- Síndrome pós-infarto (pericardite)
+
+11. ECOCARDIOGRAFIA
+Indicações:
+- Avaliar função ventricular
+- Detectar complicações mecânicas
+- Avaliar padrão de contrátilidade segmentar
+- Medir fração de ejeção (prognóstico)
+- Avaliação de trombose mural
+
+12. REABILITAÇÃO CARDÍACA
+Iniciação precoce (48-72 horas):
+- Mobilização progressiva
+- Educação do paciente
+- Modificação de fatores de risco
+- Treino aeróbico supervisionado
+- Suporte psicológico
+
+Medicações crônicas pós-IAM:
+- Dupla antiagregação: 12 meses mínimo
+- Betabloqueadores
+- IECA/ARB
+- Estatinas
+- Mineralocorticoid receptor antagonist (se FEr e sem hiperkalemia)
+
+13. PREVENÇÃO SECUNDÁRIA
+- Cessação completa do tabagismo
+- Controle pressão arterial <130/80 mmHg
+- LDL <55 mg/dL (terapia intensiva)
+- Controle glicêmico
+- Atividade física mínima 150 min/semana
+- Dieta do tipo mediterrânea
+- Evitar álcool excessivo
+
+14. PROGNÓSTICO
+Fatores de bom prognóstico:
+- IAM anterior MÍNIMO
+- Ausência de complicações
+- Fração de ejeção preservada
+- Apresentação precoce
+
+Fatores de mau prognóstico:
+- Idade avançada
+- Sexo feminino
+- Múltiplas comorbidades
+- Diabetes
+- Insuficiência renal
+- Fração de ejeção reduzida (<40%)
+- Choque cardiogênico
+
+Mortalidade hospitalar: 5-10% (com terapia apropriada)
+Sobrevida em 1 ano: 90-95%
+
+15. EDUCAÇÃO DO PACIENTE
+Sintomas de alerta para buscar atendimento emergencial:
+- Retorno de dor torácica
+- Dispneia progressiva
+- Fadiga extrema
+- Arritmia
+- Síncope
+
+Restrições na alta:
+- Evitar esforço intenso durante 4-6 semanas
+- Progressão gradual de atividade
+- Retorno ao trabalho conforme tolerância
+
+Referência: Guidelines de Infarto Agudo do Miocárdio (AHA/ACC/Sociedade Brasileira de Cardiologia)
