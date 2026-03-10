@@ -21,7 +21,7 @@ Coleta e governança de bases multimodais com 100+ registros numéricos, 2+ text
 ### Mapa Mental do Projeto
 
 <p align="center">
-  <img src="assets/mapa-mental-cardioIA.svg" alt="Mapa Mental — CardioIA: A Nova Era da Cardiologia Inteligente" width="100%">
+  <img src="assets/mapa-mental-cardioIA.svg" alt="Mapa Mental — CardioIA" width="100%">
 </p>
 
 O mapa mental acima apresenta as fases do projeto CardioIA, desde a coleta e governança de dados (Fase 1) até o desenvolvimento de modelos de IA, visão computacional, NLP, integração IoT e agentes LLM — ilustrando a progressão planejada do ecossistema ao longo do tempo.
