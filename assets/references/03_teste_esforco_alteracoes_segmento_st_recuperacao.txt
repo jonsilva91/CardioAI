@@ -1,0 +1,61 @@
+TÍTULO: Teste de esforço: alterações do segmento ST restritas à fase de recuperação
+AUTORES: J. A. Oliveira Filho, B. Luna Filho, T. Salles, R. Brito, L. Palma, A. Barbieri, J. L. V. Herrmann, E. Martinez Filho
+ANO: 1999
+PERIÓDICO: Revista da Associação Médica Brasileira
+DOI: 10.1590/S0104-42301999000200008
+URL: https://www.scielo.br/j/ramb/a/tcgcjZVPwNHCKxwPrcWy3Yp/
+VARIÁVEIS SUPORTADAS: oldpeak, exang, cp
+INSTITUIÇÃO: Disciplina da Cardiologia — Setor de Ergometria e Reabilitação da Escola Paulista de Medicina, São Paulo, SP
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+O estudo objetivou "determinar a incidência de doença coronária aterosclerótica e/ou isquemia miocárdica em pacientes com alterações do segmento ST restritas à fase de recuperação". Investigaram 19 pacientes (18 homens, 1 mulher, idade 58±9 anos) através de cinecoronariografia e/ou cintigrafia de esforço planar. As alterações correspondem a desníveis de 1 a 4 mm com inversão de onda T durante recuperação precoce ou tardia. Documentou-se doença coronária em 14 pacientes (9 submetidos a revascularização), miocardiopatia hipertensiva em 3 e prolapso mitral em 1. Em 13 casos com investigação complementar realizada em 6 meses, detectou-se doença ou isquemia em 8 pacientes.
+
+INTRODUÇÃO
+
+Historicamente, registros eletrocardiográficos inicialmente eram "realizados apenas após o exercício devido a dificuldades técnicas". Com monitorização contínua, alterações do segmento ST durante esforço ganharam importância diagnóstica. Estudos recentes demonstraram valor das alterações restritas à recuperação em diagnosticar doença coronária. A fisiopatologia permanece obscura, relacionando-se a espasmo coronário, elevação de catecolaminas plasmáticas e hipopotassemia. Na prática clínica, prevalência varia entre 2,3% a 7,9%, porém tais achados frequentemente não são investigados adequadamente.
+
+MÉTODO E CASUÍSTICA
+
+Entre 1986 e 1993, detectaram-se 32 casos de alterações do segmento ST restritas à recuperação. Este estudo analisou 19 pacientes submetidos a investigação clínica (18 homens, idade 58±9 anos, 18 sintomáticos). Dezoito realizaram cinecoronariografia; 12 realizaram cintigrafia de esforço. Testes foram limitados por sintomas usando protocolos de Bruce ou Ellestad. Registros eletrocardiográficos em CM5, D2 modificado e V2. Consideraram-se significativos desníveis ST ≥1,0 mm. Dez pacientes interromperam medicações; outros realizaram testes em vigência de nitratos, antagonistas de cálcio, betabloqueadores ou inibidores da ECA.
+
+Cintigrafias foram planares utilizando-se tecnécio 99mTc ou tálio 201. Cinecoronariografias pela técnica de Sones, considerando-se críticas obstruções ≥70% do diâmetro vascular.
+
+RESULTADOS
+
+Alterações ocorreram em recuperação tardia (14 casos), precoce (1 caso) ou durante toda recuperação (4 casos). Desníveis variaram de 1,0 a 4,9 mm. Dezoito pacientes apresentavam classe funcional I NYHA; um classe II. Capacidade aeróbica variou de 12,5 a 38,8 ml O2/Kg/min (média 25,1).
+
+Em 8 casos com angiografia em até 6 meses: 3 hipertensos com coronárias normais, 1 com doença uni-arterial, 4 revascularizados. Em 6 casos com cintigrafia em até 6 meses: 3 normais, 2 com hipocaptação transitória, 1 com hipocaptação persistente. Em 13 casos com investigação complementar, comprovaram-se lesões obstrutivas ou deficiência perfusória em 8 pacientes. Testes sequenciais em 3 casos mostraram alterações reprodutíveis em 2 pacientes.
+
+DISCUSSÃO
+
+Prevalência na literatura varia de 2,3% a 7,9%. Froelicher descreveu 15 aviadores assintomáticos com alterações na recuperação, dos quais 6 apresentavam doença coronária grave. Savage relatou 62 pacientes com anomalias de perfusão em 60% dos casos; coronariografia em 26 casos evidenciou doença grave em 23. Lachterman analisou 168 pacientes, relatando valor preditivo positivo de 84% para doença grave. Tsuchihashi estudou 43 pacientes; 18 com cintigrafia isquêmica apresentaram angina espontânea em 78% dos casos e lesões críticas de artéria descendente anterior em 94%.
+
+A fisiopatologia permanece obscura. Teorias incluem: queda de débito cardíaco secundária a diminuição do retorno venoso, elevações séricas de catecolaminas detectadas até o sexto minuto de recuperação, vasoespasmo coronário e hipopotassemia.
+
+No presente estudo, pacientes sintomáticos com alterações restritas à recuperação apresentaram elevada prevalência de lesões coronárias críticas e hipocaptação transitória. Tais achados foram considerados respostas anormais pelo Consenso Nacional de Ergometria.
+
+CONCLUSÃO
+
+O real valor das alterações do segmento ST restritas à recuperação no diagnóstico de doença coronária "permanece ainda não definido". Na prática clínica, muitas vezes não são devidamente investigadas. Resultados sugerem serem "um indicador confiável da doença coronária", porém número de casos avaliados é pequeno. Estudos multicêntricos discriminando achados em populações sintomática e assintomática com diferentes prevalências de doença coronária são necessários para esclarecer significado clínico e etiopatogenia.
+
+REFERÊNCIAS BIBLIOGRÁFICAS
+
+1. Feil H, Siegel M - Eletrocardiographic changes during attacks of angina pectoris. Amer J Med 1928; 175: 255-60.
+2. Riseman JEF, Waller JV, Brown MG - The eletrocardiogram during attacks of angina pectoris. Amer Heart J 1940; 19: 683-707.
+3. Oliveira F. JA et al - O teste ergométrico. Arq bras Cardiol 1983; 40:341-51.
+4. Detrano R, Froelicher VF - Exercise testing. Uses and limitations. Progr cardiov Dis 1988; 23: 173-201.
+5. Fletcher GF, Balady G, Froelicher VF et al - Exercise standards. Circulation 1995; 91: 580-615.
+6. Savage MP et al - Usefulness of ST-segment depression confined to exercise recovery. Am J Cardiol 1987; 60: 1405-6.
+7. Karnegis JM et al - Comparison of exercise-positive with recovery-positive treadmill test. Am J Cardiol 1987; 60: 544-7.
+8. Lachterman B et al - "Recovery Only" ST-segment depression and predictive accuracy. Ann int Med 1990; 112: 11-6.
+9. Tsuchihashi K et al - Isolated post exercise ST depression as sign of severe ischemia. Can J Cardiol 1992; 8: 1050-54.
+10. Froelicher VF et al - Correlation of coronary angiography and electrocardiographic response. Circulation 1973; 48: 597-604.
+11. Maseri A et al - Variant angina: spectrum of vasospastic myocardial ischemia. Am J Cardiol 1978; 42: 1019-35.
+12. Dimsdale JE et al - Post exercise peril. JAMA 1984; 251:630-2.
+13. Georgopoulus AJ et al - Effect of exercise on electrocardiograms with low potassium. Circulation 1961; 23: 567-72.
+14. Sociedade Brasileira de Cardiologia - Consenso Nacional de Ergometria. Arq bras Cardiol 1995; 189-211.

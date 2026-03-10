@@ -1,0 +1,81 @@
+TÍTULO: Fatores de risco para doença arterial coronariana em pacientes admitidos em unidade de hemodinâmica
+AUTORES: Maria Karolina Echer Ferreira Feijó, Raquel Lutkmeier, Christiane Wahast Ávila, Eneida Rejane Rabelo
+ANO: 2009
+PERIÓDICO: Revista Gaúcha de Enfermagem
+DOI: 10.1590/S1983-14472009000400009
+URL: https://www.scielo.br/j/rgenf/a/4FK5YdLXc66TzC6Vh3Kv4Zh/
+VARIÁVEIS SUPORTADAS: age, sex, chol, cp
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+Estudo transversal que identificou fatores de risco para DAC em 302 pacientes (62±11 anos, 89% brancos, 57% homens) submetidos a procedimentos cardíacos invasivos. Os resultados demonstraram prevalência de sedentarismo (75%), hipertensão (73%), dislipidemia (50,5%), obesidade (29%), diabetes mellitus (27%), tabagismo (25,5%), consumo de álcool (22%) e alimentação pobre em frutas/verduras (5%). A correlação entre número de fatores de risco e variáveis sociodemográficas não foi estatisticamente significativa, porém revelou-se associação positiva entre os fatores.
+
+INTRODUÇÃO
+
+As doenças cardiovasculares representam importante causa de mortalidade globalmente. No Brasil, destacam-se como responsáveis por significativa proporção de internações e óbitos, especialmente na região Sul. O estudo INTERHEART evidenciou que tabagismo, dislipidemia, hipertensão, diabetes mellitus, gordura abdominal, fatores psicossociais, baixa ingestão de frutas e verduras, sedentarismo e etilismo explicavam aproximadamente 90% do risco para infarto agudo do miocárdio.
+
+MÉTODOS
+
+Estudo transversal contemporâneo desenvolvido em unidade de hemodinâmica de hospital público universitário em Porto Alegre, de agosto a outubro de 2007. Incluíram-se 302 pacientes maiores de 18 anos submetidos a cateterismo cardíaco ou angioplastia coronariana transluminal percutânea. Os dados foram coletados mediante questionário estruturado abrangendo variáveis clínicas, hábitos de vida e informações demográficas.
+
+Definições operacionais:
+- Fumantes: consumo regular mínimo de um cigarro/dia por pelo menos um ano
+- Hipertensos: em tratamento medicamentoso ou diagnosticados previamente
+- Diabéticos: uso de hipoglicemiantes ou insulina, ou glicemia em jejum ≥126 mg/dL
+- Dislipidemia: baseada em informações do paciente ou registros médicos
+- Obesidade: IMC ≥30 kg/m²
+- Atividade física positiva: mínimo três vezes semanais, 45 minutos por sessão
+
+RESULTADOS
+
+Amostra: 302 pacientes com idade média de 62±11 anos, predominantemente brancos (89%) e do sexo masculino (57%). Metade apresentava até cinco anos de estudo. Renda média de 0-3 salários mínimos.
+
+Prevalência dos fatores de risco:
+1. Sedentarismo: 227 pacientes (75%)
+2. Hipertensão arterial: 220 pacientes (73%)
+3. Dislipidemia (`chol`): 150 pacientes (50,5%)
+4. Obesidade: 87 pacientes (29%)
+5. Diabetes mellitus: 81 pacientes (27%)
+6. Tabagismo: 77 pacientes (25,5%)
+7. Consumo de álcool: 67 pacientes (22%)
+8. Alimentação inadequada em frutas/verduras: 15 pacientes (5%)
+
+Distribuição de fatores de risco: 75% dos pacientes apresentavam de três a cinco fatores de risco simultâneos. Pacientes diabéticos demonstraram média de quatro fatores de risco.
+
+A correlação entre número de fatores de risco e variáveis como escolaridade, renda, idade, estado civil, atividade profissional e sexo não foi estatisticamente significativa. Entretanto, evidenciou-se associação positiva entre as variáveis analisadas.
+
+DISCUSSÃO
+
+Sedentarismo (75%): superior aos 71,3% relatados em estudos similares. A progressão da doença arterial coronariana pode limitar a realização de atividade física conforme a percepção dos pacientes.
+
+Hipertensão (73%): superior aos 52,35% encontrados em outros estudos brasileiros. A média etária mais elevada (62±11 anos) e o elevado percentual de sedentários contribuem para o inadequado controle pressórico.
+
+Dislipidemia (50,5%): os níveis elevados de colesterol sérico (variável `chol` no dataset) representaram o terceiro fator de risco mais prevalente, superior aos estudos regionais. A dislipidemia atua como fator aterogênico primário, acelerando a formação e progressão das placas coronárias.
+
+Perfil de risco e DAC: a combinação de dislipidemia com hipertensão, diabetes e sedentarismo multiplica o risco cardiovascular individual, explicando por que `chol` isolado pode ter menor poder preditivo que variáveis funcionais como `oldpeak` e `thalach` no Cleveland Dataset.
+
+Dor torácica (`cp`): a caracterização da dor torácica foi parte integrante da avaliação clínica dos 302 pacientes, orientando a indicação de cateterismo cardíaco — mesmo contexto diagnóstico do Cleveland Dataset.
+
+Perfil demográfico: idade média de 62 anos e predomínio masculino (57%) são consistentes com a distribuição no Cleveland Heart Disease Dataset (médias de 54 anos, 68% masculino), validando que a variável `age` e `sex` capturam adequadamente os grupos de maior risco.
+
+LIMITAÇÕES
+
+A confiabilidade das informações prestadas pelos pacientes apresenta limitações, particularmente quanto à atividade física, aspectos nutricionais e socioeconômicos, dado o reduzido nível de escolaridade. A impossibilidade de dosagem de perfil lipídico no momento da coleta de dados constitui limitação metodológica para a variável dislipidemia.
+
+CONCLUSÕES
+
+O estudo permite estimar a prevalência dos fatores de risco em pacientes submetidos a procedimentos cardíacos invasivos. O sedentarismo apresentou-se como achado predominante (75%), sucedido por hipertensão arterial, dislipidemia, obesidade, diabetes mellitus, tabagismo, consumo de álcool e alimentação inadequada.
+
+A abordagem multiprofissional, particularmente o trabalho desenvolvido em reabilitação cardíaca, traduz-se em benefícios mediante diminuição de fatores de risco e melhora da qualidade de vida.
+
+REFERÊNCIAS PRINCIPAIS
+
+1. World Health Organization. The atlas of heart disease and stroke. Geneva; 2005.
+2. Ministério da Saúde (BR). Indicadores e dados básicos Brasil 2005.
+3. Yusuf S, et al. Effect of potentially modifiable risk factors associated with myocardial infarction in 52 countries (the INTERHEART study). Lancet. 2004;364:937-52.
+4. Silva MAD, et al. Fatores de risco para infarto agudo do miocárdio no Brasil: estudo FRICAS. Arq Bras Cardiol. 1998;71(5):667-75.
+5. Avezum A, et al. Fatores de risco associados com infarto agudo do miocárdio na Região Metropolitana de São Paulo. Arq Bras Cardiol. 2005;84(3):206-13.

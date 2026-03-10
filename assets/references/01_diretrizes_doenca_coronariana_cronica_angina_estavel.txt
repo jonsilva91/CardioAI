@@ -1,0 +1,81 @@
+TÍTULO: Diretrizes de doença coronariana crônica — angina estável
+AUTORES: Luiz Antonio Machado César (ed.), Antonio de Pádua Mansur, Dikran Armaganijan, José Geraldo Amino
+ANO: 2004
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X2004002100001
+URL: https://www.scielo.br/j/abc/a/DSH5Y73Fwx5SHLSXSkfWX6t/
+VARIÁVEIS SUPORTADAS: cp, exang, oldpeak, thalach, ca, thal
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+INTRODUÇÃO
+
+O documento apresenta-se como diretriz orientadora para médicos, especialmente cardiologistas, visando o reconhecimento precoce de adultos com elevado risco de doença coronariana aterosclerótica (DAC). Estima-se aproximadamente 900.000 brasileiros com angina do peito, com cerca de 18.000 novos casos anuais.
+
+ESTRUTURA PRINCIPAL
+
+O conteúdo divide-se em três partes:
+1. Diagnóstico e Estratificação de Risco
+2. Tratamento Clínico
+3. Tratamento com Medidas Invasivas
+
+DIAGNÓSTICO E ESTRATIFICAÇÃO DE RISCO
+
+História clínica e exame físico constituem a base do diagnóstico. A angina é definida como "síndrome clínica caracterizada por dor ou desconforto" precipitada por esforço físico ou estresse emocional, aliviada por repouso ou nitratos.
+
+Classificação da dor torácica (variável `cp` no dataset):
+- Angina típica: pressão retroesternal precipitada por esforço, aliviada por repouso ou nitrato
+- Angina atípica: preenche apenas dois dos três critérios acima
+- Dor não-anginosa: preenche um ou nenhum critério
+
+Testes não invasivos recomendados:
+- Eletrocardiograma em repouso e durante esforço
+- Radiografia de tórax
+- Teste ergométrico (avalia thalach, oldpeak, exang)
+- Ecocardiografia
+- Medicina nuclear (cintilografia — variável thal)
+- Angiografia coronariana (avalia ca — número de vasos comprometidos)
+
+TESTE ERGOMÉTRICO
+
+O teste ergométrico é o método não invasivo mais utilizado para diagnóstico e estratificação de risco da angina estável. Avalia:
+
+- Frequência cardíaca máxima atingida (thalach): parâmetro funcional de capacidade cardiorrespiratória. Incapacidade de elevar a FC adequadamente ao esforço sugere disfunção cardíaca.
+
+- Depressão do segmento ST (oldpeak): infradesnivelamento de ST ≥1 mm durante esforço é critério padrão para positividade isquêmica. Quanto maior a depressão, maior a probabilidade e extensão da DAC.
+
+- Angina induzida por exercício (exang): presença de dor anginosa durante esforço reforça significativamente a probabilidade de isquemia miocárdica.
+
+O Escore de Duke integra esses parâmetros: duração do exercício, desvio máximo do ST e ocorrência de angina durante o teste.
+
+CINECORONARIOGRAFIA E NÚMERO DE VASOS (ca)
+
+A angiografia coronariana avalia diretamente o número e a extensão das estenoses coronárias. O número de vasos principais comprometidos (0 a 3) — variável `ca` — é o principal determinante do prognóstico e da estratégia terapêutica:
+- Doença uniarterial: melhor prognóstico, geralmente tratada clinicamente ou com angioplastia
+- Doença biarterial: prognóstico intermediário
+- Doença triarterial ou de tronco: indicação frequente de cirurgia de revascularização
+
+CINTILOGRAFIA COM TÁLIO (thal)
+
+A cintilografia de perfusão miocárdica com tálio-201 ou sestamibi-Tc99m distingue:
+- Defeito reversível (thal=3): hipoperfusão ao esforço com normalização no repouso — indica isquemia miocárdica reversível (DAC obstrutiva)
+- Defeito fixo (thal=1): hipoperfusão persistente no repouso — indica tecido cicatricial (infarto prévio)
+- Normal (thal=2): perfusão homogênea — exclui isquemia significativa com alto valor preditivo negativo
+
+RECOMENDAÇÕES DIAGNÓSTICAS
+
+O documento utiliza graus de recomendação (I a III) e níveis de evidência (A a C) para orientar condutas conforme probabilidade pré-teste de DAC, integrando dados clínicos, demográficos e resultados de testes não invasivos.
+
+TRATAMENTO CLÍNICO
+
+Inclui medidas farmacológicas (betabloqueadores, nitratos, antagonistas de cálcio, antiagregantes plaquetários, estatinas) e não farmacológicas (controle de fatores de risco, reabilitação cardíaca, cessação do tabagismo, dieta, atividade física supervisionada).
+
+TRATAMENTO INVASIVO
+
+Indicado conforme extensão anatômica da doença (variável ca) e resposta ao tratamento clínico. Inclui angioplastia transluminal coronária percutânea (ATCP) e cirurgia de revascularização miocárdica (CRM).
+
+REFERÊNCIAS
+
+Sociedade Brasileira de Cardiologia. Diretrizes de doença coronariana crônica — angina estável. Arq Bras Cardiol. 2004;83(Suppl II):1-43.

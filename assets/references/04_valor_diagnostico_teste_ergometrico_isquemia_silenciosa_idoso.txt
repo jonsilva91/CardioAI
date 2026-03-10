@@ -1,0 +1,83 @@
+TÍTULO: Valor diagnóstico do teste ergométrico na detecção da isquemia miocárdica silenciosa no paciente idoso com hipertensão sistólica
+AUTORES: João Joaquim de Oliveira, Sandra Regina A. S. Silva
+ANO: 1997
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X1997000700004
+URL: https://www.scielo.br/j/abc/a/8pZhGQYmKPRmJB6cd5mmrSF/
+VARIÁVEIS SUPORTADAS: oldpeak, thalach, age, exang
+INSTITUIÇÃO: Universidade Federal de Goiás, Faculdade de Medicina, Hospital das Clínicas, Goiânia, GO
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+O estudo avaliou a importância do teste ergométrico na detecção de isquemia silenciosa em idosos com hipertensão sistólica isolada. Compararam-se 110 pacientes hipertensos com 104 controles não hipertensos, todos entre 60-72 anos. O teste ergométrico mostrou "depressão isquêmica de ST em 22 (20%) dos pacientes idosos com hipertensão sistólica e em 12 (11,5%) dos idosos-controle". A depressão de segmento ST foi maior nos hipertensos (2,5±0,8 mm versus 1,9±0,4 mm) e sua duração mais prolongada (5,4±2,8 min versus 3,4±1,9 min). Os resultados indicam que idosos com hipertensão sistólica isolada apresentam prevalência de isquemia silenciosa 1,7 vezes maior que normotensos de mesma faixa etária (p<0,003).
+
+INTRODUÇÃO
+
+A doença aterosclerótica coronária constitui a principal causa de morte em países desenvolvidos e em desenvolvimento como o Brasil. Episódios de isquemia miocárdica silenciosa (IMS) foram documentados através de métodos não invasivos incluindo teste ergométrico, eletrocardiografia dinâmica, ecocardiografia de estresse e cintilografia miocárdica.
+
+A IMS possui "o mesmo valor preditivo de angina de peito para eventos adversos, como síndromes isquêmicas agudas (angina instável, IAM), arritmias e morte súbita". O teste ergométrico apresenta "uma sensibilidade em torno de 70%" para diagnosticar IMS, com sensibilidade mais significativa em populações de maior risco, particularmente idosos.
+
+A prevalência de IMS varia conforme a população: 2,5-10% em homens assintomáticos; 20% em pós-infarto; 40-80% em anginosos.
+
+MÉTODOS
+
+Delineamento: Estudo comparativo conduzido entre janeiro/1991 e dezembro/1994.
+
+Participantes:
+- Grupo A: 110 pacientes (86 homens, 24 mulheres), idades 60-72 anos, com hipertensão sistólica isolada
+- Grupo B: 104 controles (72 homens, 32 mulheres), mesma faixa etária, sem hipertensão
+
+Definição de hipertensão: Pressão arterial sistólica >160 mmHg e diastólica <90 mmHg, confirmada em três ocasiões diferentes.
+
+Procedimento do teste ergométrico:
+- Realizado em esteira rolante conforme protocolo de Bruce
+- Medicamentos anti-hipertensivos suspensos 24 horas antes
+- Pressão arterial medida ao final de cada estágio e durante recuperação
+- Registro eletrocardiográfico em três derivações a cada 3 minutos
+- Teste interrompido por: exaustão, dispnéia, depressão de ST >3 mm, arritmia ventricular sustentada
+- Teste positivo: infradesnivelamento de ST ≥1,5 mm com duração ≥0,08 s, com morfologia horizontal ou arqueada
+
+RESULTADOS
+
+Achados eletrocardiográficos principais:
+- Alterações isquêmicas (depressão ST >1,5 mm) em "22 (20%) pacientes do grupo A, e em 12 (11,5%), do grupo B (p<0,001)"
+- Apenas 3 pacientes hipertensos (2%) referiram dor torácica leve
+- Nenhum paciente controle apresentou queixa de dor
+
+Parâmetros de esforço:
+- Tempo de esforço: "7,1±2,9 min no grupo A e 8,8±2,5 min no grupo B (p<0,0001)"
+- Depressão máxima de ST: "2,5±0,8 mm no grupo A e 1,9±0,4 mm no grupo B (p<0,01)"
+- Duração da positividade: "5,4±2,8 min no grupo A e 3,4±1,9 min no grupo B (p<0,01)"
+
+Morfologia de ST: No Grupo A, 15 (68%) apresentaram depressão arqueada e 7 (33%) tipo horizontal. No Grupo B, 8 (67%) mostraram depressão horizontal e 4 (33%) arqueada (p<0,001). Depressão arqueada correlacionou-se com hipertensão mais severa.
+
+Arritmias detectadas:
+- Extra-sístoles supraventriculares: 30 (27%) Grupo A versus 15 (14%) Grupo B
+- Taquicardia supraventricular não sustentada: 6 (5%) Grupo A versus 2 (2%) Grupo B
+- Extra-sístoles ventriculares esparsas: 26 (23%) Grupo A versus 10 (10%) Grupo B
+
+DISCUSSÃO
+
+Os achados demonstram "relação linear demonstrada entre magnitude e duração da positividade do TE intra e pós-esforço com HSI do idoso". Pacientes com hipertensão menos severa e normotensos apresentaram menor magnitude e tempo de positividade de ST.
+
+A depressão de ST induzida por esforço indica isquemia subendocárdica, mesmo sem doença coronária anatomicamente significativa. Existe estreita relação entre magnitude das alterações de ST e pressão arterial sistólica durante esforço, frequência cardíaca e tempo de ejeção ventricular esquerdo.
+
+A depressão de ST representa "um sinal emitido por células miocárdicas com baixa tensão de O2 por déficit perfusional", não mantendo relação com severidade anatômica da doença coronária em todos os casos.
+
+O estudo sugere que "embora a quantidade de depressão de ST e tempo de recuperação podem ter bom valor preditivo para presença de IMS e DAC em hipertensos, não devem ser considerados como fortes preditores para a severidade da DAC obstrutiva quando comparados com estudos de angiografia coronária".
+
+CONCLUSÃO
+
+"Pacientes idosos com hipertensão sistólica isolada têm mais isquemia miocárdica silenciosa do que idosos normotensos. Entre idosos hipertensos houve uma prevalência de isquemia silenciosa 1,7 vezes mais freqüente que idosos normotensos, de mesma faixa etária (20% vs 11,5%, p<0,003)."
+
+O teste ergométrico constitui exame não invasivo, de baixo custo e morbidade reduzida, altamente preditivo para estratificar pacientes idosos hipertensos em graus de risco cardiovascular.
+
+Recomendações terapêuticas: eliminação de fatores de risco, evitar atividades extenuantes, uso de medicamentos antiisquêmicos e anti-hipertensivos. Betabloqueadores demonstram efeitos cardioprotetores adequados. Antagonistas de cálcio, nitratos e inibidores da ECA também são eficazes. Recomenda-se acompanhamento com exercícios supervisionados e teste ergométrico anual.
+
+REFERÊNCIAS
+
+O artigo cita 60 referências bibliográficas cobrindo tópicos como detecção de isquemia silenciosa, teste de esforço, doença coronária, hipertensão e biomarcadores cardíacos, incluindo autores como Stern, Cohn, Deanfield, Kannel e estudos multicêntricos como Framingham Heart Study e Multiple Risk Factor Intervention Trial.

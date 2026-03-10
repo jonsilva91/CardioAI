@@ -1,0 +1,55 @@
+TÍTULO: Associação entre fatores de risco para doença arterial coronariana e coronariopatia em pacientes submetidos a cintilografia de perfusão do miocárdio
+AUTORES: Paulo Schiavom Duarte, Luiz Eduardo Mastrocolla, Gilberto Alonso, Eduardo Vilaça Lima, Paola Emanuela Smanio, Marco Antonio Conde de Oliveira, Luiz Roberto Fernandes Martins, Júlio César Rodrigues Pereira
+ANO: 2007
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X2007000300009
+URL: https://www.scielo.br/j/abc/a/PmGnPLcWLGvpZVWyKQFWmCh/
+VARIÁVEIS SUPORTADAS: age, sex, chol, thal
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+O estudo avaliou a associação entre fatores de risco cardiovascular e doença arterial coronária (DAC) em 7.183 pacientes submetidos a cintilografia de perfusão do miocárdio. Os investigadores utilizaram análise de regressão logística para examinar fatores como idade, sexo, antecedentes familiares, índice de massa corpórea, tabagismo, dislipidemia, diabetes melito e hipertensão arterial sistêmica.
+
+INTRODUÇÃO
+
+A doença arterial coronariana constitui causa significativa de morbidade e mortalidade global. A detecção precoce, anterior às manifestações clínicas, permite atuar sobre "fatores de risco passíveis de modificação, objetivando evitar a progressão da doença ou mesmo promover a sua regressão". Diversos fatores de risco estão estabelecidos na literatura, incluindo diabetes melito, hipertensão, tabagismo, dislipidemia, estresse, sedentarismo e envelhecimento, entre outros. Contudo, existe controvérsia quanto à importância relativa de cada fator e sua variação conforme sexo e faixas etárias em diferentes populações.
+
+MÉTODOS
+
+Amostra: Foram avaliados 7.183 pacientes consecutivos (5.118 homens e 2.065 mulheres; idade média 56,7 anos) submetidos a cintilografia de perfusão do miocárdio entre janeiro de 2000 e outubro de 2004, no Centro de Medicina Diagnóstica Fleury e Faculdade de Saúde Pública da Universidade de São Paulo.
+
+Fatores de risco avaliados: Durante a anamnese prévia ao exame, foram coletados dados sobre idade, sexo, antecedentes familiares, índice de massa corpórea, tabagismo, dislipidemia, diabetes melito e hipertensão arterial sistêmica. Os pacientes foram categorizados por faixas etárias (abaixo de 40, 40-50, 50-60, 60-70 e acima de 70 anos) e categorias de IMC (abaixo de 25, 25-30, 30-35 e acima de 35).
+
+Cintilografia de perfusão do miocárdio: Empregou-se protocolo de um dia com injeção de 2-metoxi-isobutil-isonitrila marcada com tecnécio-99m em repouso e estresse, com aquisição de imagens tomográficas (SPECT). Nas fases de estresse, utilizou-se teste ergométrico em esteira ou estimulação farmacológica com dipiridamol.
+
+Classificação dos pacientes: Foram caracterizados como portadores de DAC aqueles com histórico de infarto agudo do miocárdio, revascularização do miocárdio, angioplastia transluminal coronária e/ou defeitos de perfusão na cintilografia.
+
+Análise estatística: Utilizou-se análise de regressão logística multivariada para avaliar associação dos fatores de risco com presença de DAC, fornecendo razão de chances (OR) ajustada, intervalo de confiança de 95% e significância estatística.
+
+RESULTADOS
+
+Características gerais: De 7.183 pacientes, 1.322 (18,4%) foram classificados como portadores de DAC pelo critério rigoroso (1.103 homens e 219 mulheres) e 1.663 (23,1%) pelo critério complacente (1.357 homens e 306 mulheres).
+
+Comparação entre sexos: Diferenças estatisticamente significativas foram observadas quanto à hipertensão arterial sistêmica (mais frequente em mulheres), tabagismo (predominante em homens) e antecedentes familiares (mais frequentes em mulheres). Homens apresentaram maior frequência de critérios para DAC.
+
+Análise de regressão logística: Associação estatisticamente significativa foi observada entre idade, sexo masculino e presença de DAC. Para mulheres, "o DM apareceu como o principal fator de risco controlável para DAC, com razão de chances (OR) ajustada de 2,11". Para homens, vários fatores controláveis associaram-se à DAC, destacando-se diabetes melito e dislipidemia.
+
+Análise por faixas etárias: Tabagismo em homens com menos de 40 anos mostrou OR ajustada de 5,30 (critério complacente) e 7,47 (critério rigoroso). Diabetes melito em mulheres entre 40-50 anos apresentou OR de 5,73 e 7,15, respectivamente.
+
+DISCUSSÃO
+
+Os resultados evidenciam que "os principais FR associados à maior presença de DAC na população estudada foram o processo de envelhecimento e o fato de o paciente ser do sexo masculino". Dos fatores passíveis de modificação, as principais associações foram observadas para diabetes melito e dislipidemia; contudo, hipertensão arterial sistêmica, tabagismo e antecedentes familiares também apresentaram associações estatisticamente significativas.
+
+Diabetes melito apresentou-se como principal fator de risco controlável em mulheres, com "associação mais expressiva" naquelas entre 40-50 anos, período perimenopáusico em que a proteção estrogênica começa a declinar.
+
+CONCLUSÃO
+
+"Os principais fatores de risco para DAC foram o envelhecimento e o sexo masculino." Dos fatores controláveis, aqueles com maior associação foram diabetes melito e dislipidemia em homens, e diabetes melito em mulheres. Para "faixas etárias específicas destacaram-se o tabagismo para homens jovens, o DM e o tabagismo para mulheres entre 40 e 50 anos."
+
+REFERÊNCIAS
+
+O artigo cita 35 referências abrangendo estudos sobre carga global de doenças cardiovasculares, fatores de risco para infarto do miocárdio, meta-análises sobre impacto de diabetes em diferentes sexos, e investigações sobre fatores de risco em diferentes populações e faixas etárias.

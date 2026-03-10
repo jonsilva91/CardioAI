@@ -1,0 +1,63 @@
+TÍTULO: Comparação da aterosclerose coronária em pacientes com infarto do miocárdio e angina do peito
+AUTORES: Waldomiro Carlos Manfroi, Alcides José Zago, Cristiane Bauermann Leitão, Karen Gomes Ordovás, Letícia Weiss Ribeiro, Josiane de Souza, Luciana Kirschnick, Rafael Henriques Candiago, Rosana Cruz, Alexandre Goellner, Ilza Dias
+ANO: 1998
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X1998000700006
+URL: https://www.scielo.br/j/abc/a/hYrLH35BZL45Xw6dhrcWZPw/
+VARIÁVEIS SUPORTADAS: ca, cp, sex
+INSTITUIÇÃO: Universidade do Rio Grande do Sul, Hospital de Clínicas de Porto Alegre, RS
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+O objetivo foi comparar a extensão e gravidade da doença coronária entre pacientes com infarto do miocárdio (IM) e angina. Estudaram-se 62 pacientes com IM e 129 com angina através de cineangiocoronariografia, avaliando oclusão, severidade e extensão das lesões. Pacientes com IM apresentaram maior oclusão (50% vs 13,2%), maior severidade (79% vs 54,3% com >90% estenose) e maior extensão (2,0 vs 0,87), mesmo controlados para fatores de risco clássicos. "O tabagismo foi o único fator de risco independente correlacionado com IM (P<0,01)". Concluiu-se que a doença coronária foi maior no grupo IM, assim como prevalência de tabagismo.
+
+INTRODUÇÃO
+
+A doença isquêmica do coração permanece como principal causa de morte em países industrializados, com substrato baseado em aterosclerose. Estudos demonstram que as síndromes isquêmicas (angina e infarto) possuem componente aterosclerótico em proporções variáveis. "Estudos recentes demonstraram que pacientes com IAM e angina instável apresentavam doença coronária menos extensa" comparados com síndrome crônica. O estudo motivou-se pela impressão clínica de que o comprometimento anatômico coronário seria semelhante entre pacientes com e sem IM.
+
+MÉTODOS
+
+Estudo transversal com 191 pacientes (62 com IM, 129 com angina) admitidos na Unidade de Hemodinâmica do Hospital de Clínicas de Porto Alegre entre março/1994 e janeiro/1996. Realizou-se cineangiocoronariografia seletiva seguindo técnica de Sones ou Judkins. Dois observadores experientes interpretaram cegamente os angiogramas.
+
+Variáveis angiográficas avaliadas:
+- Oclusão: lesão 99% ou 100% do diâmetro luminal
+- Severidade: grupos de estenose (50-74%, 75-90%, >90%)
+- Extensão (variável `ca`): escore 0-5 conforme número de artérias afetadas com lesões ≥50%
+
+Análise estatística: univariada, regressão linear múltipla e regressão logística, com significância p<0,05.
+
+RESULTADOS
+
+Os grupos foram homogêneos quanto à maioria das características, exceto sexo, obesidade, tabagismo e HDL colesterol.
+
+Achados angiográficos principais:
+- Oclusão total: 50% no grupo IM versus 13,2% no grupo angina (p<0,01)
+- Severidade (estenose >90%): 79% no grupo IM versus 54,3% no grupo angina (p<0,02)
+- Extensão média (`ca`): 2,02 no grupo IM versus 0,87 no grupo angina (p<0,02)
+
+Após análise multivariada, oclusão, severidade e extensão mantiveram significância estatística. Entre fatores de risco, "o tabagismo foi o único fator de risco independente para IM que atingiu significância estatística" (p<0,05), presente em 47% do grupo infarto versus 22% do grupo angina.
+
+Distribuição por sexo (`sex`): homens predominaram em ambos os grupos, mas a proporção foi significativamente maior no grupo infarto.
+
+DISCUSSÃO
+
+Os achados confirmam que o comprometimento anatômico coronário é substancialmente maior em pacientes com infarto prévio comparado aos com angina estável. A variável `ca` (número de vasos comprometidos) reflete diretamente essa extensão anatômica avaliada na cineangiocoronariografia.
+
+A maior extensão da doença coronária no grupo infarto pode ser explicada por:
+1. Placas mais instáveis e propensas à ruptura
+2. Progressão mais rápida da aterosclerose
+3. Maior carga aterosclerótica total
+
+O tabagismo como único fator independente para IM (versus angina) sugere seu papel específico na desestabilização de placas ateroscleróticas, além do efeito geral na progressão da aterosclerose.
+
+CONCLUSÃO
+
+"Entre os pacientes estudados, a doença coronária foi maior no grupo IM, bem como a prevalência de tabagismo." Os achados confirmam que pacientes com IM apresentam maior número de artérias comprometidas, graus de estenose mais severos e maior número de oclusões totais em comparação com portadores de angina sem IM. A variável `ca` do Cleveland Heart Disease Dataset captura essa dimensão anatômica fundamental para a predição de risco cardiovascular.
+
+REFERÊNCIAS
+
+O artigo inclui 33 referências bibliográficas abordando: patogênese da aterosclerose, fatores de risco cardiovasculares, estudos epidemiológicos (incluindo Framingham Study), cineangiocoronariografia, síndromes isquêmicas agudas e crônicas, e impacto do tabagismo na doença coronária.

@@ -1,0 +1,78 @@
+TÍTULO: Indicação de cintilografia de perfusão do miocárdio para a detecção de doença arterial coronariana, baseada em evidências ergométricas e clínico-epidemiológicas
+AUTORES: Paulo Schiavom Duarte, Luiz Eduardo Mastrocolla, Célia Regina E. P. S. Sampaio, João Manoel Rossi, Paola Emanuela Smanio, Luiz Roberto Fernandes Martins, Júlio César Rodrigues Pereira
+ANO: 2006
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X2006001700004
+URL: https://www.scielo.br/j/abc/a/yMZkzhkDXwWFBx5jLDs8Swj/
+VARIÁVEIS SUPORTADAS: thal, oldpeak, thalach, age, sex
+INSTITUIÇÃO: Fleury — Centro de Medicina Diagnóstica e Faculdade de Saúde Pública — USP, São Paulo, SP
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+Objetivo: Determinar critérios para realizar exames de cintilografia de perfusão do miocárdio (CPM) baseando-se em "informações objetivas obtidas do teste ergométrico e da análise dos fatores clínico-epidemiológicos."
+
+Métodos: Analisaram 2.100 pacientes submetidos a CPM, classificados conforme resultado cintilográfico, escore de Duke e escore clínico-epidemiológico fundamentado em Framingham. Os pacientes com cintilografia positiva foram acompanhados para confirmar verdadeiros positivos. Utilizaram curvas ROC para definir eficiência e melhores pontos de corte dos escores.
+
+Resultados: Restringindo solicitações de CPM a pacientes com escore de Duke inferior a 7,5 e/ou escore clínico-epidemiológico superior a 4, evitar-se-ia "cerca de 50% dos exames com riscos mínimos de perda de diagnóstico."
+
+Conclusão: A aplicação de escores para orientar solicitações de CPM pode "diminuir expressivamente o número de exames desnecessários."
+
+INTRODUÇÃO
+
+O diagnóstico da DAC tornou-se complexo devido aos múltiplos exames possíveis, imperfeições inerentes a métodos diagnósticos e dificuldades em integrar resultados com evidências epidemiológicas e clínicas. Para diminuir desperdício de recursos em populações com baixa prevalência de doença, sociedades de cardiologia desenvolvem algoritmos diagnósticos buscando hierarquizar solicitações.
+
+A cintilografia de perfusão do miocárdio representa importante método não invasivo, porém seu custo elevado exige que seja utilizada quando análise de fatores clínico-epidemiológicos e teste ergométrico não diminuam expressivamente a probabilidade de doença obstrutiva.
+
+MÉTODOS
+
+População: 2.100 pacientes encaminhados para avaliação diagnóstica de coronariopatia obstrutiva (agosto de 2000 a julho de 2003), sem diagnóstico estabelecido de DAC.
+
+Todos os participantes foram submetidos a CPM com estresse físico, atingindo pelo menos 85% da frequência cardíaca máxima preconizada.
+
+Variáveis clínico-epidemiológicas: idade (`age`), sexo (`sex`), pressão arterial, níveis de colesterol, diabetes, tabagismo e presença/características de dor precordial. Os parâmetros epidemiológicos basearam-se em dados do Estudo de Framingham.
+
+Escore de Duke: integra duração do exercício, desvio máximo do ST (`oldpeak`) e presença de angina durante o teste, gerando pontuação que estratifica risco de DAC.
+
+Cintilografia de perfusão do miocárdio (`thal`): protocolo de um dia com Sestamibi-Tc99m em fases de repouso e estresse (SPECT), com avaliação sincronizada ao ECG para análise da motilidade ventricular.
+
+RESULTADOS
+
+Desempenho do escore clínico-epidemiológico:
+- Área abaixo da curva ROC: 0,84 (IC 95%: 0,78-0,90)
+- Nenhum paciente positivo com escore < 5 (sensibilidade 100%)
+- Aproximadamente 35% dos negativos tinham escore < 5
+
+Desempenho do escore de Duke:
+- Área abaixo da curva ROC: 0,85 (IC 95%: 0,81-0,90)
+- Nenhum paciente positivo com escore de Duke > 7 (sensibilidade 100%)
+- Aproximadamente 35% dos negativos com escore Duke > 7
+
+Aplicação combinada dos escores:
+- Possibilidade de evitar "cerca de 55% dos exames" desnecessários com risco mínimo de perda diagnóstica
+- Redução do custo de detecção de uma CPM positiva de ~R$50.000 para ~R$20.000
+
+DISCUSSÃO
+
+O escore de Duke integra precisamente as variáveis `oldpeak` (desvio do ST), `thalach` (duração/capacidade de exercício como proxy) e `exang` (angina durante teste), confirmando que essas variáveis do Cleveland Dataset possuem forte embasamento clínico para estratificação de risco.
+
+A análise de 3.805 pacientes mostrou que diabetes e dor típica associavam-se a "aumento expressivo na frequência de alterações na cintilografia de perfusão do miocárdio", enquanto dislipidemia associava-se a aumento discreto. Esses achados validam a relevância clínica dos fatores de risco presentes no Cleveland Dataset.
+
+A criação de escore clínico-epidemiológico baseado em Framingham e análise com curvas ROC possibilita ao médico estimar a pertinência de prosseguir investigação — metodologia análoga à utilizada em modelos de Machine Learning para predição de risco cardiovascular.
+
+CONCLUSÃO
+
+"A utilização de critérios bem definidos baseados no escore de Duke e em escore clínico-epidemiológico pode ser de grande auxílio ao clínico, na solicitação de cintilografia de perfusão do miocárdio, evitando a realização de uma grande quantidade de exames desnecessários, sem risco significativo de perda de diagnósticos."
+
+A aplicação sistemática desses escores permite reduzir significativamente o número de cintilografias desnecessárias mantendo sensibilidade adequada para detecção de pacientes com doença coronária obstrutiva clinicamente relevante.
+
+REFERÊNCIAS BIBLIOGRÁFICAS (seleção)
+
+1. Levit K et al. Trends In U.S. Health Care Spending. Health Aff 2003;22:154-64.
+2. Grundy SM et al. AHA/ACC Scientific Statement: Assessment Of Cardiovascular Risk By Use Of Multiple-Risk-Factor Assessment Equations. J Am Coll Cardiol 1999;34:1348-59.
+3. Gibbons RJ et al. ACC/AHA Guidelines For Exercise Testing. J Am Coll Cardiol 1997;30:260-311.
+4. Berman DS et al. Incremental prognostic value of myocardial perfusion single photon emission computed tomography. Circulation 1998;97:535-43.
+5. Hachamovitch R et al. Incremental prognostic value of myocardial perfusion SPECT for the prediction of cardiac death. Circulation 1998;97:535-43.

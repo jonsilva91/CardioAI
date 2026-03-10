@@ -1,0 +1,61 @@
+TÍTULO: Teste Ergométrico Imediato em Pacientes com Dor Torácica na Sala de Emergência
+AUTORES: Josiane de Souza, Waldomiro Carlos Manfroi, Carisi Anne Polanczyk
+ANO: 2002
+PERIÓDICO: Arquivos Brasileiros de Cardiologia
+DOI: 10.1590/S0066-782X2002001000012
+URL: https://www.scielo.br/j/abc/a/JF8cXJwrknj5GCGCVDYNh4K/
+VARIÁVEIS SUPORTADAS: cp, exang, oldpeak, thalach
+INSTITUIÇÃO: Universidade Federal do Rio Grande do Sul
+
+================================================================================
+CONTEÚDO
+================================================================================
+
+RESUMO
+
+Este artigo apresenta uma revisão sobre o teste ergométrico imediato para pacientes com dor torácica em salas de emergência. Revisa e interpreta evidências sobre acurácia, segurança e custo-efetividade do teste ergométrico na avaliação de risco em pacientes com dor torácica aguda.
+
+INTRODUÇÃO
+
+As doenças cardiovasculares representam a principal causa de mortalidade no Brasil em maiores de 40 anos. Estudos internacionais mostram que "2-8% de pacientes com dor torácica são inadvertidamente liberados das emergências sem diagnóstico adequado de infarto". A avaliação inicial na sala de emergência inclui história clínica (tipo de dor — variável `cp`), ECG e marcadores séricos. Para pacientes classificados como baixo risco, o teste ergométrico imediato representa estratégia de estratificação eficaz.
+
+METODOLOGIA
+
+Revisão bibliográfica de estudos clínicos e ensaios randomizados que avaliam o uso do teste ergométrico em unidades de dor torácica.
+
+PRINCIPAIS ACHADOS
+
+Desempenho diagnóstico:
+- Valor preditivo negativo: aproximadamente 98% quando o teste é negativo
+- Sensibilidade: 73% para detecção de síndrome coronariana aguda
+- Especificidade: 74%
+
+Segurança: incidência muito baixa de complicações durante teste ergométrico imediato em pacientes selecionados (baixo risco clínico após triagem inicial).
+
+Custo-efetividade: permite identificar pacientes de baixo risco para alta da emergência sem procedimentos adicionais, reduzindo internações desnecessárias e custos hospitalares em até 30%.
+
+VARIÁVEIS DO TESTE ERGOMÉTRICO
+
+O artigo destaca os parâmetros avaliados durante o teste que se mapeiam diretamente às variáveis do Cleveland Heart Disease Dataset:
+
+Tipo de dor torácica (`cp`): A caracterização clínica prévia — angina típica, atípica ou dor não-anginosa — determina a probabilidade pré-teste e orienta a interpretação dos achados ergométricos. Dor típica em repouso com irradiação indica maior probabilidade de síndrome coronariana.
+
+Angina induzida por exercício (`exang`): O surgimento de dor anginosa durante o esforço é critério de positividade do teste e forte indicador de isquemia miocárdica. Aumenta substancialmente o valor preditivo positivo quando associado às alterações de ST.
+
+Depressão do segmento ST (`oldpeak`): Infradesnivelamento de ST ≥1 mm (horizontal ou descendente) durante esforço ou recuperação é o principal critério eletrocardiográfico de positividade isquêmica. Magnitude e duração do infradesnível correlacionam-se com extensão da isquemia.
+
+Frequência cardíaca máxima (`thalach`): Incapacidade de atingir 85% da FC máxima prevista (FC máx = 220 - idade) por limitação cardiovascular — e não por limitação física ou medicamentosa — é marcador de disfunção cardíaca. A reserva cronotrópica inadequada associa-se a pior prognóstico.
+
+INDICAÇÕES DO TESTE ERGOMÉTRICO IMEDIATO
+
+Pacientes indicados: baixo risco após triagem — sem alterações de ECG isquêmicas, marcadores cardíacos negativos em duas dosagens, ausência de dor em repouso nas últimas horas, hemodinamicamente estáveis.
+
+Contraindicações absolutas: IAM em evolução, angina instável de alto risco, arritmias não controladas, estenose aórtica grave, insuficiência cardíaca descompensada, embolia pulmonar aguda, miocardite ou pericardite ativa.
+
+CONCLUSÃO
+
+O teste ergométrico imediato é seguro e efetivo para estratificar risco em pacientes de baixo risco com dor torácica, reduzindo internações desnecessárias e custos hospitalares. A combinação das variáveis cp, exang, oldpeak e thalach avaliadas durante o exame permite classificar os pacientes em grupos de risco e orientar a conduta clínica na emergência.
+
+REFERÊNCIAS
+
+O artigo baseia-se em ensaios randomizados e estudos observacionais publicados entre 1990-2001, incluindo protocolos de unidades de dor torácica de centros de referência norte-americanos e europeus.
