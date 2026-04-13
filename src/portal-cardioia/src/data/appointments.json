@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "patientName": "João Silva",
+    "date": "2026-04-15",
+    "time": "09:00",
+    "doctor": "Dr. Roberto Cardoso",
+    "type": "Consulta"
+  },
+  {
+    "id": 2,
+    "patientName": "Maria Souza",
+    "date": "2026-04-15",
+    "time": "10:30",
+    "doctor": "Dra. Helena Martins",
+    "type": "Retorno"
+  },
+  {
+    "id": 3,
+    "patientName": "Carlos Mendes",
+    "date": "2026-04-16",
+    "time": "14:00",
+    "doctor": "Dr. Rafael Nunes",
+    "type": "Avaliação"
+  }
+]
