@@ -417,10 +417,10 @@ Este repositório contém todos os arquivos exigidos das fases implementadas.
 
 ### Vídeo
 
-Adicionar aqui o link do vídeo no YouTube (não listado):
+Vídeo no YouTube (não listado):
 
 ```text
-[Inserir link do vídeo aqui]
+[![WCardioAI](https://img.youtube.com/vi/YUZqcR8LgFU/0.jpg)](https://youtu.be/YUZqcR8LgFU)
 ```
 
 ---
