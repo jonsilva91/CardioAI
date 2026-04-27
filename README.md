@@ -1,4 +1,4 @@
-# CardioIA: A Nova Era da Cardiologia Inteligente
+# Challenge IA FIAP + Dasa + Genera — Sprint 1
 
 <p align="center">
   <a href="https://www.fiap.com.br/">
@@ -16,47 +16,185 @@
 
 ---
 
-## Visão Geral
+## 1. Visão Geral do Desafio
 
-O **CardioIA** é um projeto acadêmico desenvolvido para a FIAP com foco em **Inteligência Artificial aplicada à cardiologia**. A proposta evolui por fases, integrando diferentes tipos de dados e componentes tecnológicos para simular um ecossistema inteligente de apoio clínico.
+Nesta Sprint 1, nosso objetivo é propor uma solução de IA generativa capaz de interpretar, agrupar, priorizar e explicar resultados genéticos dos pacientes da Genera, transformando relatórios técnicos em conteúdos claros, resumidos e personalizados.
 
-O projeto contempla:
-
-- **Dados numéricos** de pacientes cardíacos
-- **Dados textuais** com sintomas, descrições clínicas e conhecimento médico
-- **Dados visuais** com imagens de ECG
-- **Classificação textual de risco**
-- **Portal front-end em React** para visualização de pacientes, agendamentos e métricas
-- Evolução futura para modelos mais avançados de IA, NLP e visão computacional
+A proposta desta etapa não é entregar um sistema final implementado, mas sim uma base conceitual e arquitetural sólida, com foco em problema, usuários, user stories, estrutura dos dados, arquitetura inicial e próximos passos.
 
 ---
 
-## Objetivos do Projeto
+## 2. Problema
 
-### Fase 1
+Os relatórios genéticos da Genera contêm informações valiosas para prevenção, cuidado e personalização da jornada de saúde. No entanto, esse conteúdo costuma ser técnico, extenso e fragmentado, dificultando a interpretação pelo paciente final.
 
-Coletar, organizar e documentar bases multimodais para cardiologia, com governança, rastreabilidade e potencial de uso em Machine Learning.
+Atualmente, o principal desafio não é a ausência de informação, mas sim a dificuldade de transformar muitos dados genéticos em entendimento prático e acionável. O usuário precisa entender:
 
-### Fase 2
-
-Implementar componentes práticos de IA simbólica e classificação textual:
-
-- leitura de frases com sintomas
-- mapeamento sintoma → doença
-- classificador básico de risco com TF-IDF + Scikit-learn
-
-### Ir Além 1
-
-Construir a interface do **Portal CardioIA** com:
-
-- autenticação simulada
-- proteção de rotas
-- dashboard com métricas
-- listagem de pacientes
-- agendamento de consultas
-- navegação responsiva com React + Vite
+- o que é mais importante no seu resultado;
+- quais riscos ou predisposições merecem atenção;
+- quais orientações práticas podem ser extraídas do exame;
+- como navegar pelos diferentes painéis de forma simples.
 
 ---
+
+## 3. Solução Proposta
+
+Nossa proposta é desenvolver um **Copiloto Genético com IA Generativa**, capaz de transformar relatórios genéticos em PDF em uma experiência interativa, clara e personalizada para o paciente.
+
+A solução será híbrida, composta por três camadas principais:
+
+- **Camada de estruturação dos dados**, responsável por interpretar o PDF, extrair seu conteúdo e convertê-lo para um formato organizado, como JSON;
+- **Camada de inteligência**, responsável por resumir os achados, agrupar riscos por grandes temas, priorizar resultados relevantes e gerar recomendações práticas com linguagem acessível;
+- **Camada de interação**, composta por uma interface visual com cards, painéis e um **chatbot conversacional**, permitindo ao paciente fazer perguntas em linguagem natural sobre o próprio relatório.
+
+Dessa forma, a solução não se limita a exibir o conteúdo do exame: ela atua como um assistente digital capaz de explicar resultados, destacar pontos de atenção, responder dúvidas e apoiar a jornada de cuidado com mais clareza e personalização.
+
+## A ideia é converter relatórios técnicos em uma experiência mais útil, humanizada e acionável para o paciente, mantendo governança científica e segurança no uso da IA.
+
+## 4. Usuários da Solução
+
+### 4.1 Paciente
+
+Usuário principal da solução. Busca compreender melhor seu relatório genético, receber resumos claros, visualizar riscos por tema e obter orientações práticas.
+
+### 4.2 Time de Genômica / Geneticista
+
+Usuário de governança da solução. Precisa controlar fontes científicas, manter o conteúdo confiável e permitir evolução segura do sistema.
+
+---
+
+## 5. User Stories Priorizadas
+
+### US01
+
+**Como paciente, quero visualizar um resumo personalizado dos meus resultados genéticos.**
+
+### US02
+
+**Como paciente, quero entender meus riscos agrupados por grandes temas (ex.: pele, nutrição, doenças crônicas).**
+
+### US03
+
+**Como paciente, quero recomendações práticas baseadas no meu perfil genético.**
+
+### US04 — Governança
+
+**Como time de genômica, quero controlar quais periódicos científicos podem ser usados pela IA.**
+
+---
+
+## 6. Justificativa das User Stories
+
+As user stories escolhidas representam o núcleo do problema do challenge.
+
+As três histórias de paciente atacam diretamente:
+
+- a dificuldade de interpretação do conteúdo técnico;
+- a falta de priorização dos resultados;
+- a necessidade de transformar informação genética em ação prática.
+
+A user story de governança garante base científica controlada, maior confiança na solução e aderência ao contexto sensível da saúde.
+
+---
+
+## 7. Estrutura dos Dados
+
+Os PDFs analisados apresentam uma estrutura recorrente, contendo elementos como:
+
+- painel do produto;
+- categoria;
+- característica genética;
+- SNP / rsID;
+- gene;
+- genótipo;
+- classificação de predisposição;
+- explicação técnica;
+- interpretação do resultado;
+- recomendações gerais.
+
+A partir disso, propomos transformar cada resultado em uma estrutura JSON.
+
+### Exemplo
+
+```json
+{
+  "paciente_id": "anon_001",
+  "painel": "Genera Skin",
+  "categoria": "Cuidados relevantes",
+  "caracteristica": "Sensibilidade ao sol",
+  "snp": "rs1805007",
+  "gene": "MC1R",
+  "genotipo": "C,T",
+  "classificacao": "Maior predisposição",
+  "descricao_resumida": "Predisposição para sensibilidade aos raios ultravioleta",
+  "explicacao_paciente": "Você pode ter maior tendência a queimaduras solares e dificuldade de bronzeamento.",
+  "recomendacoes": [
+    "Evitar exposição prolongada ao sol",
+    "Usar protetor solar diariamente",
+    "Priorizar horários de menor radiação"
+  ],
+  "requer_acompanhamento": true,
+  "fonte_relatorio": "Genera Skin"
+}
+```
+
+## 8. Arquitetura Inicial da Solução
+
+### Fluxo proposto
+
+- Upload ou leitura do relatório genético em PDF
+- Extração do conteúdo textual e estrutural
+- Segmentação por seções e características
+- Conversão para JSON estruturado
+- Camada de IA para resumo, agrupamento, priorização e recomendação
+- Indexação dos dados estruturados para consultas inteligentes
+- Exibição em interface amigável ao paciente, com dashboard e chatbot
+
+### Representação resumida
+
+**PDF → Extração → Estruturação em JSON → IA Generativa → Dashboard + Chatbot/Copilot**
+
+### Componentes principais
+
+- **Parser de documento**: responsável por ler o PDF e identificar campos relevantes
+- **Base estruturada**: armazena os dados extraídos em formato organizado
+- **Motor de IA**: gera resumo, explicações e recomendações
+- **Chatbot / Copilot**: responde perguntas em linguagem natural com base no relatório do paciente
+- **Interface visual**: apresenta cards, destaques, agrupamentos temáticos e recomendações
+
+## 9. Papel da IA
+
+A IA terá como funções principais:
+
+- resumir os achados do relatório;
+- agrupar resultados por tema;
+- destacar pontos de maior relevância;
+- traduzir linguagem técnica para linguagem acessível;
+- gerar recomendações práticas não diagnósticas;
+- permitir interação via **chatbot conversacional**, respondendo perguntas sobre o próprio relatório;
+- apoiar futuras evoluções com personalização e explicações contextuais baseadas no histórico de resultados.
+
+Dessa forma, a IA não será apenas um mecanismo de resumo, mas sim o núcleo de um **copiloto genético digital**, capaz de transformar informação técnica em entendimento prático e interação guiada.
+
+## 10. Governança e Segurança
+
+Como se trata de dados genéticos e contexto de saúde, a solução deve considerar:
+
+- conformidade com LGPD;
+- uso controlado de fontes científicas;
+- guard rails para evitar aconselhamento médico indevido;
+- transparência sobre limites da IA;
+- aviso de que a solução não substitui avaliação médica.
+
+## 11. Vídeo da Sprint
+
+Link da apresentação em vídeo de até 5 minutos:
+
+[Inserir link aqui]
+
+## 12. Conclusão
+
+A Sprint 1 estabelece a base estratégica e técnica da solução. Priorizamos user stories centradas no paciente, apoiadas por uma camada essencial de governança científica, com foco em transformar relatórios genéticos complexos em informação clara, organizada e útil.
 
 ## Estrutura do Repositório
 
