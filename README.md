@@ -409,6 +409,16 @@ Caso o navegador bloqueie o render por política de segurança/extensões, testa
 
 ---
 
+## IR ALÉM Fase 3— Comunicação automatizada com REST e e-mail
+
+Fase 3 do projeto CardioIA expande a solução para o contexto de **IoT na saúde**, com monitoramento contínuo de sinais vitais, comunicação entre sistemas e análise de séries temporais.
+
+A documentação completa do Ir Além está disponível em:
+
+➡️ [Acessar README do Ir Além da Fase 3](src/ir_alem_fase03/README-Fase3-IrAlem-section.md)
+
+---
+
 ## Evidências de Entrega
 
 ### Repositório
