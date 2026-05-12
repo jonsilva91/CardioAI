@@ -1,0 +1,7 @@
+# Configuração para a extensão Wokwi do VS Code (com PlatformIO).
+# Para uso no Wokwi Web (wokwi.com), basta enviar sketch.ino + diagram.json
+# + libraries.txt — este arquivo não é necessário nesse fluxo.
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32doit-devkit-v1/firmware.bin"
+elf = ".pio/build/esp32doit-devkit-v1/firmware.elf"
