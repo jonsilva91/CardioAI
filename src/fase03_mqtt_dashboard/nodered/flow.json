@@ -1,0 +1,372 @@
+[
+  {
+    "id": "tab_cardioai_f3",
+    "type": "tab",
+    "label": "CardioAI Fase 3",
+    "disabled": false,
+    "info": "Dashboard 2.0 + MQTT — Parte 2 da Fase 3 do CardioIA.\n\nFluxo:\n  mqtt in → validar payload → computar alerta →\n    ├─ split-series (topic=temp / topic=bpm) → ui-chart\n    ├─ extract umid → ui-gauge\n    └─ extract alertaTexto → ui-text\n\nBroker: broker.hivemq.com:1883 (público, sem TLS).\nTópico: cardioai/+/telemetry (wildcard de deviceId).\nDashboard: http://localhost:1880/dashboard"
+  },
+  {
+    "id": "mqtt_in_telemetry",
+    "type": "mqtt in",
+    "z": "tab_cardioai_f3",
+    "name": "telemetry",
+    "topic": "cardioai/+/telemetry",
+    "qos": "1",
+    "datatype": "json",
+    "broker": "mqtt_broker_hivemq",
+    "nl": false,
+    "rap": false,
+    "rh": 0,
+    "inputs": 0,
+    "x": 130,
+    "y": 140,
+    "wires": [
+      [
+        "fn_validar"
+      ]
+    ]
+  },
+  {
+    "id": "fn_validar",
+    "type": "function",
+    "z": "tab_cardioai_f3",
+    "name": "validar payload",
+    "func": "if (typeof msg.payload !== 'object' || msg.payload === null) {\n    node.warn('payload inválido (não-objeto)');\n    return null;\n}\nconst p = msg.payload;\nif (typeof p.temp !== 'number' || typeof p.umid !== 'number' || typeof p.bpm !== 'number') {\n    node.warn('payload inválido (campos ausentes ou tipos errados)');\n    return null;\n}\nreturn msg;\n",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 320,
+    "y": 140,
+    "wires": [
+      [
+        "fn_alerta"
+      ]
+    ]
+  },
+  {
+    "id": "fn_alerta",
+    "type": "function",
+    "z": "tab_cardioai_f3",
+    "name": "computar alerta",
+    "func": "const p = msg.payload;\nconst alerta = (p.bpm > 120) || (p.temp > 38);\np.alerta = alerta;\np.alertaTexto = alerta ? '⚠️ LIMITE ULTRAPASSADO' : '✓ NORMAL';\nreturn msg;\n",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 520,
+    "y": 140,
+    "wires": [
+      [
+        "fn_split",
+        "ch_umid",
+        "ch_alerta"
+      ]
+    ]
+  },
+  {
+    "id": "fn_split",
+    "type": "function",
+    "z": "tab_cardioai_f3",
+    "name": "split-series (temp + bpm)",
+    "func": "const msgTemp = { topic: 'temp', payload: msg.payload.temp };\nconst msgBpm  = { topic: 'bpm',  payload: msg.payload.bpm };\nreturn [[msgTemp, msgBpm]];\n",
+    "outputs": 1,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 760,
+    "y": 80,
+    "wires": [
+      [
+        "ui_chart_vitals"
+      ]
+    ]
+  },
+  {
+    "id": "ui_chart_vitals",
+    "type": "ui-chart",
+    "z": "tab_cardioai_f3",
+    "group": "ui_group_sinais",
+    "name": "Sinais vitais",
+    "label": "Temperatura (°C) e BPM",
+    "order": 1,
+    "chartType": "line",
+    "category": "topic",
+    "categoryType": "msg",
+    "xAxisLabel": "",
+    "xAxisProperty": "",
+    "xAxisPropertyType": "msg",
+    "xAxisType": "time",
+    "xAxisFormat": "auto",
+    "xAxisFormatType": "auto",
+    "yAxisLabel": "",
+    "yAxisProperty": "payload",
+    "yAxisPropertyType": "msg",
+    "stackSeries": false,
+    "showLegend": true,
+    "removeOlder": 5,
+    "removeOlderUnit": 60,
+    "removeOlderPoints": "",
+    "width": 6,
+    "height": 4,
+    "className": "",
+    "x": 1000,
+    "y": 80,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ch_umid",
+    "type": "change",
+    "z": "tab_cardioai_f3",
+    "name": "extract umid",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.umid",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 750,
+    "y": 160,
+    "wires": [
+      [
+        "ui_gauge_umid"
+      ]
+    ]
+  },
+  {
+    "id": "ui_gauge_umid",
+    "type": "ui-gauge",
+    "z": "tab_cardioai_f3",
+    "name": "Umidade",
+    "group": "ui_group_sinais",
+    "order": 2,
+    "value": "payload",
+    "valueType": "msg",
+    "width": 3,
+    "height": 3,
+    "gtype": "gauge-half",
+    "gstyle": "rounded",
+    "title": "",
+    "alwaysShowTitle": false,
+    "units": "%",
+    "icon": "water-percent",
+    "prefix": "",
+    "suffix": "",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#f57c00",
+        "text": "",
+        "textType": "label"
+      },
+      {
+        "from": "30",
+        "color": "#388e3c",
+        "text": "",
+        "textType": "label"
+      },
+      {
+        "from": "70",
+        "color": "#f57c00",
+        "text": "",
+        "textType": "label"
+      }
+    ],
+    "min": "0",
+    "max": "100",
+    "sizeThickness": "10",
+    "sizeGap": "10",
+    "sizeKeyThickness": "10",
+    "className": "",
+    "x": 950,
+    "y": 160,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ch_alerta",
+    "type": "change",
+    "z": "tab_cardioai_f3",
+    "name": "extract alertaTexto + cor",
+    "rules": [
+      {
+        "t": "set",
+        "p": "color",
+        "pt": "msg",
+        "to": "$boolean(payload.alerta) ? '#c62828' : '#2e7d32'",
+        "tot": "jsonata"
+      },
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload.alertaTexto",
+        "tot": "msg"
+      }
+    ],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 770,
+    "y": 240,
+    "wires": [
+      [
+        "ui_text_alerta"
+      ]
+    ]
+  },
+  {
+    "id": "ui_text_alerta",
+    "type": "ui-text",
+    "z": "tab_cardioai_f3",
+    "group": "ui_group_sinais",
+    "order": 3,
+    "width": 6,
+    "height": 1,
+    "name": "Status clínico",
+    "label": "Status clínico",
+    "format": "<span style=\"color: {{msg.color}}; font-size: 1.4em; font-weight: 700;\">{{msg.payload}}</span>",
+    "layout": "row-spread",
+    "style": false,
+    "font": "",
+    "fontSize": 16,
+    "color": "#000000",
+    "wrapText": false,
+    "className": "",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 990,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "mqtt_broker_hivemq",
+    "type": "mqtt-broker",
+    "name": "HiveMQ Public",
+    "broker": "broker.hivemq.com",
+    "port": "1883",
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "ui_group_sinais",
+    "type": "ui-group",
+    "name": "Sinais Vitais",
+    "page": "ui_page_monitor",
+    "width": 6,
+    "height": 1,
+    "order": 1,
+    "showTitle": true,
+    "className": "",
+    "visible": true,
+    "disabled": false
+  },
+  {
+    "id": "ui_page_monitor",
+    "type": "ui-page",
+    "name": "Monitor",
+    "ui": "ui_base_cardioai",
+    "path": "/monitor",
+    "icon": "monitor-heart",
+    "layout": "grid",
+    "theme": "ui_theme_cardioai",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Small Desktop",
+        "px": "768",
+        "cols": "9"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ],
+    "order": 1,
+    "className": "",
+    "visible": true,
+    "disabled": false
+  },
+  {
+    "id": "ui_base_cardioai",
+    "type": "ui-base",
+    "name": "CardioAI Dashboard",
+    "path": "/dashboard",
+    "appIcon": "",
+    "includeClientData": true,
+    "acceptsClientConfig": [],
+    "showPathInSidebar": false,
+    "navigationStyle": "default",
+    "titleBarStyle": "default"
+  },
+  {
+    "id": "ui_theme_cardioai",
+    "type": "ui-theme",
+    "name": "CardioAI Theme",
+    "colors": {
+      "surface": "#ffffff",
+      "primary": "#c62828",
+      "bgPage": "#fafafa",
+      "groupBg": "#ffffff",
+      "groupOutline": "#e0e0e0"
+    },
+    "sizes": {
+      "pagePadding": "12px",
+      "groupGap": "12px",
+      "groupBorderRadius": "4px",
+      "widgetGap": "12px"
+    }
+  },
+  {
+    "id": "0daf3f252fc1d5f5",
+    "type": "global-config",
+    "env": [],
+    "modules": {
+      "@flowfuse/node-red-dashboard": "1.30.2"
+    }
+  }
+]

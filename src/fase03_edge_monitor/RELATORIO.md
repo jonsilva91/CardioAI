@@ -95,8 +95,37 @@ Em hardware físico real, a função `bufferPush` seria substituída por uma esc
 1. Acesse <https://wokwi.com> e clique em **Start from Scratch** → **ESP32**.
 2. Substitua o conteúdo de `sketch.ino` pelo deste repositório.
 3. Substitua o conteúdo de `diagram.json` pelo deste repositório.
-4. Crie um arquivo `libraries.txt` com as duas linhas: `DHT sensor library` e `Adafruit Unified Sensor`.
+4. Crie um arquivo `libraries.txt` com as quatro linhas: `DHT sensor library`, `Adafruit Unified Sensor`, `PubSubClient`, `ArduinoJson`.
 5. Clique em **Save** (login necessário) e copie o link gerado para esta seção.
+
+---
+
+## Evolução para Parte 2 — MQTT + Cloud
+
+A partir da Parte 2 da Fase 3, o mesmo firmware foi **evoluído in-place** (sem criar um sketch paralelo) para também publicar cada amostra na nuvem via MQTT. **O canal Serial CSV original foi 100 % preservado** — toda evidência de validação da Parte 1 (cabeçalho único, linhas CSV, `[FLUSH]`, `[WARN]`, `[ERR]`) continua aparecendo no Monitor Serial exatamente como antes. O Wokwi público continua o mesmo, apenas com seu conteúdo atualizado.
+
+### O que foi adicionado
+
+- **Wi-Fi** via rede simulada `Wokwi-GUEST` (timeout 10 s + reconnect não-bloqueante).
+- **Cliente MQTT** (`PubSubClient`) conectado ao broker público `broker.hivemq.com:1883`.
+- **Last Will and Testament** em `cardioai/<deviceId>/status` com payload `{"online":false}`, QoS 1, retain true; o status `{"online":true}` é publicado imediatamente após cada conexão.
+- **`deviceId` derivado do MAC** do ESP32 — garante unicidade no broker público compartilhado.
+- **Publicação JSON** em `cardioai/<deviceId>/telemetry` com payload `{"ts":...,"temp":...,"umid":...,"bpm":...,"buffered":bool}`.
+- **`publishSample()`** emite **simultaneamente** no Serial (CSV idêntico à Parte 1) e no MQTT (JSON).
+- **Reconnect MQTT com backoff exponencial** (1 → 2 → 4 → … → 30 s) sem bloquear o `loop()`.
+- **Bufferização também quando MQTT desconectado**: mesmo com a flag `online=true`, se `client.connected()` for false, novas amostras vão para o buffer — espelhando a resiliência da Parte 1 para o canal MQTT.
+
+### Por que o canal Serial foi preservado
+
+- **Evidência da Parte 1** capturada e validada antes do MQTT continua válida.
+- Em IoT real, Serial é o canal de debug/diagnóstico em campo; MQTT é o canal de produção. Manter os dois custa ~5 linhas dentro de `publishSample` e é a prática padrão.
+- O avaliador pode validar a Parte 1 e a Parte 2 **na mesma simulação**, no mesmo Wokwi, sem trocar de projeto.
+
+### Documentação completa da Parte 2
+
+Para detalhes do fluxo MQTT (broker, QoS, retain, LWT, payload), configuração do dashboard Node-RED, instruções de import do `flow.json` e os limites clínicos de alerta, consulte:
+
+➡️ [src/fase03_mqtt_dashboard/RELATORIO.md](../fase03_mqtt_dashboard/RELATORIO.md)
 
 ## Cenários de teste
 

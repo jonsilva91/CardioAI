@@ -409,6 +409,29 @@ Caso o navegador bloqueie o render por política de segurança/extensões, testa
 
 ---
 
+## Fase 3 — Parte 1: Edge Monitor ESP32 (IoT)
+
+Protótipo de monitoramento cardíaco vestível em ESP32 simulado no Wokwi, com captura de sinais vitais (DHT22 + potenciômetro para BPM 40–180), buffer circular em RAM como camada de resiliência offline (120 amostras ≈ 10 min) e drenagem em formato CSV no Monitor Serial quando a conectividade simulada (botão no GPIO15) está ativa.
+
+- **Código e diagrama**: [`src/fase03_edge_monitor/`](src/fase03_edge_monitor/)
+- **Relatório técnico**: [`src/fase03_edge_monitor/RELATORIO.md`](src/fase03_edge_monitor/RELATORIO.md)
+- **Link do Wokwi**: <https://wokwi.com/projects/463852249434716161>
+- **Sensores**: DHT22 (temperatura + umidade), potenciômetro simulando BPM
+
+---
+
+## Fase 3 — Parte 2: MQTT + Dashboard Node-RED (Fog/Cloud)
+
+Extensão da Parte 1 levando a telemetria à nuvem via **MQTT** (broker público `broker.hivemq.com`) e visualizando em um **dashboard Node-RED** com gráfico (temperatura + BPM), gauge (umidade) e indicador visual de alerta clínico (`bpm > 120` OU `temp > 38 °C`). O firmware é o **mesmo módulo da Parte 1**, evoluído in-place para publicar simultaneamente no Serial CSV (canal preservado) e no MQTT JSON (canal novo).
+
+- **Firmware**: [`src/fase03_edge_monitor/sketch.ino`](src/fase03_edge_monitor/sketch.ino) (módulo único, evoluído)
+- **Relatório técnico (Parte 2)**: [`src/fase03_mqtt_dashboard/RELATORIO.md`](src/fase03_mqtt_dashboard/RELATORIO.md)
+- **Fluxo Node-RED**: [`src/fase03_mqtt_dashboard/nodered/flow.json`](src/fase03_mqtt_dashboard/nodered/flow.json)
+- **Screenshots do dashboard**: [`src/fase03_mqtt_dashboard/screenshots/`](src/fase03_mqtt_dashboard/screenshots/)
+- **Ferramentas**: HiveMQ público (MQTT 1883, sem TLS), Node-RED 3.x + `@flowfuse/node-red-dashboard` (Dashboard 2.0)
+
+---
+
 ## IR ALÉM Fase 3— Comunicação automatizada com REST e e-mail
 
 Fase 3 do projeto CardioIA expande a solução para o contexto de **IoT na saúde**, com monitoramento contínuo de sinais vitais, comunicação entre sistemas e análise de séries temporais.
