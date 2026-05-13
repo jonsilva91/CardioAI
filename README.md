@@ -418,6 +418,8 @@ Protótipo de monitoramento cardíaco vestível em ESP32 simulado no Wokwi, com 
 - **Link do Wokwi**: <https://wokwi.com/projects/463852249434716161>
 - **Sensores**: DHT22 (temperatura + umidade), potenciômetro simulando BPM
 
+[VIDEO DESMOSTRATIVO](https://youtu.be/uto2BFqWQ-o)
+
 ---
 
 ## Fase 3 — Parte 2: MQTT + Dashboard Node-RED (Fog/Cloud)
@@ -430,6 +432,8 @@ Extensão da Parte 1 levando a telemetria à nuvem via **MQTT** (broker público
 - **Screenshots do dashboard**: [`src/fase03_mqtt_dashboard/screenshots/`](src/fase03_mqtt_dashboard/screenshots/)
 - **Ferramentas**: HiveMQ público (MQTT 1883, sem TLS), Node-RED 3.x + `@flowfuse/node-red-dashboard` (Dashboard 2.0)
 
+
+[VIDEO DESMOSTRATIVO](https://youtu.be/uto2BFqWQ-o)
 ---
 
 ## IR ALÉM Fase 3— Comunicação automatizada com REST e e-mail
