@@ -1,4 +1,4 @@
-# CardioIA: A Nova Era da Cardiologia Inteligente
+# CardioAI: A Nova Era da Cardiologia Inteligente
 
 <p align="center">
   <a href="https://www.fiap.com.br/">
@@ -18,43 +18,26 @@
 
 ## Visão Geral
 
-O **CardioIA** é um projeto acadêmico desenvolvido para a FIAP com foco em **Inteligência Artificial aplicada à cardiologia**. A proposta evolui por fases, integrando diferentes tipos de dados e componentes tecnológicos para simular um ecossistema inteligente de apoio clínico.
+O **CardioAI** é um projeto acadêmico da FIAP com foco em **Inteligência Artificial aplicada à cardiologia**. O repositório foi reorganizado para separar claramente os entregáveis por fase, facilitar a avaliação acadêmica e preservar o funcionamento dos artefatos já implementados.
 
 O projeto contempla:
 
-- **Dados numéricos** de pacientes cardíacos
-- **Dados textuais** com sintomas, descrições clínicas e conhecimento médico
-- **Dados visuais** com imagens de ECG
-- **Classificação textual de risco**
-- **Portal front-end em React** para visualização de pacientes, agendamentos e métricas
-- Evolução futura para modelos mais avançados de IA, NLP e visão computacional
+- bases multimodais para cardiologia
+- IA simbólica e classificação textual
+- portal front-end em React
+- monitoramento IoT com API REST e automação de alertas
+- análise de séries temporais em saúde
+- preparação da Fase 4 com CNN aplicada a ECG
 
 ---
 
-## Objetivos do Projeto
+## Navegação Rápida
 
-### Fase 1
-
-Coletar, organizar e documentar bases multimodais para cardiologia, com governança, rastreabilidade e potencial de uso em Machine Learning.
-
-### Fase 2
-
-Implementar componentes práticos de IA simbólica e classificação textual:
-
-- leitura de frases com sintomas
-- mapeamento sintoma → doença
-- classificador básico de risco com TF-IDF + Scikit-learn
-
-### Ir Além 1
-
-Construir a interface do **Portal CardioIA** com:
-
-- autenticação simulada
-- proteção de rotas
-- dashboard com métricas
-- listagem de pacientes
-- agendamento de consultas
-- navegação responsiva com React + Vite
+- [Fase 1 — Bases Multimodais](phases/fase01_bases_multimodais/README.md)
+- [Fase 2 — IA Simbólica e Classificação](phases/fase02_ia_simbolica_classificacao/README.md)
+- [Fase 3 — IoT, REST, e-mail e séries temporais](phases/fase03_iot_monitoramento/README.md)
+- [Fase 4 — CNN aplicada a ECG](phases/fase04_cnn_ecg/README.md)
+- [Portal React](apps/portal-cardioia/README.md)
 
 ---
 
@@ -62,305 +45,193 @@ Construir a interface do **Portal CardioIA** com:
 
 ```text
 CardioAI/
-├── documents/
-│   ├── frases_pacientes.txt
-│   ├── mapa_conhecimento.csv
-│   └── heart-explain.md
-│   ├── references/
-│   │   ├── 01_diretrizes_doenca_coronariana_cronica_angina_estavel.txt
-│   │   ├── 02_associacao_fatores_risco_dac_cintilografia.txt
-│   │   ├── 03_teste_esforco_alteracoes_segmento_st_recuperacao.txt
-│   │   ├── 04_valor_diagnostico_teste_ergometrico_isquemia_silenciosa_idoso.txt
-│   │   ├── 05_teste_ergometrico_imediato_dor_toracica_emergencia.txt
-│   │   ├── 06_comparacao_aterosclerose_coronaria_infarto_angina.txt
-│   │   ├── 07_indicacao_cintilografia_perfusao_miocardio_escores.txt
-│   │   └── 08_fatores_risco_dac_unidade_hemodinamica.txt
-│
+├── README.md
+├── assets/
 ├── data/
-│    ├── frases_risco.csv
-|    ├── pacientes_cardio.csv
-|    ├── resultado_diagnostico.csv
-├── src/
-│   ├── diagnostico_ontologia.py
-│   ├── classificacao_risco.ipynb
+│   ├── raw/
+│   ├── processed/
+│   └── samples/
+├── docs/
+│   ├── references/
+│   └── reports/
+├── phases/
+│   ├── fase01_bases_multimodais/
+│   ├── fase02_ia_simbolica_classificacao/
+│   ├── fase03_iot_monitoramento/
+│   └── fase04_cnn_ecg/
+├── apps/
 │   └── portal-cardioia/
-│       ├── package.json
-│       ├── vite.config.js
-│       ├── index.html
-│       └── src/
-│           ├── App.jsx
-│           ├── main.jsx
-│           ├── routes.jsx
-│           ├── components/
-│           ├── contexts/
-│           ├── data/
-│           ├── pages/
-│           └── services/
+├── config/
 ├── referencias.md
-└── README.md
+└── .gitignore
 ```
 
 ---
 
-# Fase 1 — Bases Multimodais em Cardiologia
+## Resumo das Fases
 
-## Parte 1: Dados Numéricos
+### Fase 1 — Bases Multimodais
 
-**Arquivo**: `heart.csv`  
-**Tamanho**: 303 registros × 14 variáveis  
-**Status**: ✅ Atende ao mínimo de 100 linhas
+Organiza materiais de referência, textos clínicos e documentação de bases para uso em IA aplicada à cardiologia.
 
-### Aplicação
+**Local:** `phases/fase01_bases_multimodais/`
 
-Essa base serve como apoio para tarefas de:
+### Fase 2 — IA Simbólica e Classificação Textual
 
-- classificação binária de doença cardíaca
-- análise de variáveis clínicas
-- feature engineering
-- futuros modelos supervisionados
+Contém o script de diagnóstico baseado em mapa de conhecimento e o notebook de classificação textual de risco.
 
-### Variáveis de destaque
+**Local:** `phases/fase02_ia_simbolica_classificacao/`
 
-- `cp` — tipo de dor no peito
-- `thalach` — frequência cardíaca máxima
-- `oldpeak` — depressão do segmento ST
-- `ca` — número de vasos acometidos
-- `thal` — resultado do teste com tálio
-- `exang` — angina induzida por exercício
+### Fase 3 — IoT, REST, e-mail e séries temporais
 
----
+Centraliza os entregáveis de monitoramento IoT, API REST com alertas simulados por e-mail, notebook de séries temporais e relatórios.
 
-## Parte 2: Dados Textuais
+**Local:** `phases/fase03_iot_monitoramento/`
 
-**Pasta**: `documents/`  
-**Status**: ✅ Atende ao mínimo exigido
+### Fase 4 — CNN aplicada a ECG
 
-### Arquivos
+Estrutura inicial preparada para classificação de ECG com CNN simples, incluindo notebook, scripts de treino/avaliação e diretórios de saída.
 
-- `diagnostico_insuficiencia_cardiaca.txt`
-- `arritmias_classificacao_tratamento.txt`
-- `infarto_agudo_miocardio.txt`
+**Local:** `phases/fase04_cnn_ecg/`
 
-### Aplicações
+### Portal CardioIA
 
-- classificação de sintomas
-- extração de entidades médicas
-- apoio a NLP clínico
-- busca semântica
-- construção de mapa de conhecimento
+Aplicação React + Vite para autenticação simulada, dashboard, pacientes e agendamentos.
 
----
+**Local:** `apps/portal-cardioia/`
 
-## Parte 3: Dados Visuais
+### IR ALÉM 2 — Aplicativo Mobile React Native
 
-**Tipo**: imagens de ECG  
-**Quantidade**: 10.148+ imagens  
-**Status**: ✅ Atende ao mínimo exigido
+Aplicativo mobile em React Native/Expo para classificação de imagens de ECG, integrando com o modelo CNN da Fase 4 via API FastAPI.
 
-### Possibilidades futuras
+**Funcionalidades:**
 
-- classificação de ECG normal vs. anormal
-- visão computacional aplicada à triagem
-- uso de CNN e interpretabilidade
+- Seleção de imagens da galeria
+- Upload e classificação via API
+- Exibição de resultado com confiança
+- Avisos de uso acadêmico
+
+➡️ **[Acessar documentação do app mobile](apps/mobile-cardioia/README.md)**
+
+**Local:** `apps/mobile-cardioia/`
 
 ---
 
-## Governança de Dados
+## Como Executar
 
-- Sem dados pessoais identificáveis
-- Fontes documentadas
-- Versionamento por Git
-- Organização por modalidade
-- Estrutura preparada para evolução em IA multimodal
-
----
-
-# Fase 2 — IA Simbólica + Classificação Textual
-
-## Parte 1 — Mapeamento sintoma → doença
-
-Foram criados artefatos para representar relações clínicas simples entre sintomas e diagnósticos cardiovasculares.
-
-### Arquivos
-
-- `data/frase_diagnostico.py`
-- `dcouments/mapa_conhecimento.csv`
-
-### Objetivo
-
-Ler frases em linguagem natural, identificar sintomas e sugerir diagnósticos com base em um mapa de conhecimento simples.
-
-### Exemplos de doenças trabalhadas
-
-- infarto agudo do miocárdio
-- insuficiência cardíaca
-- arritmia
-- angina
-- hipertensão
-
----
-
-## Parte 2 — Classificador básico de risco
-
-Foi construída uma base simulada de frases médicas rotuladas e um notebook para classificação de risco.
-
-### Arquivos
-
-- `data/frases_risco.csv`
-- `src/classificacao_risco.ipynb`
-
-### Tecnologias
-
-- Python
-- Pandas
-- Scikit-learn
-- TF-IDF
-- Logistic Regression / Decision Tree
-
-### Objetivo
-
-Classificar frases médicas como:
-
-- **alto risco**
-- **baixo risco**
-
-### Exemplo de frase
-
-- `"sinto dor no peito e falta de ar"` → alto risco
-- `"tive um leve incômodo nas costas"` → baixo risco
-
-### Etapas do notebook
-
-- carregamento da base
-- vetorização com TF-IDF
-- treino do classificador
-- avaliação com acurácia
-- testes com frases novas
-
----
-
-# Ir Além 1 — Portal CardioIA em React + Vite
-
-Foi desenvolvido um portal front-end simulando a rotina de um sistema cardiológico.
-
-## Funcionalidades implementadas
-
-- autenticação fake com Context API
-- token fake salvo no `localStorage`
-- proteção de rotas
-- dashboard com métricas resumidas
-- listagem de pacientes
-- formulário de agendamento com `useReducer`
-- estilização com CSS Modules
-- dados simulados em JSON local
-
-## Estrutura do portal
-
-```text
-src/portal-cardioia/
-├── package.json
-├── index.html
-└── src/
-    ├── components/
-    │   ├── Navbar.jsx
-    │   ├── ProtectedRoute.jsx
-    │   └── StatCard.jsx
-    ├── contexts/
-    │   ├── AuthContext.jsx
-    │   └── useAuth.jsx
-    ├── data/
-    │   ├── patients.json
-    │   └── appointments.json
-    ├── pages/
-    │   ├── Login.jsx
-    │   ├── Dashboard.jsx
-    │   ├── Pacientes.jsx
-    │   └── Agendamentos.jsx
-    ├── services/
-    │   └── fakeApi.js
-    ├── App.jsx
-    ├── main.jsx
-    └── routes.jsx
-```
-
----
-
-## Credenciais do Portal
-
-```text
-E-mail: admin@cardioia.com
-Senha: 123456
-```
-
----
-
-## Telas do Portal
-
-### Login
-
-Tela inicial com autenticação simulada.
-
-### Dashboard
-
-Painel com:
-
-- total de pacientes
-- total de consultas
-- casos de alto risco
-- casos de baixo risco
-
-### Pacientes
-
-Listagem simulada de pacientes com:
-
-- nome
-- idade
-- sexo
-- condição clínica
-- nível de risco
-- última consulta
-
-### Agendamentos
-
-Formulário de consultas usando `useReducer`, com listagem das consultas cadastradas.
-
----
-
-## Como Executar o Portal
-
-### 1. Entrar na pasta do front-end
+### 1. Portal React
 
 ```bash
-cd src/portal-cardioia
-```
-
-### 2. Instalar dependências
-
-```bash
+cd apps/portal-cardioia
 npm install
-```
-
-### 3. Executar em modo de desenvolvimento
-
-```bash
 npm run dev
 ```
 
-### 4. Abrir no navegador
+Acesse a URL exibida no terminal, normalmente `http://localhost:5173`.
 
-Acesse a URL exibida no terminal, normalmente:
+### 2. Fase 2 — Diagnóstico simbólico
 
-```text
-http://localhost:5173
+```bash
+python phases/fase02_ia_simbolica_classificacao/diagnostico_ontologia.py
 ```
 
-### Observação
+### 3. Fase 2 — Notebook de classificação textual
 
-Caso o navegador bloqueie o render por política de segurança/extensões, testar:
+```bash
+jupyter notebook phases/fase02_ia_simbolica_classificacao/classificacao_risco.ipynb
+```
 
-- em janela anônima
-- em outro navegador
-- ou com extensões desativadas
+### 4. Fase 3 — API REST e alerta por e-mail simulado
+
+```bash
+cd phases/fase03_iot_monitoramento/ir_alem_1_rest_email
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app:app --reload --port 8000
+```
+
+Em outro terminal:
+
+```bash
+cd phases/fase03_iot_monitoramento/ir_alem_1_rest_email
+python client_simulador.py
+```
+
+### 5. Fase 3 — Notebook de séries temporais
+
+```bash
+pip install -r phases/fase03_iot_monitoramento/ir_alem_2_series_temporais/requirements.txt
+jupyter notebook phases/fase03_iot_monitoramento/notebooks/ir_alem_2_series_temporais_saude.ipynb
+```
+
+### 6. Fase 4 — CNN ECG
+
+```bash
+pip install -r phases/fase04_cnn_ecg/requirements.txt
+jupyter notebook phases/fase04_cnn_ecg/notebooks/cnn_ecg_classification.ipynb
+python phases/fase04_cnn_ecg/src/train.py
+python phases/fase04_cnn_ecg/src/evaluate.py
+```
+
+### 7. Fase 4 — API FastAPI (IR ALÉM 2)
+
+```bash
+cd phases/fase04_cnn_ecg
+.venv\Scripts\activate
+uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
+```
+
+Acesse: `http://localhost:8000/docs`
+
+### 8. App Mobile React Native (IR ALÉM 2)
+
+**Backend (terminal 1):**
+
+```bash
+cd phases/fase04_cnn_ecg
+.venv\Scripts\activate
+uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Mobile (terminal 2):**
+
+```bash
+cd apps/mobile-cardioia
+npm install
+npx expo start
+```
+
+⚠️ **Configure o IP da sua máquina em `src/services/visionApi.js` antes de executar!**
+
+Veja instruções completas em: [apps/mobile-cardioia/README.md](apps/mobile-cardioia/README.md)
+
+---
+
+## Dados e Referências
+
+- Referências bibliográficas gerais: [`referencias.md`](referencias.md)
+- Artigos e textos de apoio: [`docs/references/`](docs/references/)
+- Dados brutos futuros devem ser colocados em: [`data/raw/`](data/raw/)
+- Saídas processadas e amostras podem ser organizadas em:
+  - [`data/processed/`](data/processed/)
+  - [`data/samples/`](data/samples/)
+
+> Para a Fase 4, datasets grandes não devem ser versionados. O download deve ser feito manualmente e armazenado em `data/raw/`.
+
+---
+
+## Evidências de Entrega
+
+### Repositório
+
+Este repositório contém os artefatos acadêmicos organizados por fase para facilitar navegação, execução e avaliação.
+
+### Vídeo
+
+Vídeo no YouTube (não listado):
+
+[![WCardioAI](https://img.youtube.com/vi/YUZqcR8LgFU/0.jpg)](https://youtu.be/YUZqcR8LgFU)
 
 ---
 
@@ -373,6 +244,7 @@ Caso o navegador bloqueie o render por política de segurança/extensões, testa
 - NumPy
 - Scikit-learn
 - Jupyter Notebook
+- TensorFlow/Keras ou PyTorch na evolução da Fase 4
 
 ### Front-end
 
@@ -390,61 +262,22 @@ Caso o navegador bloqueie o render por política de segurança/extensões, testa
 
 ---
 
-## Roadmap do Projeto
+## Roadmap
 
 ### Concluído
 
 - Fase 1 — bases multimodais
 - Fase 2 — mapa de conhecimento e classificador textual
-- Ir Além 1 — portal front-end funcional
+- Fase 3 — IoT, REST, e-mail e séries temporais
+- Portal React funcional
 
-### Próximos passos possíveis
+### Próximos passos
 
-- integração do portal com back-end real
-- persistência de pacientes e consultas
-- classificador mais robusto de risco
-- visualização de exames de ECG
-- rede neural para classificação de imagens cardiológicas
-- integração multimodal entre texto, imagem e dados clínicos
-
----
-
-## IR ALÉM Fase 3— Comunicação automatizada com REST e e-mail
-
-Fase 3 do projeto CardioIA expande a solução para o contexto de **IoT na saúde**, com monitoramento contínuo de sinais vitais, comunicação entre sistemas e análise de séries temporais.
-
-A documentação completa do Ir Além está disponível em:
-
-➡️ [Acessar README do Ir Além da Fase 3](src/ir_alem_fase03/README-Fase3-IrAlem-section.md)
-
----
-
-## Evidências de Entrega
-
-### Repositório
-
-Este repositório contém todos os arquivos exigidos das fases implementadas.
-
-### Vídeo
-
-Vídeo no YouTube (não listado):
-
-[![WCardioAI](https://img.youtube.com/vi/YUZqcR8LgFU/0.jpg)](https://youtu.be/YUZqcR8LgFU)
-
----
-
-## Referências
-
-- UCI Machine Learning Repository
-- Kaggle
-- SciELO
-- Diretrizes SBC, ACC/AHA e ESC
-
-Consultar também:
-
-- `referencias.md`
-- `documents/`
-- `documents/references/`
+- consolidar entregáveis da Fase 4
+- treinar CNN para classificação de ECG
+- gerar matriz de confusão e métricas clínicas
+- discutir limitações médicas, overfitting e uso responsável de IA em saúde
+- integrar portal com serviços futuros
 
 ---
 
@@ -455,11 +288,9 @@ MIT License
 ---
 
 **Status do Projeto**: Em evolução  
-**Versão**: 2.0  
+**Versão**: 4.0  
 **Curso**: FIAP — Faculdade de Informática e Administração Paulista
 
 ---
-
-**Versão**: 1.1-phase1 | **Data**: 10/03/2026 | **Status**: Fase 1 ✅
 
 _Desenvolvido para FIAP – Faculdade de Informática e Administração Paulista_

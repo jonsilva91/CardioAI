@@ -1,5 +1,57 @@
+# Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+
+# Node
+node_modules/
+dist/
+build/
+
+# React Native / Expo
+apps/mobile-cardioia/.expo/
+apps/mobile-cardioia/.expo-shared/
+apps/mobile-cardioia/node_modules/
+apps/mobile-cardioia/npm-debug.*
+apps/mobile-cardioia/yarn-error.log
+apps/mobile-cardioia/package-lock.json
+apps/mobile-cardioia/yarn.lock
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# IoT / PlatformIO
+.pio/
+
+# Data files
+data/raw/**
+!data/raw/.gitkeep
+!data/raw/README.md
+!data/raw/ecg_images/
+
+# Trained models and outputs
+phases/fase04_cnn_ecg/outputs/models/**
+!phases/fase04_cnn_ecg/outputs/models/.gitkeep
+phases/fase04_cnn_ecg/outputs/figures/**
+!phases/fase04_cnn_ecg/outputs/figures/.gitkeep
+
+# Large files
+*.h5
+*.keras
+*.pb
+*.ckpt
+*.weights
+
+# Legacy spreadsheet exclusions
 *.csv
 *.tsv
 *.xls
 *.xlsx
 *cwd
+
+# Made with Bob
