@@ -273,11 +273,51 @@ Vídeo no YouTube (não listado):
 
 ### Próximos passos
 
-- consolidar entregáveis da Fase 4
-- treinar CNN para classificação de ECG
-- gerar matriz de confusão e métricas clínicas
-- discutir limitações médicas, overfitting e uso responsável de IA em saúde
-- integrar portal com serviços futuros
+- integração do portal com back-end real
+- persistência de pacientes e consultas
+- classificador mais robusto de risco
+- visualização de exames de ECG
+- rede neural para classificação de imagens cardiológicas
+- integração multimodal entre texto, imagem e dados clínicos
+
+---
+
+## IR ALÉM Fase 3— Comunicação automatizada com REST e e-mail
+
+Fase 3 do projeto CardioIA expande a solução para o contexto de **IoT na saúde**, com monitoramento contínuo de sinais vitais, comunicação entre sistemas e análise de séries temporais.
+
+A documentação completa do Ir Além está disponível em:
+
+➡️ [Acessar README do Ir Além da Fase 3](src/ir_alem_fase03/README-Fase3-IrAlem-section.md)
+
+---
+
+## Evidências de Entrega
+
+### Repositório
+
+Este repositório contém todos os arquivos exigidos das fases implementadas.
+
+### Vídeo
+
+Vídeo no YouTube (não listado):
+
+[![WCardioAI](https://img.youtube.com/vi/YUZqcR8LgFU/0.jpg)](https://youtu.be/YUZqcR8LgFU)
+
+---
+
+## Referências
+
+- UCI Machine Learning Repository
+- Kaggle
+- SciELO
+- Diretrizes SBC, ACC/AHA e ESC
+
+Consultar também:
+
+- `referencias.md`
+- `documents/`
+- `documents/references/`
 
 ---
 
