@@ -59,13 +59,13 @@ phases/fase04_cnn_ecg/
 
 ### Dataset Recomendado
 
-**Nome:** ECG Images dataset (MIT-BIH Arrhythmia Database)
+**Nome:** ECG Images dataset
 
-**Fonte:** [Kaggle - ECG Images](https://www.kaggle.com/datasets/shayanfazeli/heartbeat)
+**Fonte:** [Kaggle - ECG Images](https://www.kaggle.com/datasets/analiviafr/ecg-images)
 
 **Características:**
 
-- Imagens de ECG 256x256 pixels
+- Imagens de ECG 128X128 pixels
 - 5 classes de arritmia cardíaca
 - Formato: PNG
 - Derivado do MIT-BIH Arrhythmia Database
@@ -80,7 +80,7 @@ phases/fase04_cnn_ecg/
 
 ### Como Baixar
 
-**Instruções detalhadas:** `../../data/raw/ecg_images/README.md`
+**Instruções detalhadas:** `../../../data/raw/ecg_images/README.md`
 
 **Resumo:**
 
@@ -136,8 +136,8 @@ data/raw/ecg_images/
    !pip install kaggle
    !mkdir -p ~/.kaggle
    # Upload kaggle.json
-   !kaggle datasets download -d shayanfazeli/heartbeat
-   !unzip heartbeat.zip -d ecg_images
+   !kaggle datasets download -d analiviafr/ecg-images
+   !unzip archive.zip -d ecg_images
    ```
 
 3. Execute as células sequencialmente
@@ -265,7 +265,7 @@ Dense(5) + Softmax
 from src.model_cnn import build_cnn_model
 
 model = build_cnn_model(
-    input_shape=(256, 256, 3),
+    input_shape=(128, 128, 3),
     num_classes=5
 )
 ```
@@ -302,7 +302,7 @@ Dense(5) + Softmax
 from src.model_transfer import build_transfer_model
 
 model = build_transfer_model(
-    input_shape=(256, 256, 3),
+    input_shape=(128, 128, 3),
     num_classes=5,
     base_model='mobilenetv2'  # ou 'vgg16', 'resnet50'
 )
@@ -408,233 +408,6 @@ O sistema calcula e exibe:
 - Estratégias de mitigação
 - Framework de governança
 - Conformidade regulatória
-
----
-
-## 📱 IR ALÉM 2: Aplicativo Mobile React Native
-
-### Objetivo
-
-Desenvolver um **aplicativo mobile** em React Native/Expo que integra com a API FastAPI para classificação de imagens de ECG, demonstrando a aplicação prática do modelo CNN em dispositivos móveis.
-
-### Estrutura do App Mobile
-
-```text
-apps/mobile-cardioia/
-├── App.js                          # Componente principal
-├── app.json                        # Configuração Expo
-├── package.json                    # Dependências
-├── README.md                       # Documentação completa
-└── src/
-    ├── screens/
-    │   └── EcgAnalysisScreen.js    # Tela de análise
-    ├── services/
-    │   └── visionApi.js            # Cliente API
-    └── components/
-        └── ResultCard.js           # Exibição de resultado
-```
-
-### Funcionalidades Implementadas
-
-✅ **Seleção de Imagem**
-
-- Integração com galeria do dispositivo via `expo-image-picker`
-- Preview da imagem selecionada
-- Suporte a PNG, JPG, JPEG
-
-✅ **Classificação**
-
-- Envio de imagem para API FastAPI
-- Upload via multipart/form-data
-- Loading indicator durante processamento
-
-✅ **Exibição de Resultado**
-
-- Classe prevista destacada
-- Barra de confiança visual e colorida
-- Todas as probabilidades por classe
-- Badge de resultado simulado (quando aplicável)
-
-✅ **Avisos e Segurança**
-
-- Aviso acadêmico fixo na tela
-- Mensagem de não substituir diagnóstico médico
-- Informação do endpoint da API
-- Tratamento de erros com mensagens claras
-
-### Backend FastAPI
-
-**Arquivo:** `src/api.py`
-
-**Endpoints:**
-
-1. **GET /health** - Health check da API
-
-   ```json
-   {
-     "status": "ok",
-     "model_loaded": true,
-     "keras_available": true,
-     "classes": ["Normal", "Myocardial Infarction", ...]
-   }
-   ```
-
-2. **POST /predict** - Classificação de ECG
-   ```json
-   {
-     "predicted_class": "Normal",
-     "confidence": 0.91,
-     "message": "Resultado acadêmico/simulado...",
-     "all_probabilities": {...},
-     "is_simulated": false
-   }
-   ```
-
-**Características:**
-
-- CORS habilitado para chamadas mobile
-- Suporte a modo simulado (fallback sem modelo)
-- Pré-processamento idêntico ao treinamento
-- Validação de tipo de arquivo
-- Tratamento robusto de erros
-
-### Como Executar
-
-#### 1. Iniciar Backend
-
-```bash
-cd phases/fase04_cnn_ecg
-
-# Ativar ambiente virtual
-.venv\Scripts\activate  # Windows
-# ou
-source .venv/bin/activate  # Linux/Mac
-
-# Instalar dependências (se necessário)
-pip install -r requirements.txt
-
-# Iniciar API FastAPI
-uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
-```
-
-**Verificar API:**
-
-- Health: http://localhost:8000/health
-- Docs: http://localhost:8000/docs
-
-#### 2. Configurar IP no App
-
-⚠️ **IMPORTANTE:** Configure o IP da sua máquina na rede local.
-
-Edite `apps/mobile-cardioia/src/services/visionApi.js`:
-
-```javascript
-// Linha 14
-const API_BASE_URL = "http://SEU_IP_LOCAL:8000";
-```
-
-**Descobrir seu IP:**
-
-- Windows: `ipconfig`
-- Linux/Mac: `ifconfig` ou `ip addr show`
-
-**Exemplo:** `http://192.168.0.10:8000`
-
-> ⚠️ Não use `localhost` - no celular isso aponta para o próprio dispositivo!
-
-#### 3. Instalar Dependências Mobile
-
-```bash
-cd apps/mobile-cardioia
-npm install
-```
-
-#### 4. Iniciar App
-
-```bash
-npx expo start
-```
-
-#### 5. Abrir no Dispositivo
-
-**Opção A: Dispositivo Físico (Recomendado)**
-
-1. Instale o app **Expo Go** no celular
-2. Escaneie o QR code exibido no terminal
-3. Aguarde o carregamento
-
-**Opção B: Emulador**
-
-- Pressione `a` para Android
-- Pressione `i` para iOS (apenas Mac)
-
-### Demonstração
-
-**Fluxo de Uso:**
-
-1. Abrir app → Tela "CardioIA - Análise de ECG"
-2. Tocar em "Selecionar Imagem de ECG"
-3. Escolher imagem da galeria
-4. Ver preview da imagem
-5. Tocar em "Classificar ECG"
-6. Aguardar processamento (loading)
-7. Ver resultado:
-   - Classe detectada
-   - Confiança (%)
-   - Barra visual colorida
-   - Avisos de uso acadêmico
-
-### Tecnologias Mobile
-
-- **React Native**: Framework multiplataforma
-- **Expo**: Plataforma de desenvolvimento
-- **expo-image-picker**: Seleção de imagens
-- **axios**: Cliente HTTP
-- **React Hooks**: useState para gerenciamento de estado
-
-### Modo Simulado
-
-Se o modelo real não estiver disponível, a API funciona em **modo simulado**:
-
-- Gera resultados determinísticos baseados em características da imagem
-- Útil para demonstração sem modelo treinado
-- Claramente indicado com badge "⚠️ Resultado Simulado"
-- Mesma interface e fluxo
-
-### Avisos de Segurança
-
-⚠️ **Uso Acadêmico Apenas**
-
-- Protótipo educacional
-- NÃO usar para diagnóstico real
-- NÃO substitui profissional de saúde
-
-⚠️ **Privacidade**
-
-- Imagens enviadas para backend local
-- Nenhum dado armazenado permanentemente
-- Use apenas imagens de teste/simuladas
-
-### Documentação Completa
-
-Para instruções detalhadas, troubleshooting e mais informações:
-
-➡️ **[README do App Mobile](../../apps/mobile-cardioia/README.md)**
-
-### Entregáveis IR ALÉM 2
-
-✅ Código do aplicativo React Native
-✅ Backend FastAPI integrado ao modelo
-✅ Instruções de execução completas
-✅ Documentação detalhada
-✅ Avisos de uso acadêmico
-✅ Tratamento de erros robusto
-
-**Vídeo de Demonstração:**
-
-- Duração: até 3 minutos
-- Mostrar: seleção, classificação, resultado
-- Destacar: avisos acadêmicos e interface
 
 ---
 
@@ -774,13 +547,10 @@ ModuleNotFoundError: No module named 'tensorflow'
 
 **Equipe CardioAI:**
 
-- **João Vitor Severo Oliveira** — RM5666251
-  - Implementação da CNN do zero
-  - Análise de métricas
-  - Documentação técnica
-
 - **Jonas Luis da Silva** — RM561465
   - Transfer Learning
+  - Implementação da CNN do zero
+  - Análise de métricas
   - Protótipo Flask
   - Relatórios
 
@@ -788,54 +558,13 @@ ModuleNotFoundError: No module named 'tensorflow'
   - Pré-processamento de dados
   - Análise de viés (IR ALÉM 1)
   - Visualizações
+  - Documentação técnica
 
 **Trabalho Colaborativo:**
 
 - Revisão de código
 - Testes e validação
 - Documentação final
-
----
-
-## 🎓 Critérios de Avaliação Cobertos
-
-✅ **Pipeline de Pré-processamento**
-
-- Carregamento de imagens
-- Redimensionamento e normalização
-- Data augmentation
-- Divisão treino/validação/teste
-
-✅ **CNN do Zero**
-
-- Arquitetura completa implementada
-- Treinamento funcional
-- Avaliação com métricas
-
-✅ **Transfer Learning**
-
-- MobileNetV2 implementado
-- Base congelada
-- Classificador customizado
-
-✅ **Protótipo Simples**
-
-- Flask web app funcional
-- Upload e classificação
-- Interface amigável
-
-✅ **Documentação Clara**
-
-- README completo
-- Relatórios técnicos
-- Comentários no código
-
-✅ **IR ALÉM 1**
-
-- Análise de desbalanceamento
-- Discussão de viés
-- Estratégias de mitigação
-- Framework de governança
 
 ---
 
@@ -899,7 +628,7 @@ ModuleNotFoundError: No module named 'tensorflow'
 
 ## 📞 Contato e Suporte
 
-**Repositório:** [GitHub - CardioAI](https://github.com/seu-usuario/CardioAI)
+**Repositório:** [GitHub - CardioAI](https://github.com/jonsilva91/CardioAI)
 
 **Issues:** Use o GitHub Issues para reportar problemas
 
