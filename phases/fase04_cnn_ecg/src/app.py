@@ -332,7 +332,7 @@ def predict():
     try:
         # Carrega e pré-processa a imagem
         image = Image.open(file.stream).convert('RGB')
-        image = image.resize((256, 256))
+        image = image.resize((128, 128))
         image_array = np.array(image) / 255.0
         image_array = np.expand_dims(image_array, axis=0)
         

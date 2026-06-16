@@ -34,4 +34,4 @@ def build_cnn_model(input_shape: tuple[int, int, int], num_classes: int) -> Any:
     )
     return model
 
-# Made with Bob
+
