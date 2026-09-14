@@ -250,7 +250,7 @@ Este repositório contém os artefatos acadêmicos organizados por fase para fac
 
 Vídeo no YouTube (não listado):
 
-[![CardioAI](https://camo.githubusercontent.com/e89429a3dcbbfc19381698fcc2e6e4c95f9c9d7375b59fe3136f7a9b47dee321/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f59555a716352384c6746552f302e6a7067)](https://youtu.be/YUZqcR8LgFU)
+[![CardioAI](https://camo.githubusercontent.com/e89429a3dcbbfc19381698fcc2e6e4c95f9c9d7375b59fe3136f7a9b47dee321/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f59555a716352384c6746552f302e6a7067)](https://youtu.be/Nu-WhM9n6-s)
 
 ---
 

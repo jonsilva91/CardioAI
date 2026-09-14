@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Navbar from '../../components/Navbar';
 import styles from './AssistenteChat.module.css';
 
 export default function AssistenteChat() {
@@ -28,7 +29,7 @@ export default function AssistenteChat() {
 
     const userText = inputValue;
     const newUserMsg = { id: Date.now(), sender: 'user', text: userText, urgent: false };
-    
+
     setMessages(prev => [...prev, newUserMsg]);
     setInputValue('');
     setIsTyping(true);
@@ -43,7 +44,7 @@ export default function AssistenteChat() {
       });
 
       const data = await response.json();
-      
+
       const newBotMsg = {
         id: Date.now() + 1,
         sender: 'bot',
@@ -68,6 +69,7 @@ export default function AssistenteChat() {
 
   return (
     <div className={styles.chatContainer}>
+      <Navbar />
       <header className={styles.chatHeader}>
         <h2>Assistente CardioAI (Fase 5)</h2>
         <span className={styles.disclaimer}>Protótipo Não-Diagnóstico</span>
