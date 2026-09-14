@@ -5,6 +5,7 @@ import Agendamentos from "./pages/Agendamentos";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Pacientes from "./pages/Pacientes";
+import AssistenteChat from "./pages/AssistenteChat/AssistenteChat";
 
 function RouterContent() {
   const { isAuthenticated } = useAuth();
@@ -41,6 +42,15 @@ function RouterContent() {
         element={
           <ProtectedRoute>
             <Agendamentos />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/assistente"
+        element={
+          <ProtectedRoute>
+            <AssistenteChat />
           </ProtectedRoute>
         }
       />

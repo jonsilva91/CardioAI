@@ -28,6 +28,9 @@ export default function Navbar() {
         <Link to="/agendamentos" className={isActive("/agendamentos")}>
           Agendamentos
         </Link>
+        <Link to="/assistente" className={isActive("/assistente")}>
+          Assistente
+        </Link>
       </nav>
 
       <div className={styles.userArea}>

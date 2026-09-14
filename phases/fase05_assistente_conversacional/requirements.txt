@@ -1,0 +1,5 @@
+flask==3.0.0
+flask-cors==4.0.0
+python-dotenv==1.0.0
+ibm-watson==7.0.1
+ibm-cloud-sdk-core==3.17.0

@@ -18,36 +18,40 @@ Este relatório aborda os aspectos éticos e de governança relacionados ao uso 
 
 O dataset ECG Images apresenta **desbalanceamento significativo** entre as classes:
 
-**Distribuição Típica Observada:**
+**Distribuição Real Observada no Dataset Completo:**
 
-- **Normal (N)**: ~70-80% das amostras
-- **Supraventricular (S)**: ~5-10%
-- **Ventricular (V)**: ~5-10%
-- **Fusion (F)**: ~1-3%
-- **Unknown (Q)**: ~1-3%
+- **Normal (N)**: 59,50% (22.122 amostras)
+- **Unknown (Q)**: 17,25% (6.413 amostras)
+- **Ventricular (V)**: 15,55% (5.780 amostras)
+- **Supraventricular (S)**: 5,98% (2.222 amostras)
+- **Fusion (F)**: 1,72% (641 amostras)
 
-**Razão de Desbalanceamento:** Até 80:1 entre classe majoritária e minoritária
+**Razão de Desbalanceamento Real:** 34,51:1 entre a classe majoritária (N) e minoritária (F)
+
+**Estratégia Adotada no Experimento (Balanceamento Artificial):**
+Para mitigar este problema e viabilizar o treinamento local (USE_SMALL_DATASET=True), o experimento limitou cada classe a 600 imagens no treino (dataset artificialmente balanceado 1:1:1:1:1). Embora isso resolva o problema métrico no treino, introduz viés clínico: o modelo não aprende que a classe N é a mais comum na vida real.
 
 ### 2.2 Impactos do Desbalanceamento
 
 #### 2.2.1 Viés de Predição
 
 **Problema:**
-O modelo tende a favorecer a classe majoritária (Normal) para maximizar accuracy geral.
+Mesmo com o dataset balanceado artificialmente no treino, os modelos podem apresentar viés em relação às características extraídas.
 
-**Consequências:**
+**Consequências observadas no experimento real:**
 
-- **Falsos Negativos em Classes Minoritárias**: Arritmias graves podem ser classificadas como normais
-- **Baixa Sensibilidade**: Dificuldade em detectar casos raros mas críticos
-- **Métricas Enganosas**: Alta accuracy geral mascara baixa performance em classes importantes
+- Alta precisão pode mascarar baixa sensibilidade (recall) em classes específicas.
+- Falta de convergência de modelos baseados em arquiteturas pré-treinadas pode resultar em predições altamente enviesadas.
 
-**Exemplo Prático:**
+**Exemplo Prático (Viés Real Documentado na Fase 4):**
 
 ```
-Cenário: 1000 amostras (900 Normal, 100 Anormal)
-Modelo ingênuo: Classifica tudo como Normal
-Accuracy: 90% (enganosa!)
-Recall para Anormal: 0% (crítico!)
+Modelo: Transfer Learning (MobileNetV2)
+Classe: Normal (N) - a mais comum clinicamente
+Resultado real: Precision = ~98%, Mas Recall = ~9%
+Consequência: O modelo aprendeu a raramente predizer "Normal". 
+Ao ignorar 91% dos batimentos normais, ele os classifica como arritmias.
+Em contexto clínico, isso geraria alarmes falsos quase contínuos.
 ```
 
 #### 2.2.2 Viés de Representação

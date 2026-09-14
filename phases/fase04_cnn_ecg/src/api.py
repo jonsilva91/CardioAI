@@ -45,7 +45,7 @@ MODEL_PATH = PROJECT_ROOT / "phases" / "fase04_cnn_ecg" / "outputs" / "models" /
 
 # Variáveis globais
 model = None
-class_names = ["Normal", "Myocardial Infarction", "History of MI", "Abnormal Heartbeat", "Other"]
+class_names = []
 
 # Modelos Pydantic para resposta
 class PredictionResponse(BaseModel):
@@ -66,22 +66,38 @@ class HealthResponse(BaseModel):
 
 def load_model():
     """Carrega o modelo treinado se disponível."""
-    global model
+    global model, class_names
     
     if not KERAS_AVAILABLE:
         print("⚠️ TensorFlow não disponível. API funcionará em modo simulado.")
+        # Se não há Keras, usa fallback
+        class_names = ["F", "N", "Q", "S", "V"]
         return
     
     if MODEL_PATH.exists():
         try:
             model = keras.models.load_model(MODEL_PATH)
+            
+            # Tenta carregar os nomes das classes
+            import json
+            class_names_path = PROJECT_ROOT / "phases" / "fase04_cnn_ecg" / "outputs" / "models" / "class_names.json"
+            if class_names_path.exists():
+                with open(class_names_path, 'r', encoding='utf-8') as f:
+                    class_names = json.load(f)
+                print(f"✓ Nomes das classes carregados: {class_names}")
+            else:
+                class_names = ["F", "N", "Q", "S", "V"]
+                print(f"⚠️ class_names.json não encontrado. Usando: {class_names}")
+                
             print(f"✓ Modelo carregado: {MODEL_PATH}")
         except Exception as e:
             print(f"⚠️ Erro ao carregar modelo: {e}")
             print("API funcionará em modo simulado.")
+            class_names = ["F", "N", "Q", "S", "V"]
     else:
         print(f"⚠️ Modelo não encontrado em: {MODEL_PATH}")
         print("API funcionará em modo simulado para demonstração.")
+        class_names = ["F", "N", "Q", "S", "V"]
 
 
 def simulate_prediction(image_array: np.ndarray) -> tuple[str, float, dict]:
@@ -95,13 +111,13 @@ def simulate_prediction(image_array: np.ndarray) -> tuple[str, float, dict]:
     # Gera probabilidades baseadas na intensidade média
     # Isso garante que a mesma imagem sempre retorne o mesmo resultado
     if mean_intensity < 0.3:
-        probabilities = [0.85, 0.05, 0.03, 0.04, 0.03]  # Normal
+        probabilities = [0.05, 0.85, 0.03, 0.04, 0.03]  # Normal (N)
     elif mean_intensity < 0.5:
-        probabilities = [0.10, 0.75, 0.05, 0.05, 0.05]  # Myocardial Infarction
+        probabilities = [0.10, 0.05, 0.05, 0.05, 0.75]  # Ventricular (V)
     elif mean_intensity < 0.7:
-        probabilities = [0.05, 0.10, 0.70, 0.10, 0.05]  # History of MI
+        probabilities = [0.05, 0.10, 0.70, 0.10, 0.05]  # Unknown (Q)
     else:
-        probabilities = [0.05, 0.05, 0.05, 0.80, 0.05]  # Abnormal Heartbeat
+        probabilities = [0.05, 0.05, 0.05, 0.80, 0.05]  # Supraventricular (S)
     
     predicted_idx = np.argmax(probabilities)
     predicted_class = class_names[predicted_idx]

@@ -1,0 +1,228 @@
+{
+  "name": "CardioAI - Assistente Inicial",
+  "intents": [
+    {
+      "intent": "saudacao",
+      "examples": [
+        { "text": "olá" },
+        { "text": "oi" },
+        { "text": "bom dia" },
+        { "text": "boa tarde" },
+        { "text": "boa noite" },
+        { "text": "opa" }
+      ]
+    },
+    {
+      "intent": "sintomas_cardiacos",
+      "examples": [
+        { "text": "estou sentindo dor no peito" },
+        { "text": "meu coração está acelerado" },
+        { "text": "falta de ar" },
+        { "text": "estou com palpitação" },
+        { "text": "pressão alta" },
+        { "text": "tontura" },
+        { "text": "coração batendo forte" }
+      ]
+    },
+    {
+      "intent": "agendamento_consulta",
+      "examples": [
+        { "text": "quero marcar uma consulta" },
+        { "text": "como faço para agendar com o cardiologista" },
+        { "text": "marcar retorno" },
+        { "text": "preciso de um médico" },
+        { "text": "agendar" }
+      ]
+    },
+    {
+      "intent": "duvida_ecg",
+      "examples": [
+        { "text": "o que significa V no ECG?" },
+        { "text": "o que é arritmia ventricular" },
+        { "text": "resultado do meu exame deu N" },
+        { "text": "o que é batimento de fusão" },
+        { "text": "classe F" },
+        { "text": "explica resultado do ecg" }
+      ]
+    },
+    {
+      "intent": "emergencia",
+      "examples": [
+        { "text": "dor muito forte no peito" },
+        { "text": "não consigo respirar direito" },
+        { "text": "acho que estou enfartando" },
+        { "text": "estou desmaiando" },
+        { "text": "socorro coração" },
+        { "text": "aperto forte no coração" }
+      ]
+    },
+    {
+      "intent": "despedida",
+      "examples": [
+        { "text": "obrigado" },
+        { "text": "tchau" },
+        { "text": "até mais" },
+        { "text": "valeu" }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sintoma",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "dor_peito",
+          "synonyms": [ "dor no peito", "aperto no peito", "peito doendo" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "palpitacao",
+          "synonyms": [ "coração acelerado", "palpitação", "batimento forte", "taquicardia" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "falta_de_ar",
+          "synonyms": [ "falta de ar", "difícil de respirar", "respiração curta", "dispneia" ]
+        }
+      ]
+    },
+    {
+      "entity": "classe_ecg",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "F",
+          "synonyms": [ "classe f", "fusão", "batimento de fusão" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "N",
+          "synonyms": [ "classe n", "normal", "batimento normal" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Q",
+          "synonyms": [ "classe q", "não classificável", "desconhecido", "unknown" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "S",
+          "synonyms": [ "classe s", "supraventricular", "arritmia supraventricular" ]
+        },
+        {
+          "type": "synonyms",
+          "value": "V",
+          "synonyms": [ "classe v", "ventricular", "arritmia ventricular" ]
+        }
+      ]
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "dialog_node": "node_bem_vindo",
+      "conditions": "welcome",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Olá! Sou o Assistente CardioAI. Posso ajudar a marcar consultas, esclarecer dúvidas sobre ECG ou entender seus sintomas iniciais.\n\n⚠️ AVISO: Sou um protótipo educacional. Não realizo diagnóstico médico. Se for uma emergência, procure um hospital imediatamente."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "dialog_node": "node_emergencia",
+      "conditions": "#emergencia",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "⚠️ ATENÇÃO: Seus sintomas podem indicar uma emergência médica!\n\nLigue imediatamente para 192 (SAMU) ou procure o pronto-socorro mais próximo. Não espere."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "dialog_node": "node_sintomas",
+      "conditions": "#sintomas_cardiacos",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Entendi que você está relatando <? @sintoma ?: 'um sintoma' ?>. \nÉ importante que um médico avalie isso. Gostaria de agendar uma consulta presencial?\n\n(Aviso: Esta avaliação não substitui um diagnóstico médico real)."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "dialog_node": "node_agendamento",
+      "conditions": "#agendamento_consulta",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Para agendar uma consulta com nossa equipe de cardiologia, por favor acesse a aba 'Agendamentos' no portal ou ligue para nossa central.\n(Modo demonstração: agendamento simulado)."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "dialog_node": "node_duvida_ecg",
+      "conditions": "#duvida_ecg",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Entendi que você tem uma dúvida sobre ECG, possivelmente relacionada à classe <? @classe_ecg ?: 'mencionada' ?>. Vou buscar essa informação na nossa base de conhecimento (integração com Fase 4 em andamento)."
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    },
+    {
+      "dialog_node": "node_fallback",
+      "conditions": "anything_else",
+      "output": {
+        "generic": [
+          {
+            "response_type": "text",
+            "values": [
+              {
+                "text": "Desculpe, não compreendi. Posso ajudar com agendamento de consultas, dúvidas sobre ECG (classes F, N, Q, S, V) ou triagem inicial de sintomas. Como posso ser útil?"
+              }
+            ],
+            "selection_policy": "sequential"
+          }
+        ]
+      }
+    }
+  ],
+  "workspace_id": "simulated-id",
+  "language": "pt-br",
+  "description": "Skill do assistente conversacional CardioAI"
+}

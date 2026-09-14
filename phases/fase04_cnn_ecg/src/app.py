@@ -28,11 +28,23 @@ def load_model():
     global model, class_names
     if MODEL_PATH.exists():
         model = keras.models.load_model(MODEL_PATH)
-        # Classes padrão do dataset ECG Images (MIT-BIH)
-        class_names = ["Normal", "Myocardial Infarction", "History of MI", "Abnormal Heartbeat", "Other"]
+        
+        # Tenta carregar os nomes das classes reais salvos no treinamento
+        import json
+        class_names_path = PROJECT_ROOT / "phases" / "fase04_cnn_ecg" / "outputs" / "models" / "class_names.json"
+        
+        if class_names_path.exists():
+            with open(class_names_path, 'r', encoding='utf-8') as f:
+                class_names = json.load(f)
+            print(f"✓ Nomes das classes carregados de class_names.json: {class_names}")
+        else:
+            # Classes padrão reais do dataset ECG Images (Kaggle) baseadas nas subpastas originais
+            class_names = ["F", "N", "Q", "S", "V"]
+            print(f"⚠️ Arquivo class_names.json não encontrado. Usando classes reais padrão: {class_names}")
+            
         print(f"✓ Modelo carregado: {MODEL_PATH}")
     else:
-        print(f"⚠ Modelo não encontrado em: {MODEL_PATH}")
+        print(f"⚠️ Modelo não encontrado em: {MODEL_PATH}")
         print("Execute o treinamento primeiro: python phases/fase04_cnn_ecg/src/train.py")
 
 

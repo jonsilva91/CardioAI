@@ -37,6 +37,7 @@ O projeto contempla:
 - [Fase 2 — IA Simbólica e Classificação](phases/fase02_ia_simbolica_classificacao/README.md)
 - [Fase 3 — IoT, REST, e-mail e séries temporais](phases/fase03_iot_monitoramento/README.md)
 - [Fase 4 — CNN aplicada a ECG](phases/fase04_cnn_ecg/README.md)
+- [Fase 5 — Assistente Conversacional](phases/fase05_assistente_conversacional/README.md)
 - [Portal React](apps/portal-cardioia/README.md)
 
 ---
@@ -58,7 +59,8 @@ CardioAI/
 │   ├── fase01_bases_multimodais/
 │   ├── fase02_ia_simbolica_classificacao/
 │   ├── fase03_iot_monitoramento/
-│   └── fase04_cnn_ecg/
+│   ├── fase04_cnn_ecg/
+│   └── fase05_assistente_conversacional/
 ├── apps/
 │   └── portal-cardioia/
 ├── config/
@@ -93,6 +95,12 @@ Centraliza os entregáveis de monitoramento IoT, API REST com alertas simulados 
 Estrutura inicial preparada para classificação de ECG com CNN simples, incluindo notebook, scripts de treino/avaliação e diretórios de saída.
 
 **Local:** `phases/fase04_cnn_ecg/`
+
+### Fase 5 — Assistente Conversacional
+
+Implementação de um assistente conversacional (chatbot) para triagem inicial integrado ao portal React, com IBM watsonx Assistant, fallback local, e dois IR ALÉM focados em LLM e RPA.
+
+**Local:** `phases/fase05_assistente_conversacional/`
 
 ### Portal CardioIA
 
@@ -205,6 +213,20 @@ npx expo start
 ⚠️ **Configure o IP da sua máquina em `src/services/visionApi.js` antes de executar!**
 
 Veja instruções completas em: [apps/mobile-cardioia/README.md](apps/mobile-cardioia/README.md)
+
+### 9. Fase 5 — Assistente Conversacional
+
+Para rodar o backend do chat:
+
+```bash
+cd phases/fase05_assistente_conversacional
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python src/app.py
+```
+
+O chat ficará acessível via Portal React na rota `/assistente`.
 
 ---
 
