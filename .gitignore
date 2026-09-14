@@ -53,5 +53,7 @@ phases/fase04_cnn_ecg/outputs/figures/**
 *.xls
 *.xlsx
 *cwd
+.env
+*.env
 
 # Made with Bob
