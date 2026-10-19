@@ -1,0 +1,14 @@
+# ===============================================================
+# CardioAI - Fase 05: Desafio Ir Além 1
+# Dependências para Integração Real com APIs de LLM
+# ===============================================================
+
+# SDK Oficial OpenAI (suporte a gpt-4o-mini e JSON / Structured Outputs)
+openai>=1.40.0
+
+# SDK Oficial Google Gemini (opcional / alternativo)
+google-generativeai>=0.8.0
+
+# Gestão de Variáveis de Ambiente e Schemas de Dados
+python-dotenv>=1.0.0
+pydantic>=2.0.0

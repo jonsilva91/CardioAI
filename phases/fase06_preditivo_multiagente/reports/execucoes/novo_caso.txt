@@ -1,0 +1,71 @@
+======================================================================
+🏥 CARDIOAI - SISTEMA PREDITIVO MULTIAGENTE DE RISCO CARDÍACO
+======================================================================
+📁 Paciente: C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\data\exemplos\novo_caso.json
+🆔 Sessão SQLite: sessao_novo_caso_ccf3b9
+🧠 Modelo LLM: gpt-4o-mini
+======================================================================
+
+🔄 [HANDOFF]: Agente Orquestrador ➔ Agente Analista de Risco
+
+🔧 [TOOL] prever_risco_paciente executada com sucesso:
+   - Probabilidade: 0.99
+   - Classe Prevista: 1
+   - Classificação: ALTO
+
+🔄 [HANDOFF]: Agente Analista de Risco ➔ Agente Especialista em Protocolos
+
+🔧 [TOOL] consultar_base_protocolos executada com sucesso:
+   - Protocolos acionados: 4
+     * Se carga do sistema > 85% → abrir unidades temporárias
+     * Se disponibilidade_recursos < 30% → redistribuir insumos
+     * Se densidade_eventos > 6 → ativar plano de contingência
+     * Se risco sistêmico alto → ativar estado de emergência
+
+🔄 [HANDOFF]: Agente Especialista em Protocolos ➔ Agente Planejador de Resposta
+
+🛡️ [GUARDRAIL]: Saída do Planejador validada com sucesso! Sem violações de integridade.
+
+======================================================================
+RISCO PREVISTO: 0.99
+CLASSIFICAÇÃO: ALTO
+
+PROTOCOLOS SUGERIDOS:
+- Se carga do sistema > 85% → abrir unidades temporárias
+- Se disponibilidade_recursos < 30% → redistribuir insumos
+- Se densidade_eventos > 6 → ativar plano de contingência
+- Se risco sistêmico alto → ativar estado de emergência
+
+AÇÕES OPERACIONAIS:
+- Monitoramento contínuo dos sinais vitais do paciente em tempo real.
+- Notificar a equipe médica sobre o alto risco cardiovascular identificado.
+- Preparar a equipe para administração imediata de medicamentos cardiovasculares necessários.
+- Estabelecer contato com unidades de terapia intensiva para potencial internação do paciente.
+
+JUSTIFICATIVA:
+Dada a alta probabilidade de 99% para risco cardiovascular, associada a uma classificação de Risco Alto, é fundamental ações imediatas de cuidado. A sobrecarga do sistema, com carga superior a 85%, indica uma necessidade de abrir unidades temporárias para melhor gerenciamento dos pacientes. Já a baixa disponibilidade de recursos (25%) requer redistribuição imediata de insumos para garantir suporte eficiente. A densidade de eventos, superior a 6, sugere que ativar o plano de contingência é necessário para manejo adequado. Conforme os protocolos, devemos ativar o estado de emergência devido ao risco sistêmico elevado, assegurando que todas as medidas apropriadas sejam implementadas para a segurança do paciente.
+
+AVISO:
+As informações coletadas são de natureza sensível e devem ser tratadas em conformidade com a legislação de proteção de dados e normas de ética médica.
+======================================================================
+
+📄 SAÍDA COMPLETA (JSON):
+{
+  "probabilidade": 0.99,
+  "classificacao": "ALTO",
+  "protocolos_sugeridos": [
+    "Se carga do sistema > 85% → abrir unidades temporárias",
+    "Se disponibilidade_recursos < 30% → redistribuir insumos",
+    "Se densidade_eventos > 6 → ativar plano de contingência",
+    "Se risco sistêmico alto → ativar estado de emergência"
+  ],
+  "acoes_operacionais": [
+    "Monitoramento contínuo dos sinais vitais do paciente em tempo real.",
+    "Notificar a equipe médica sobre o alto risco cardiovascular identificado.",
+    "Preparar a equipe para administração imediata de medicamentos cardiovasculares necessários.",
+    "Estabelecer contato com unidades de terapia intensiva para potencial internação do paciente."
+  ],
+  "justificativa": "Dada a alta probabilidade de 99% para risco cardiovascular, associada a uma classificação de Risco Alto, é fundamental ações imediatas de cuidado. A sobrecarga do sistema, com carga superior a 85%, indica uma necessidade de abrir unidades temporárias para melhor gerenciamento dos pacientes. Já a baixa disponibilidade de recursos (25%) requer redistribuição imediata de insumos para garantir suporte eficiente. A densidade de eventos, superior a 6, sugere que ativar o plano de contingência é necessário para manejo adequado. Conforme os protocolos, devemos ativar o estado de emergência devido ao risco sistêmico elevado, assegurando que todas as medidas apropriadas sejam implementadas para a segurança do paciente.",
+  "aviso": "As informações coletadas são de natureza sensível e devem ser tratadas em conformidade com a legislação de proteção de dados e normas de ética médica."
+}
+======================================================================

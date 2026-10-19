@@ -1,0 +1,57 @@
+======================================================================
+🏥 CARDIOAI - SISTEMA PREDITIVO MULTIAGENTE DE RISCO CARDÍACO
+======================================================================
+📁 Paciente: C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\data\exemplos\caso_baixo_risco.json
+🆔 Sessão SQLite: sessao_caso_baixo_risco_f221bf
+🧠 Modelo LLM: gpt-4o-mini
+======================================================================
+
+🔄 [HANDOFF]: Agente Orquestrador ➔ Agente Analista de Risco
+
+🔧 [TOOL] prever_risco_paciente executada com sucesso:
+   - Probabilidade: 0.00
+   - Classe Prevista: 0
+   - Classificação: BAIXO
+
+🔄 [HANDOFF]: Agente Analista de Risco ➔ Agente Especialista em Protocolos
+
+🔧 [TOOL] consultar_base_protocolos executada com sucesso:
+   - Protocolos acionados: 0
+
+🔄 [HANDOFF]: Agente Especialista em Protocolos ➔ Agente Planejador de Resposta
+
+🛡️ [GUARDRAIL]: Saída do Planejador validada com sucesso! Sem violações de integridade.
+
+======================================================================
+RISCO PREVISTO: 0.00
+CLASSIFICAÇÃO: BAIXO
+
+PROTOCOLOS SUGERIDOS:
+- Nenhum protocolo crítico acionado.
+
+AÇÕES OPERACIONAIS:
+- Monitoramento da condição do paciente com frequência regular.
+- Orientação ao paciente sobre hábitos de vida saudáveis e sinais de alerta.
+- Agendamento de consulta de acompanhamento em cardiologia.
+
+JUSTIFICATIVA:
+A classe prevista para o paciente é 'BAIXO', com uma probabilidade de risco cardiovascular de 0%. Isso indica que, de acordo com o modelo de ML, o paciente não apresenta fatores de risco significativos no momento. Portanto, o monitoramento regular e a educação do paciente sobre sua condição e saúde cardiovascular são essenciais para a continuidade do cuidado e prevenção de futuros episódios.
+
+AVISO:
+Esta avaliação foi realizada com base nas informações disponíveis e não substitui a consulta médica individualizada.
+======================================================================
+
+📄 SAÍDA COMPLETA (JSON):
+{
+  "probabilidade": 0.0,
+  "classificacao": "BAIXO",
+  "protocolos_sugeridos": [],
+  "acoes_operacionais": [
+    "Monitoramento da condição do paciente com frequência regular.",
+    "Orientação ao paciente sobre hábitos de vida saudáveis e sinais de alerta.",
+    "Agendamento de consulta de acompanhamento em cardiologia."
+  ],
+  "justificativa": "A classe prevista para o paciente é 'BAIXO', com uma probabilidade de risco cardiovascular de 0%. Isso indica que, de acordo com o modelo de ML, o paciente não apresenta fatores de risco significativos no momento. Portanto, o monitoramento regular e a educação do paciente sobre sua condição e saúde cardiovascular são essenciais para a continuidade do cuidado e prevenção de futuros episódios.",
+  "aviso": "Esta avaliação foi realizada com base nas informações disponíveis e não substitui a consulta médica individualizada."
+}
+======================================================================

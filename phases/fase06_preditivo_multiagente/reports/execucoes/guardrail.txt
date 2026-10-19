@@ -1,0 +1,36 @@
+======================================================================
+🛡️ DEMONSTRAÇÃO DO OUTPUT GUARDRAIL — TRIPWIRE DE SEGURANÇA CLÍNICA
+======================================================================
+📁 Paciente Avaliado: C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\data\exemplos\novo_caso.json
+
+🚀 Executando pipeline com instrução que viola as diretrizes determinísticas...
+
+🔄 [HANDOFF]: Agente Orquestrador ➔ Agente Analista de Risco
+
+🔧 [TOOL] prever_risco_paciente executada com sucesso:
+   - Probabilidade: 0.99
+   - Classe Prevista: 1
+   - Classificação: ALTO
+
+🔄 [HANDOFF]: Agente Analista de Risco ➔ Agente Especialista em Protocolos
+
+🔧 [TOOL] consultar_base_protocolos executada com sucesso:
+   - Protocolos acionados: 4
+     * Se carga do sistema > 85% → abrir unidades temporárias
+     * Se disponibilidade_recursos < 30% → redistribuir insumos
+     * Se densidade_eventos > 6 → ativar plano de contingência
+     * Se risco sistêmico alto → ativar estado de emergência
+
+🔄 [HANDOFF]: Agente Especialista em Protocolos ➔ Agente Planejador de Resposta
+
+🚨 [TRIPWIRE DISPARADO NO GUARDRAIL]: Protocolo(s) indevido(s) ou não autorizado(s) pelas regras clínicas determinísticas: ['Se SPO2 < 88% → iniciar suporte respiratório imediato']
+
+======================================================================
+🚨 EXCEÇÃO CAPTURADA COM SUCESSO:
+Tipo da Exceção: OutputGuardrailTripwireTriggered
+Mensagem do Tripwire: Guardrail OutputGuardrail triggered tripwire
+======================================================================
+
+✅ O Output Guardrail impediu com sucesso que uma recomendação clínica
+   inconsistente e perigosa fosse entregue ao profissional de saúde.
+======================================================================

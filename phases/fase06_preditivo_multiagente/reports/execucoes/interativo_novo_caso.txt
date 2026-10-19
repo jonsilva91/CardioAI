@@ -1,0 +1,96 @@
+======================================================================
+🏥 CARDIOAI - SISTEMA PREDITIVO MULTIAGENTE DE RISCO CARDÍACO
+======================================================================
+📁 Paciente: C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\data\exemplos\novo_caso.json
+🆔 Sessão SQLite: sessao_novo_caso_1994dd
+🧠 Modelo LLM: gpt-4o-mini
+======================================================================
+
+🔄 [HANDOFF]: Agente Orquestrador ➔ Agente Analista de Risco
+
+🔧 [TOOL] prever_risco_paciente executada com sucesso:
+   - Probabilidade: 0.99
+   - Classe Prevista: 1
+   - Classificação: ALTO
+
+🔄 [HANDOFF]: Agente Analista de Risco ➔ Agente Especialista em Protocolos
+
+🔧 [TOOL] consultar_base_protocolos executada com sucesso:
+   - Protocolos acionados: 4
+     * Se carga do sistema > 85% → abrir unidades temporárias
+     * Se disponibilidade_recursos < 30% → redistribuir insumos
+     * Se densidade_eventos > 6 → ativar plano de contingência
+     * Se risco sistêmico alto → ativar estado de emergência
+
+🔄 [HANDOFF]: Agente Especialista em Protocolos ➔ Agente Planejador de Resposta
+
+🛡️ [GUARDRAIL]: Saída do Planejador validada com sucesso! Sem violações de integridade.
+
+======================================================================
+RISCO PREVISTO: 0.99
+CLASSIFICAÇÃO: ALTO
+
+PROTOCOLOS SUGERIDOS:
+- Se carga do sistema > 85% → abrir unidades temporárias
+- Se disponibilidade_recursos < 30% → redistribuir insumos
+- Se densidade_eventos > 6 → ativar plano de contingência
+- Se risco sistêmico alto → ativar estado de emergência
+
+AÇÕES OPERACIONAIS:
+- Ativar unidades temporárias para acomodação de pacientes adicionais.
+- Redistribuir insumos médicos e equipamentos para as unidades necessitadas.
+- Implementar o plano de contingência de acordo com a densidade de eventos atual.
+- Declarar estado de emergência na unidade para otimização de recursos e resposta rápida.
+
+JUSTIFICATIVA:
+A elevadíssima carga do sistema (92%), juntamente com uma baixa disponibilidade de recursos (25%) e uma densidade de eventos de 7 (acima do limiar de 6), indica uma sobrecarga crítica na unidade. A classificação de risco 'ALTO' reforça a necessidade de ativar as medidas cabíveis para garantir o atendimento e a segurança dos pacientes. Essas ações são essenciais para lidar efetivamente com o aumento da demanda de atendimento e minimizar os riscos associados.
+
+AVISO:
+Esta análise é parte de um processo automatizado e não deve substituir a avaliação clínica direta pelo cuidado médico.
+======================================================================
+
+📄 SAÍDA COMPLETA (JSON):
+{
+  "probabilidade": 0.99,
+  "classificacao": "ALTO",
+  "protocolos_sugeridos": [
+    "Se carga do sistema > 85% → abrir unidades temporárias",
+    "Se disponibilidade_recursos < 30% → redistribuir insumos",
+    "Se densidade_eventos > 6 → ativar plano de contingência",
+    "Se risco sistêmico alto → ativar estado de emergência"
+  ],
+  "acoes_operacionais": [
+    "Ativar unidades temporárias para acomodação de pacientes adicionais.",
+    "Redistribuir insumos médicos e equipamentos para as unidades necessitadas.",
+    "Implementar o plano de contingência de acordo com a densidade de eventos atual.",
+    "Declarar estado de emergência na unidade para otimização de recursos e resposta rápida."
+  ],
+  "justificativa": "A elevadíssima carga do sistema (92%), juntamente com uma baixa disponibilidade de recursos (25%) e uma densidade de eventos de 7 (acima do limiar de 6), indica uma sobrecarga crítica na unidade. A classificação de risco 'ALTO' reforça a necessidade de ativar as medidas cabíveis para garantir o atendimento e a segurança dos pacientes. Essas ações são essenciais para lidar efetivamente com o aumento da demanda de atendimento e minimizar os riscos associados.",
+  "aviso": "Esta análise é parte de um processo automatizado e não deve substituir a avaliação clínica direta pelo cuidado médico."
+}
+======================================================================
+
+💬 MODO INTERATIVO ATIVADO (Sessão mantida via SQLite)
+Você pode fazer perguntas sobre a decisão clínica (ex: 'por que o plano de contingência foi ativado?').
+Digite 'sair' ou 'exit' para encerrar.
+
+
+👨‍⚕️ Pergunta: 
+🤖 Processando com histórico da sessão...
+
+💬 Resposta do Orquestrador:
+O plano de contingência foi acionado devido a uma combinação de fatores que indicam uma sobrecarga crítica no sistema de atendimento. Esses fatores incluem:
+
+1. **Carga do sistema acima de 85%**: A carga atual é de 92%, o que indica que estamos operando acima da capacidade ideal.
+2. **Disponibilidade de recursos abaixo de 30%**: Com apenas 25% dos recursos disponíveis, há um risco significativo de não conseguir atender a todos os pacientes de forma adequada.
+3. **Densidade de eventos acima de 6**: Com uma densidade de eventos de 7, a situação está crítica, exigindo uma resposta rápida e estruturada.
+
+Essa soma de condições justifica a ativação do plano de contingência para garantir que os pacientes sejam atendidos com segurança e eficiência.
+
+
+👨‍⚕️ Pergunta: Encerrando sessão interativa. Até logo!
+
+[non-fatal] Tracing request failed
+[non-fatal] Tracing request failed
+[non-fatal] Tracing request failed
+[non-fatal] Tracing: max retries reached, giving up on this batch.

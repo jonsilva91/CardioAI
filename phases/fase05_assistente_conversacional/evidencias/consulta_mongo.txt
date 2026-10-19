@@ -1,0 +1,156 @@
+================================================================================
+ EVIDENCIA DE CONSULTA NOSQL MONGODB (EQUIVALENTE MONGOSH)
+================================================================================
+Cluster / Host: cluster0.lavvg50.mongodb.net
+Database: cardioai_nosql
+
+[STATUS] Conexao ativa com o cluster MongoDB Real!
+
+>> db.getCollectionNames(): ['diagnosticos_ia']
+
+--------------------------------------------------------------------------------
+ COLECAO: diagnosticos_ia (Total de documentos: 18)
+ Comando: db.diagnosticos_ia.find().sort({_id: -1}).limit(3)
+--------------------------------------------------------------------------------
+--- [Documento 1 de 18] ---
+{
+  "_id": {
+    "$oid": "6ad21c41b4966c748a766634"
+  },
+  "id_diagnostico": "DIAG-ML-1792154689429-106",
+  "paciente_id": 106,
+  "timestamp_inferencia": "2026-10-16T09:44:49.429541",
+  "origem_leitura": {
+    "fonte": "SQLite (Sensor IoT)",
+    "id_leitura_relacional": 42,
+    "timestamp_leitura": "2026-10-16T09:44:48.695387"
+  },
+  "telemetria": {
+    "pressao_sistolica": 82,
+    "pressao_diastolica": 52,
+    "frequencia_cardiaca": 134,
+    "pressao_arterial_media": 62.0,
+    "pressao_pulso": 30,
+    "indice_choque": 1.634,
+    "duplo_produto": 109.88
+  },
+  "predicao": {
+    "modelo_versao": "RandomForest-v2.1",
+    "risco_nivel": "RISCO_CRITICO",
+    "classe_id": 3,
+    "confianca": 1.0,
+    "alerta_critico": true,
+    "distribuicao_probabilidades": {
+      "BAIXO_RISCO": 0.0,
+      "RISCO_MODERADO": 0.0,
+      "ALTO_RISCO": 0.0,
+      "RISCO_CRITICO": 1.0
+    },
+    "anomalias_detectadas": [
+      "Hipotensao Arterial (PA: 82/52 mmHg)",
+      "Taquiarritmia Grave (FC: 134 bpm)"
+    ],
+    "recomendacao_clinica": "EMERGENCIA CARDIOLOGICA: Protocolo de crise hipertensiva/arritmia acionado. Avaliacao medica de urgencia requerida!"
+  },
+  "metadados_governanca": {
+    "autor_pipeline": "Engenharia de Dados & ML CardioAI",
+    "framework": "Scikit-Learn + PyMongo",
+    "conformidade": "Diretrizes SBC / SBH"
+  }
+}
+
+--- [Documento 2 de 18] ---
+{
+  "_id": {
+    "$oid": "6ad21c41b4966c748a766633"
+  },
+  "id_diagnostico": "DIAG-ML-1792154689386-105",
+  "paciente_id": 105,
+  "timestamp_inferencia": "2026-10-16T09:44:49.386019",
+  "origem_leitura": {
+    "fonte": "SQLite (Sensor IoT)",
+    "id_leitura_relacional": 41,
+    "timestamp_leitura": "2026-10-16T09:44:48.695387"
+  },
+  "telemetria": {
+    "pressao_sistolica": 168,
+    "pressao_diastolica": 102,
+    "frequencia_cardiaca": 94,
+    "pressao_arterial_media": 124.0,
+    "pressao_pulso": 66,
+    "indice_choque": 0.56,
+    "duplo_produto": 157.92
+  },
+  "predicao": {
+    "modelo_versao": "RandomForest-v2.1",
+    "risco_nivel": "ALTO_RISCO",
+    "classe_id": 2,
+    "confianca": 0.9948,
+    "alerta_critico": true,
+    "distribuicao_probabilidades": {
+      "BAIXO_RISCO": 0.0,
+      "RISCO_MODERADO": 0.0029,
+      "ALTO_RISCO": 0.9948,
+      "RISCO_CRITICO": 0.0022
+    },
+    "anomalias_detectadas": [
+      "Hipertensao Estagio 1/2 (PA: 168/102 mmHg)"
+    ],
+    "recomendacao_clinica": "Desvio significativo detectado. Notificar equipe de enfermagem/cardiologia para avaliacao imediata."
+  },
+  "metadados_governanca": {
+    "autor_pipeline": "Engenharia de Dados & ML CardioAI",
+    "framework": "Scikit-Learn + PyMongo",
+    "conformidade": "Diretrizes SBC / SBH"
+  }
+}
+
+--- [Documento 3 de 18] ---
+{
+  "_id": {
+    "$oid": "6ad21c41b4966c748a766632"
+  },
+  "id_diagnostico": "DIAG-ML-1792154689346-104",
+  "paciente_id": 104,
+  "timestamp_inferencia": "2026-10-16T09:44:49.346483",
+  "origem_leitura": {
+    "fonte": "SQLite (Sensor IoT)",
+    "id_leitura_relacional": 40,
+    "timestamp_leitura": "2026-10-16T09:44:48.695387"
+  },
+  "telemetria": {
+    "pressao_sistolica": 138,
+    "pressao_diastolica": 88,
+    "frequencia_cardiaca": 106,
+    "pressao_arterial_media": 104.67,
+    "pressao_pulso": 50,
+    "indice_choque": 0.768,
+    "duplo_produto": 146.28
+  },
+  "predicao": {
+    "modelo_versao": "RandomForest-v2.1",
+    "risco_nivel": "RISCO_MODERADO",
+    "classe_id": 1,
+    "confianca": 0.8236,
+    "alerta_critico": false,
+    "distribuicao_probabilidades": {
+      "BAIXO_RISCO": 0.0092,
+      "RISCO_MODERADO": 0.8236,
+      "ALTO_RISCO": 0.1636,
+      "RISCO_CRITICO": 0.0036
+    },
+    "anomalias_detectadas": [
+      "Taquicardia Sinusal (FC: 106 bpm)"
+    ],
+    "recomendacao_clinica": "Alteracao hemodinamica leve/moderada. Intensificar frequencia de leitura e reavaliar em 15 minutos."
+  },
+  "metadados_governanca": {
+    "autor_pipeline": "Engenharia de Dados & ML CardioAI",
+    "framework": "Scikit-Learn + PyMongo",
+    "conformidade": "Diretrizes SBC / SBH"
+  }
+}
+
+================================================================================
+ CONSULTA CONCLUIDA COM SUCESSO NO MONGODB REAL
+================================================================================

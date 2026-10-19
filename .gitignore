@@ -46,6 +46,7 @@ phases/fase04_cnn_ecg/outputs/figures/**
 *.pb
 *.ckpt
 *.weights
+*.zip
 
 # Legacy spreadsheet exclusions
 *.csv
@@ -56,4 +57,22 @@ phases/fase04_cnn_ecg/outputs/figures/**
 .env
 *.env
 
+# Fase 05 - Assistente Conversacional
+phases/fase05_assistente_conversacional/src/conversation_log.db
+phases/fase05_assistente_conversacional/ir_alem_2_rpa_dados_hibridos/pacientes.db
+!phases/fase05_assistente_conversacional/ir_alem_2_rpa_dados_hibridos/modelo_risco.joblib
+
+# Fase 06 - Preditivo Multiagente
+!phases/fase06_preditivo_multiagente/data/*.csv
+phases/fase06_preditivo_multiagente/data/sessions.db
+phases/fase06_preditivo_multiagente/data/*.db
+
+# Logs de auditoria (Ir Alem 1)
+logs/*.jsonl
+phases/fase06_preditivo_multiagente/ir_alem/ir_alem_1_governanca/logs/*.jsonl
+!phases/fase06_preditivo_multiagente/ir_alem/ir_alem_1_governanca/evidencias/evidencia_log.jsonl
+!**/evidencias/evidencia_log.jsonl
+
 # Made with Bob
+
+

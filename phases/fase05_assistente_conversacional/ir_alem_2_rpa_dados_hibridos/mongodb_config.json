@@ -1,0 +1,72 @@
+{
+  "_comentario": "Configuração NoSQL MongoDB para o CardioAI - Fase 05 (Desafio Ir Além 2)",
+  "ambiente": "desenvolvimento",
+  "conexao": {
+    "uri": "mongodb://localhost:27017",
+    "uri_atlas_exemplo": "mongodb+srv://<usuario>:<senha>@cluster0.cardioai.mongodb.net/?retryWrites=true&w=majority&appName=CardioAI",
+    "variavel_ambiente_uri": "MONGO_URI",
+    "database": "cardioai_nosql",
+    "variavel_ambiente_database": "MONGO_DATABASE",
+    "options": {
+      "serverSelectionTimeoutMS": 3000,
+      "connectTimeoutMS": 5000,
+      "socketTimeoutMS": 10000,
+      "maxPoolSize": 50,
+      "minPoolSize": 5,
+      "retryWrites": true,
+      "retryReads": true
+    }
+  },
+  "colecoes": {
+    "diagnosticos_ia": {
+      "nome": "diagnosticos_ia",
+      "descricao": "Documentos semi-estruturados gerados pelo pipeline de inferência de Machine Learning",
+      "indices": [
+        { "campos": { "paciente_id": 1, "timestamp_inferencia": -1 }, "unico": false },
+        { "campos": { "predicao.risco_nivel": 1 }, "unico": false },
+        { "campos": { "predicao.alerta_critico": 1 }, "unico": false },
+        { "campos": { "id_diagnostico": 1 }, "unico": true }
+      ]
+    },
+    "logs_auditoria": {
+      "nome": "logs_auditoria_rpa",
+      "descricao": "Logs e metadados de auditoria e data lineage do robô de monitoramento",
+      "indices": [
+        { "campos": { "timestamp": -1 }, "unico": false },
+        { "campos": { "evento": 1 }, "unico": false }
+      ]
+    }
+  },
+  "schema_validation": {
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["id_diagnostico", "paciente_id", "timestamp_inferencia", "telemetria", "predicao"],
+        "properties": {
+          "id_diagnostico": { "bsonType": "string", "description": "Identificador único do diagnóstico gerado" },
+          "paciente_id": { "bsonType": "int", "description": "ID do paciente monitorado" },
+          "timestamp_inferencia": { "bsonType": "string", "description": "ISO 8601 timestamp da inferência" },
+          "telemetria": {
+            "bsonType": "object",
+            "required": ["pressao_sistolica", "pressao_diastolica", "frequencia_cardiaca"],
+            "properties": {
+              "pressao_sistolica": { "bsonType": ["int", "double"] },
+              "pressao_diastolica": { "bsonType": ["int", "double"] },
+              "frequencia_cardiaca": { "bsonType": ["int", "double"] }
+            }
+          },
+          "predicao": {
+            "bsonType": "object",
+            "required": ["risco_nivel", "confianca", "classe_id"],
+            "properties": {
+              "risco_nivel": { "bsonType": "string" },
+              "confianca": { "bsonType": "double" },
+              "classe_id": { "bsonType": "int" },
+              "alerta_critico": { "bsonType": "bool" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

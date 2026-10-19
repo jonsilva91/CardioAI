@@ -1,0 +1,83 @@
+
+################################################################################
+ ROBÔ DE MONITORAMENTO CARDIOAI - IR ALÉM 2 REFATORADO
+ NoSQL Real (MongoDB) + Machine Learning Preditivo (Scikit-Learn)
+################################################################################
+
+
+================================================================================
+ EXECUCAO DO PIPELINE DE IA & PERSISTENCIA NOSQL - 2026-10-16 09:44:49
+================================================================================
+[ESTAVEL] [Paciente 101] PA: 120/80 mmHg | FC: 72 bpm
+   -> Risco Predito: BAIXO_RISCO (Confianca: 93.4%)
+   -> Anomalias: Padrao fisiologico normal
+   -> NoSQL Document ID: 6ad21c41b4966c748a76662f
+
+[CRITICO] [Paciente 102] PA: 195/115 mmHg | FC: 128 bpm
+   -> Risco Predito: RISCO_CRITICO (Confianca: 100.0%)
+   -> Anomalias: Crise Hipertensiva (PA: 195/115 mmHg), Taquicardia Sinusal (FC: 128 bpm)
+   -> NoSQL Document ID: 6ad21c41b4966c748a766630
+
+[ALTO RISCO] [Paciente 103] PA: 108/68 mmHg | FC: 42 bpm
+   -> Risco Predito: ALTO_RISCO (Confianca: 100.0%)
+   -> Anomalias: Bradicardia Severa (FC: 42 bpm)
+   -> NoSQL Document ID: 6ad21c41b4966c748a766631
+
+[MODERADO] [Paciente 104] PA: 138/88 mmHg | FC: 106 bpm
+   -> Risco Predito: RISCO_MODERADO (Confianca: 82.4%)
+   -> Anomalias: Taquicardia Sinusal (FC: 106 bpm)
+   -> NoSQL Document ID: 6ad21c41b4966c748a766632
+
+[ALTO RISCO] [Paciente 105] PA: 168/102 mmHg | FC: 94 bpm
+   -> Risco Predito: ALTO_RISCO (Confianca: 99.5%)
+   -> Anomalias: Hipertensao Estagio 1/2 (PA: 168/102 mmHg)
+   -> NoSQL Document ID: 6ad21c41b4966c748a766633
+
+[CRITICO] [Paciente 106] PA: 82/52 mmHg | FC: 134 bpm
+   -> Risco Predito: RISCO_CRITICO (Confianca: 100.0%)
+   -> Anomalias: Hipotensao Arterial (PA: 82/52 mmHg), Taquiarritmia Grave (FC: 134 bpm)
+   -> NoSQL Document ID: 6ad21c41b4966c748a766634
+
+================================================================================
+ DEMONSTRACAO DE CONSULTAS E AGREGACOES NOSQL (MONGODB)
+================================================================================
+
+[QUERY 1] Historico NoSQL do Paciente 102 (3 registros):
+   - 2026-10-16T09:44:49.254456: Risco=RISCO_CRITICO | PA=195/115 | FC=128 bpm
+   - 2026-10-16T09:44:39.051304: Risco=RISCO_CRITICO | PA=195/115 | FC=128 bpm
+   - 2026-10-16T09:43:54.765710: Risco=RISCO_CRITICO | PA=195/115 | FC=128 bpm
+
+[QUERY 2] Alertas Criticos Identificados pelo Modelo (5 eventos):
+   - Paciente 106: RISCO_CRITICO (100.0%) - Hipotensao Arterial (PA: 82/52 mmHg), Taquiarritmia Grave (FC: 134 bpm)
+   - Paciente 105: ALTO_RISCO (99.5%) - Hipertensao Estagio 1/2 (PA: 168/102 mmHg)
+   - Paciente 103: ALTO_RISCO (100.0%) - Bradicardia Severa (FC: 42 bpm)
+   - Paciente 102: RISCO_CRITICO (100.0%) - Crise Hipertensiva (PA: 195/115 mmHg), Taquicardia Sinusal (FC: 128 bpm)
+   - Paciente 106: RISCO_CRITICO (100.0%) - Hipotensao Arterial (PA: 82/52 mmHg), Taquiarritmia Grave (FC: 134 bpm)
+
+[QUERY 3] Agregacao NoSQL ($group por nivel de risco e confianca media):
+{
+    "BAIXO_RISCO": {
+        "total": 3,
+        "confianca_media": 0.934
+    },
+    "RISCO_MODERADO": {
+        "total": 3,
+        "confianca_media": 0.824
+    },
+    "ALTO_RISCO": {
+        "total": 6,
+        "confianca_media": 0.997
+    },
+    "RISCO_CRITICO": {
+        "total": 6,
+        "confianca_media": 1.0
+    }
+}
+================================================================================
+
+
+2026-10-16 09:44:48 [INFO] [SQLite] Base relacional inicializada com 6 leituras de telemetria IoT.
+2026-10-16 09:44:48 [INFO] [ML] Modelo preditivo carregado com sucesso de: modelo_risco.joblib
+2026-10-16 09:44:48 [INFO] [NoSQL] Conectando ao MongoDB (cluster0.lavvg50.mongodb.net)...
+2026-10-16 09:44:49 [INFO] [NoSQL - MONGODB REAL] Conexão com MongoDB Real estabelecida com sucesso! Banco: 'cardioai_nosql'
+2026-10-16 09:44:49 [INFO] [NoSQL] Indices de busca e performance criados na colecao 'diagnosticos_ia'.

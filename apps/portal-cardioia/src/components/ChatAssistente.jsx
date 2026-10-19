@@ -1,38 +1,67 @@
 import { useState, useRef, useEffect } from "react";
+import { API_ENDPOINTS } from "../config";
+import styles from "./ChatAssistente.module.css";
 
-const API_URL = import.meta.env.VITE_CHAT_API_URL || "http://localhost:5001/chat";
+const INITIAL_MESSAGE = {
+  id: 1,
+  role: "bot",
+  text: "Olá! Sou o assistente virtual do CardioAI. Posso ajudar com dúvidas sobre sintomas, agendamento de consulta e resultados de ECG. Importante: este assistente não substitui avaliação médica e não fornece diagnóstico. Como posso ajudar?",
+  urgent: false,
+};
 
-export function ChatAssistente() {
-  const [messages, setMessages] = useState([
-    {
-      role: "bot",
-      text: "Olá! Sou o assistente virtual do CardioIA. Posso ajudar com dúvidas sobre sintomas, agendamento de consulta e resultados de ECG. Importante: este assistente não substitui avaliação médica e não fornece diagnóstico. Como posso ajudar?",
-      urgent: false,
-    },
-  ]);
-  const [input, setInput] = useState("");
+/**
+ * Componente modular e reutilizável de Chat do Assistente CardioAI.
+ * 
+ * Centraliza todo o fluxo de mensagens, gerenciamento de sessão individual
+ * com o Watson Assistant (Fase 5), tratamento de urgência e renderização.
+ */
+export function ChatAssistente({
+  title = "Assistente CardioAI (Fase 5)",
+  subtitle = "Triagem inicial · não substitui avaliação médica",
+  disclaimer = "Protótipo Não-Diagnóstico",
+  variant = "full", // "full" ou "widget"
+  className = "",
+}) {
+  const [sessionId, setSessionId] = useState(null);
+  const [messages, setMessages] = useState([INITIAL_MESSAGE]);
+  const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
   }, [messages, isTyping]);
 
-  async function sendMessage() {
-    const text = input.trim();
+  async function handleSendMessage(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const text = inputValue.trim();
     if (!text || isTyping) return;
 
-    setMessages((prev) => [...prev, { role: "user", text }]);
-    setInput("");
+    const userMessage = {
+      id: Date.now(),
+      role: "user",
+      text,
+      urgent: false,
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
     setIsTyping(true);
     setError(null);
 
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(API_ENDPOINTS.chat, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+          session_id: sessionId,
+        }),
       });
 
       if (!res.ok) {
@@ -41,22 +70,29 @@ export function ChatAssistente() {
 
       const data = await res.json();
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "bot",
-          text: data.response ?? "Desculpe, não consegui gerar uma resposta.",
-          urgent: Boolean(data.urgent),
-          source: data.source,
-        },
-      ]);
+      // Mantém a sessão individual sincronizada com o Watson Assistant
+      if (data.session_id) {
+        setSessionId(data.session_id);
+      }
+
+      const botMessage = {
+        id: Date.now() + 1,
+        role: "bot",
+        text: data.response ?? "Desculpe, não consegui gerar uma resposta.",
+        urgent: Boolean(data.urgent),
+        source: data.source,
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
+      console.error("Erro ao comunicar com o assistente:", err);
       setError(
-        "Não consegui falar com o assistente agora. Verifique se o backend está rodando.",
+        "Não foi possível conectar ao backend do assistente. Verifique se o serviço está ativo.",
       );
       setMessages((prev) => [
         ...prev,
         {
+          id: Date.now() + 1,
           role: "bot",
           text: "Desculpe, tive um problema técnico para responder. Tente novamente em instantes.",
           urgent: false,
@@ -67,187 +103,126 @@ export function ChatAssistente() {
     }
   }
 
-  function handleKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
+  async function handleResetSession() {
+    if (sessionId) {
+      try {
+        await fetch(API_ENDPOINTS.sessionClose, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ session_id: sessionId }),
+        });
+      } catch (err) {
+        console.warn("Aviso ao encerrar sessão no backend:", err);
+      }
     }
+
+    setSessionId(null);
+    setMessages([
+      {
+        id: Date.now(),
+        role: "bot",
+        text: "Sessão reiniciada com sucesso. Como posso ajudar você agora?",
+        urgent: false,
+      },
+    ]);
+    setError(null);
   }
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.header}>
-        <div style={styles.headerTitle}>Assistente CardioIA</div>
-        <div style={styles.headerSubtitle}>Triagem inicial · não substitui avaliação médica</div>
-      </div>
+  const containerClasses = [
+    styles.chatContainer,
+    variant === "widget" ? styles.widget : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-      <div style={styles.messagesArea}>
-        {messages.map((msg, i) => (
+  return (
+    <div className={containerClasses}>
+      <header className={styles.chatHeader}>
+        <div className={styles.headerInfo}>
+          <h2 className={styles.headerTitle}>{title}</h2>
+          {subtitle && <span className={styles.headerSubtitle}>{subtitle}</span>}
+        </div>
+
+        <div className={styles.headerActions}>
+          {sessionId && (
+            <span
+              className={styles.sessionBadge}
+              title={`ID da sessão: ${sessionId}`}
+            >
+              <span className={styles.sessionDot}>●</span>
+              Sessão: {sessionId.startsWith("local-") ? `Local (${sessionId.slice(6, 14)})` : `${sessionId.slice(0, 10)}...`}
+            </span>
+          )}
+
+          {disclaimer && (
+            <span className={styles.disclaimer}>{disclaimer}</span>
+          )}
+
+          <button
+            type="button"
+            className={styles.resetButton}
+            onClick={handleResetSession}
+            title="Encerrar sessão atual e iniciar nova conversa"
+          >
+            Nova Conversa
+          </button>
+        </div>
+      </header>
+
+      <div className={styles.messageArea}>
+        {messages.map((msg) => (
           <div
-            key={i}
-            style={{
-              ...styles.messageRow,
-              justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
-            }}
+            key={msg.id}
+            className={`${styles.messageRow} ${styles[msg.role]}`}
           >
             <div
-              style={{
-                ...styles.bubble,
-                ...(msg.role === "user" ? styles.bubbleUser : styles.bubbleBot),
-                ...(msg.urgent ? styles.bubbleUrgent : {}),
-              }}
+              className={`${styles.messageBubble} ${
+                msg.urgent ? styles.urgent : ""
+              }`}
             >
-              {msg.urgent && <div style={styles.urgentTag}>⚠️ ATENÇÃO</div>}
+              {msg.urgent && (
+                <div className={styles.urgentTag}>⚠️ ATENÇÃO / EMERGÊNCIA</div>
+              )}
               {msg.text}
             </div>
           </div>
         ))}
 
         {isTyping && (
-          <div style={{ ...styles.messageRow, justifyContent: "flex-start" }}>
-            <div style={{ ...styles.bubble, ...styles.bubbleBot }}>
-              <span style={styles.typingDots}>digitando...</span>
+          <div className={`${styles.messageRow} ${styles.bot}`}>
+            <div className={styles.typingIndicator}>
+              CardioAI está digitando...
             </div>
           </div>
         )}
 
-        {error && <div style={styles.errorBanner}>{error}</div>}
+        {error && <div className={styles.errorBanner}>{error}</div>}
 
         <div ref={messagesEndRef} />
       </div>
 
-      <div style={styles.inputArea}>
-        <textarea
-          style={styles.textInput}
-          placeholder="Digite sua mensagem..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          rows={1}
-        />
-        <button
-          style={{
-            ...styles.sendButton,
-            opacity: input.trim() && !isTyping ? 1 : 0.5,
-          }}
-          onClick={sendMessage}
-          disabled={!input.trim() || isTyping}
-        >
-          Enviar
-        </button>
+      <div className={styles.inputArea}>
+        <form onSubmit={handleSendMessage} className={styles.inputForm}>
+          <input
+            type="text"
+            className={styles.chatInput}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Digite sua mensagem (ex: sinto dor no peito, ou o que é classe V?)..."
+            disabled={isTyping}
+          />
+          <button
+            type="submit"
+            className={styles.sendButton}
+            disabled={!inputValue.trim() || isTyping}
+          >
+            Enviar
+          </button>
+        </form>
       </div>
     </div>
   );
 }
 
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    maxWidth: 480,
-    height: 600,
-    border: "1px solid #e2e2e2",
-    borderRadius: 12,
-    overflow: "hidden",
-    fontFamily: "Arial, sans-serif",
-    boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-  },
-  header: {
-    padding: "14px 18px",
-    background: "#c62828",
-    color: "white",
-  },
-  headerTitle: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  headerSubtitle: {
-    fontSize: 12,
-    opacity: 0.9,
-    marginTop: 2,
-  },
-  messagesArea: {
-    flex: 1,
-    overflowY: "auto",
-    padding: 16,
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-    background: "#f7f7f8",
-  },
-  messageRow: {
-    display: "flex",
-    width: "100%",
-  },
-  bubble: {
-    maxWidth: "80%",
-    padding: "10px 14px",
-    borderRadius: 14,
-    fontSize: 14,
-    lineHeight: 1.4,
-    whiteSpace: "pre-wrap",
-  },
-  bubbleUser: {
-    background: "#c62828",
-    color: "white",
-    borderBottomRightRadius: 4,
-  },
-  bubbleBot: {
-    background: "white",
-    color: "#222",
-    border: "1px solid #e2e2e2",
-    borderBottomLeftRadius: 4,
-  },
-  bubbleUrgent: {
-    background: "#fff3f3",
-    border: "2px solid #c62828",
-    color: "#7a0000",
-    fontWeight: 500,
-  },
-  urgentTag: {
-    fontWeight: "bold",
-    fontSize: 12,
-    marginBottom: 4,
-    color: "#c62828",
-  },
-  typingDots: {
-    fontStyle: "italic",
-    color: "#999",
-    fontSize: 13,
-  },
-  errorBanner: {
-    fontSize: 12,
-    color: "#c62828",
-    background: "#fff3f3",
-    padding: 8,
-    borderRadius: 8,
-    textAlign: "center",
-  },
-  inputArea: {
-    display: "flex",
-    gap: 8,
-    padding: 12,
-    borderTop: "1px solid #e2e2e2",
-    background: "white",
-  },
-  textInput: {
-    flex: 1,
-    resize: "none",
-    padding: "10px 12px",
-    borderRadius: 8,
-    border: "1px solid #ccc",
-    fontSize: 14,
-    fontFamily: "inherit",
-    outline: "none",
-  },
-  sendButton: {
-    padding: "0 18px",
-    borderRadius: 8,
-    border: "none",
-    background: "#c62828",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-};
+export default ChatAssistente;

@@ -1,0 +1,57 @@
+======================================================================
+🏥 CARDIOAI - SISTEMA PREDITIVO MULTIAGENTE DE RISCO CARDÍACO
+======================================================================
+📁 Paciente: C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\data\exemplos\caso_moderado_risco.json
+🆔 Sessão SQLite: sessao_caso_moderado_risco_d2528f
+🧠 Modelo LLM: gpt-4o-mini
+======================================================================
+
+🔄 [HANDOFF]: Agente Orquestrador ➔ Agente Analista de Risco
+
+🔧 [TOOL] prever_risco_paciente executada com sucesso:
+   - Probabilidade: 0.59
+   - Classe Prevista: 1
+   - Classificação: MODERADO
+
+🔄 [HANDOFF]: Agente Analista de Risco ➔ Agente Especialista em Protocolos
+
+🔧 [TOOL] consultar_base_protocolos executada com sucesso:
+   - Protocolos acionados: 0
+
+🔄 [HANDOFF]: Agente Especialista em Protocolos ➔ Agente Planejador de Resposta
+
+🛡️ [GUARDRAIL]: Saída do Planejador validada com sucesso! Sem violações de integridade.
+
+======================================================================
+RISCO PREVISTO: 0.59
+CLASSIFICAÇÃO: MODERADO
+
+PROTOCOLOS SUGERIDOS:
+- Nenhum protocolo crítico acionado.
+
+AÇÕES OPERACIONAIS:
+- Monitoramento contínuo dos sinais vitais, com ênfase na pressão arterial e frequência cardíaca.
+- Avaliação da capacidade de suporte respiratório do paciente, especialmente conforme saturação de oxigênio.
+- Preparo da equipe para intervenções rápidas em caso de agravamento do estado clínico.
+
+JUSTIFICATIVA:
+A probabilidade de pico de risco cardiovascular está avaliada em 0.59, indicando um cenário moderado de sobrecarga, o que requer monitoramento intensificado e preparação para ações rápidas. Variáveis como sinais vitais instáveis e a atualização constante das condições do paciente sugerem a necessidade de intervenções organizadas e proativas para evitar um agravamento do quadro.
+
+AVISO:
+Este documento é gerado automaticamente e não substitui a opinião clínica de um profissional de saúde.
+======================================================================
+
+📄 SAÍDA COMPLETA (JSON):
+{
+  "probabilidade": 0.59,
+  "classificacao": "MODERADO",
+  "protocolos_sugeridos": [],
+  "acoes_operacionais": [
+    "Monitoramento contínuo dos sinais vitais, com ênfase na pressão arterial e frequência cardíaca.",
+    "Avaliação da capacidade de suporte respiratório do paciente, especialmente conforme saturação de oxigênio.",
+    "Preparo da equipe para intervenções rápidas em caso de agravamento do estado clínico."
+  ],
+  "justificativa": "A probabilidade de pico de risco cardiovascular está avaliada em 0.59, indicando um cenário moderado de sobrecarga, o que requer monitoramento intensificado e preparação para ações rápidas. Variáveis como sinais vitais instáveis e a atualização constante das condições do paciente sugerem a necessidade de intervenções organizadas e proativas para evitar um agravamento do quadro.",
+  "aviso": "Este documento é gerado automaticamente e não substitui a opinião clínica de um profissional de saúde."
+}
+======================================================================
