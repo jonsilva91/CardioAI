@@ -26,6 +26,7 @@ O projeto contempla:
 - classificação de imagens de ECG com CNN treinada do zero e Transfer Learning (Fase 4)
 - assistente conversacional integrado ao IBM watsonx Assistant (Fase 5)
 - modelo preditivo de risco cardiovascular (Random Forest) e orquestração multiagente com OpenAI Agents SDK (Fase 6)
+- plataforma integrada em nuvem unificando IoT MicroPython (Wokwi ESP32), Backend FastAPI (Render), Portal React/Vite (Vercel), App Mobile Android (APK via Expo EAS Build), modelo preditivo e agentes de IA (Fase 7)
 
 ---
 
@@ -37,7 +38,9 @@ O projeto contempla:
 - [Fase 4 — CNN aplicada a ECG](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase04_cnn_ecg/README.md)
 - [Fase 5 — Assistente Conversacional](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase05_assistente_conversacional/README.md)
 - [Fase 6 — Preditivo e Multiagente](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase06_preditivo_multiagente/README.md)
+- [Fase 7 — Plataforma Integrada (IoT, Cloud, Web, Mobile & Agentes)](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase07_plataforma_integrada/README.md)
 - [Portal React](https://github.com/jonsilva91/CardioAI/blob/main/apps/portal-cardioia/README.md)
+- [App Mobile (Expo / EAS Build)](https://github.com/jonsilva91/CardioAI/blob/main/apps/mobile-cardioia/README.md)
 
 ---
 
@@ -57,10 +60,12 @@ CardioAI/
 │   ├── fase03_iot_monitoramento/
 │   ├── fase04_cnn_ecg/
 │   ├── fase05_assistente_conversacional/
-│   └── fase06_preditivo_multiagente/
+│   ├── fase06_preditivo_multiagente/
+│   └── fase07_plataforma_integrada/
 ├── apps/
 │   ├── mobile-cardioia/
 │   └── portal-cardioia/
+├── render.yaml
 ├── config/
 ├── referencias.md
 └── .gitignore
@@ -110,22 +115,33 @@ Sistema preditivo de pico de risco cardiovascular com Machine Learning supervisi
 
 **Local:** `phases/fase06_preditivo_multiagente/`
 
+### Fase 7 — Plataforma Integrada em Nuvem (IoT, Backend FastAPI, Web, Mobile e Agentes IA)
+
+Consolidação final de todos os módulos do ecossistema **CardioAI** operando integrados em produção:
+- **Nó IoT em MicroPython (`phases/fase07_plataforma_integrada/iot/`):** Simulação pública no Wokwi ([https://wokwi.com/projects/480500031706588161](https://wokwi.com/projects/480500031706588161)) com ESP32, DHT22, 2 potenciômetros (`BPM` e `SpO2`), botão de envio imediato, display OLED SSD1306 I2C, LEDs verde/vermelho, pré-análise local na borda e fila offline de até 20 leituras;
+- **Backend Unificado FastAPI no Render (`phases/fase07_plataforma_integrada/backend/`):** Hospedado em [https://cardioai-fase07-backend.onrender.com](https://cardioai-fase07-backend.onrender.com), importa diretamente `src.predictor`, `src.protocols` e `src.agents_system` da Fase 6, autentica usuários via JWT e dispositivos via `X-Device-Token`, calcula risco e protocolos em tempo real e expõe o pipeline multiagente (`/recomendacao`) e o assistente de triagem (`/api/chat`);
+- **Portal Web em Produção na Vercel (`apps/portal-cardioia/`):** Disponível em [https://cardio-ai-five.vercel.app](https://cardio-ai-five.vercel.app), com login JWT real, dashboard de monitoramento em tempo real (`/monitoramento`, polling 5 s, gráficos `recharts`), recomendação multiagente sob demanda e chat clínico;
+- **App Mobile Android (`apps/mobile-cardioia/`):** Atualizado para o Expo SDK 58 (`br.com.fiap.cardioia`), com APK gerado no Expo EAS Build ([https://expo.dev/accounts/jonsilva91/projects/mobile-cardioia/builds/be64508a-ebc2-4fb2-9ab3-93a89bb8b267](https://expo.dev/accounts/jonsilva91/projects/mobile-cardioia/builds/be64508a-ebc2-4fb2-9ab3-93a89bb8b267)) e validado no emulador Android Pixel 7 / Android 13 via Appetize.io.
+
+➡️ **[Acessar documentação completa e relatório da Fase 7](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase07_plataforma_integrada/README.md)**
+
+**Local:** `phases/fase07_plataforma_integrada/`
+
 ### Portal CardioIA
 
-Aplicação React + Vite para autenticação simulada, dashboard, pacientes, agendamentos e o assistente conversacional (rota `/assistente`).
+Aplicação React + Vite integrada ao backend FastAPI da Fase 7, contando com login JWT real, rota protegida de monitoramento cardiológico em tempo real (`/monitoramento` com polling de 5 s e gráficos `recharts`), acionamento sob demanda da recomendação multiagente (`/recomendacao`), assistente conversacional de triagem (`/assistente`), dashboard, pacientes e agendamentos.
 
 **Local:** `apps/portal-cardioia/`
 
 ### App Mobile React Native
 
-Aplicativo mobile em React Native/Expo para classificação de imagens de ECG, integrando com o modelo CNN da Fase 4 via API FastAPI.
+Aplicativo mobile em React Native (**Expo SDK 58**, pacote `br.com.fiap.cardioia`) integrado ao backend da Fase 7, com APK Android gerado via **Expo EAS Build**:
 
 **Funcionalidades:**
 
-- Seleção de imagens da galeria
-- Upload e classificação via API
-- Exibição de resultado com confiança
-- Avisos de uso acadêmico
+- Autenticação JWT real (`POST /api/auth/login`) com persistência segura via `expo-secure-store`
+- Monitoramento em tempo real do paciente padrão `PAC-001` (BPM, SpO2, Temperatura, risco com cor + texto e protocolos acionados) com atualização a cada 5 s e *pull-to-refresh*
+- Solicitação sob demanda de **Recomendação IA** executando o pipeline multiagente da Fase 6 (`POST /api/pacientes/PAC-001/recomendacao`)
 
 ➡️ **[Acessar documentação do app mobile](https://github.com/jonsilva91/CardioAI/blob/main/apps/mobile-cardioia/README.md)**
 
@@ -200,27 +216,17 @@ uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
 
 Acesse: `http://localhost:8000/docs`
 
-### 8. App Mobile React Native (IR ALÉM 2)
+### 8. App Mobile React Native (Expo SDK 58 / EAS Build)
 
-**Backend (terminal 1):**
-
-```
-cd phases/fase04_cnn_ecg
-.venv\Scripts\activate
-uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
-```
-
-**Mobile (terminal 2):**
-
-```
+```bash
 cd apps/mobile-cardioia
+cp .env.example .env
 npm install
+npx expo-doctor
 npx expo start
 ```
 
-⚠️ **Configure o IP da sua máquina em `src/services/visionApi.js` antes de executar!**
-
-Veja instruções completas em: [apps/mobile-cardioia/README.md](https://github.com/jonsilva91/CardioAI/blob/main/apps/mobile-cardioia/README.md)
+A URL do backend é configurada via variável de ambiente `EXPO_PUBLIC_API_URL` (definida em `eas.json` e `.env`). Veja instruções completas em: [apps/mobile-cardioia/README.md](https://github.com/jonsilva91/CardioAI/blob/main/apps/mobile-cardioia/README.md)
 
 ### 9. Fase 5 — Assistente Conversacional
 
@@ -284,6 +290,17 @@ python scripts/demo_guardrail.py
 pytest -v
 ```
 
+### 11. Fase 7 — Plataforma Integrada (IoT, Backend FastAPI, Portal Web e App Mobile)
+
+```bash
+# Backend FastAPI + Testes Automatizados (10 testes pytest)
+pip install -r phases/fase07_plataforma_integrada/backend/requirements.txt
+pytest phases/fase07_plataforma_integrada/backend/tests -v
+uvicorn app.main:app --app-dir phases/fase07_plataforma_integrada/backend --host 0.0.0.0 --port 8000 --reload
+```
+
+Veja o guia completo (incluindo links em produção na Vercel e Render, simulação Wokwi MicroPython e instalação do APK Android) em: [phases/fase07_plataforma_integrada/README.md](https://github.com/jonsilva91/CardioAI/blob/main/phases/fase07_plataforma_integrada/README.md)
+
 ---
 
 ## Dados e Referências
@@ -316,6 +333,10 @@ Demonstrações em vídeo das entregas acadêmicas do projeto:
 ### Vídeo da Fase 6 — Ir Além 2 (Desafio Opcional 2)
 - **Link no YouTube (Não Listado):** [https://youtu.be/FRKwCTTr1H0](https://youtu.be/FRKwCTTr1H0)
 
+### Vídeo da Fase 7 — Plataforma Integrada (IoT, Cloud, ML, Multiagente, Web e Mobile)
+- **Link no YouTube (Não Listado):** [https://youtu.be/e7b1ICpbym0](https://youtu.be/e7b1ICpbym0)
+- **Conteúdo:** Demonstração integrada ponta a ponta com o ESP32 MicroPython no Wokwi enviando telemetria para o backend FastAPI no Render, atualização em tempo real no Portal Web (Vercel) e no App Mobile Android (APK / Appetize.io), acionamento do sistema multiagente da Fase 6 e assistente conversacional de triagem.
+
 ---
 
 ## Tecnologias Utilizadas
@@ -334,11 +355,22 @@ Demonstrações em vídeo das entregas acadêmicas do projeto:
 - Pydantic
 - SQLite (`SQLiteSession`)
 
+### Back-end, Cloud, IoT e Mobile
+
+- FastAPI & Uvicorn
+- Autenticação JWT (`PyJWT` / `HS256`) e `expo-secure-store`
+- MicroPython (ESP32, `urequests`, `dht`, `ADC`, OLED `SSD1306` I2C)
+- Simulador Wokwi
+- React Native / Expo SDK 58 (Expo EAS Build — APK Android)
+- Render (Deploy Python com Blueprint `render.yaml` e `buildFilter`)
+- Vercel (Deploy SPA com `vercel.json`)
+
 ### Front-end
 
 - React
 - Vite
 - React Router DOM
+- Recharts (gráficos de série temporal em tempo real)
 - Context API
 - CSS Modules
 
@@ -360,14 +392,8 @@ Demonstrações em vídeo das entregas acadêmicas do projeto:
 - Fase 4 — CNN e Transfer Learning para classificação de ECG
 - Fase 5 — assistente conversacional com IBM watsonx Assistant
 - Fase 6 — modelo preditivo de risco cardiovascular (Random Forest) e orquestração multiagente (OpenAI Agents SDK) com guardrails e persistência SQLite
+- Fase 7 — plataforma integrada em nuvem (Wokwi ESP32 MicroPython + FastAPI no Render + Portal React na Vercel + APK Android no Expo EAS Build)
 - Portal React funcional
-
-### Próximos passos
-
-- integração do portal com back-end real de persistência
-- classificador mais robusto de risco
-- expandir cobertura de intents do assistente conversacional
-- visualização de exames de ECG no portal
 
 ---
 
@@ -391,8 +417,8 @@ MIT License
 
 ---
 
-**Status do Projeto**: Fases 1 a 6 entregues
-**Versão**: 6.0
+**Status do Projeto**: Fases 1 a 7 entregues
+**Versão**: 7.0
 **Curso**: FIAP — Faculdade de Informática e Administração Paulista
 
 ---

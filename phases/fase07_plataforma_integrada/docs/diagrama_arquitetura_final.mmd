@@ -1,0 +1,36 @@
+flowchart LR
+    subgraph CICD["CI/CD Automatizado (GitHub)"]
+        GH["Repositório GitHub<br/>jonsilva91/CardioAI"]
+    end
+
+    subgraph EDGE["Camada IoT / Edge (Wokwi ESP32 MicroPython)"]
+        SENS["Sensores Físicos Simulados<br/>• DHT22 (Temperatura)<br/>• Pot1: BPM (40–180)<br/>• Pot2: SpO2 (80–100%)<br/>• Botão (Envio Imediato)"]
+        ESP["ESP32 MicroPython<br/>• Pré-análise local (Edge)<br/>• Fila offline (até 20 leituras)"]
+        ATU["Atuadores Locais<br/>• Display OLED SSD1306 I2C<br/>• LED Verde (BAIXO) / Pisca (MOD)<br/>• LED Vermelho (ALTO / Alerta)"]
+        SENS --> ESP
+        ESP --> ATU
+    end
+
+    subgraph CLOUD["Backend Unificado no Render (FastAPI)"]
+        API["FastAPI (app.main:app)<br/>• Auth JWT (HS256)<br/>• Validação X-Device-Token<br/>• Store em Memória (200 leituras)"]
+        ML["Motor Preditivo & Regras (Fase 6)<br/>• Cenário Padrão + 3 Sinais IoT (10 features)<br/>• Random Forest (modelo_pico_risco.joblib)<br/>• 10 Protocolos Determinísticos"]
+        AGENTS["IA Generativa & Multiagente (OpenAI)<br/>• 4 Agentes (OpenAI Agents SDK + Guardrail)<br/>• Assistente de Triagem (/api/chat, gpt-4o-mini)"]
+        API <--> ML
+        API <--> AGENTS
+    end
+
+    subgraph CLIENTS["Camada de Apresentação (Clientes Autenticados via JWT)"]
+        WEB["Portal Web React + Vite (Vercel)<br/>• /monitoramento (Polling 5s + Recharts)<br/>• Recomendação Multiagente IA<br/>• ChatAssistente (/api/chat)"]
+        MOB["App Mobile CardioIA (Expo SDK 58 / APK)<br/>• Login JWT (expo-secure-store)<br/>• Monitoramento 5s + Pull-to-Refresh<br/>• Botão Recomendação IA"]
+    end
+
+    ESP -- "HTTPS POST /api/telemetria<br/>(Header: X-Device-Token)" --> API
+    API -- "JSON {probabilidade, classificacao,<br/>alerta, protocolos} ➔ LED / OLED" --> ATU
+
+    API <-- "HTTPS REST + Bearer JWT<br/>(/status, /historico, /recomendacao, /chat)" --> WEB
+    API <-- "HTTPS REST + Bearer JWT<br/>(/login, /status, /recomendacao)" --> MOB
+
+    GH -. "Push (main) ➔ Deploy SPA (vercel.json)" .-> WEB
+    GH -. "Push (buildFilter.paths) ➔ Deploy Python (render.yaml)" .-> API
+    GH -. "EAS Build (preview ➔ APK Android)" .-> MOB
+

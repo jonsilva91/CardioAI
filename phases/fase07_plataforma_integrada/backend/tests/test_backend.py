@@ -107,7 +107,7 @@ def test_health_endpoint_nunca_expoe_valor_da_chave(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Valida GET /health: modelo carregado e flag booleana de OPENAI_API_KEY sem expor o segredo."""
-    segredo_falso = "sk-segredo-super-confidencial-nao-expor"
+    segredo_falso = "chave-falsa-confidencial-apenas-teste-unitario"
     monkeypatch.setenv("OPENAI_API_KEY", segredo_falso)
 
     resp = client.get("/health")
@@ -314,7 +314,7 @@ def test_rate_limit_recomendacao_30_segundos_sem_chamar_openai(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Valida o limite de 1 chamada a cada 30 s em /recomendacao usando stub local do Runner."""
-    monkeypatch.setenv("OPENAI_API_KEY", "sk-chave-teste-apenas-para-stub-local")
+    monkeypatch.setenv("OPENAI_API_KEY", "chave-teste-apenas-para-stub-local")
 
     async def fake_runner_run(agent, prompt, context=None, **kwargs):
         rec = fase06_agents.RecomendacaoFinal(
