@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: cardioai-fase07-backend
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r phases/fase07_plataforma_integrada/backend/requirements.txt"
+    startCommand: "uvicorn app.main:app --app-dir phases/fase07_plataforma_integrada/backend --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: DEVICE_TOKEN
+        sync: false
+      - key: DEMO_EMAIL
+        sync: false
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+

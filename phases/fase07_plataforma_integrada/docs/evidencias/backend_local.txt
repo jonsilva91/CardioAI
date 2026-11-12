@@ -1,0 +1,391 @@
+================================================================================
+EVIDENCIA DE EXECUCAO LOCAL - BACKEND FASE 7 (PLATAFORMA INTEGRADA CARDIOAI)
+================================================================================
+
+[1] EXECUCAO DOS TESTES AUTOMATIZADOS (PYTEST - SEM CHAMAR OPENAI)
+--------------------------------------------------------------------------------
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\JonasLuisdaSilva\Documents\CardioAI\phases\fase06_preditivo_multiagente\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\JonasLuisdaSilva\Documents\CardioAI
+plugins: anyio-4.15.1
+collecting ... collected 8 items
+
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_health_endpoint_nunca_expoe_valor_da_chave PASSED [ 12%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_login_sucesso_e_falha PASSED [ 25%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_telemetria_exige_device_token_e_valida_faixas PASSED [ 37%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_modelo_real_fc_maior_110_e_spo2_menor_92_sobe_risco_para_alto PASSED [ 50%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_status_e_historico_paciente_com_limite_200_leituras PASSED [ 62%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_sem_openai_api_key_recomendacao_e_chat_retornam_503 PASSED [ 75%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_rate_limit_recomendacao_30_segundos_sem_chamar_openai PASSED [ 87%]
+phases/fase07_plataforma_integrada/backend/tests/test_backend.py::test_cors_respeita_allowed_origins PASSED [100%]
+
+============================== 8 passed in 8.14s ==============================
+
+[2] INICIANDO SERVIDOR UVICORN REAL COM .env
+--------------------------------------------------------------------------------
+Comando: uvicorn app.main:app --app-dir phases/fase07_plataforma_integrada/backend --host 127.0.0.1 --port 8017
+
+>>> GET /health
+Requisicao: GET /health
+Status HTTP: 200
+Resposta JSON:
+{
+  "status": "ok",
+  "modelo_carregado": true,
+  "openai_api_key": true,
+  "openai_api_key_configurada": true
+}
+
+>>> POST /api/auth/login
+Requisicao: POST /api/auth/login
+Status HTTP: 200
+Resposta JSON:
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5c...[JWT_ASSINADO]",
+  "token_type": "bearer",
+  "email": "admin@cardioia.com",
+  "expires_in": 28800
+}
+
+>>> POST /api/telemetria (Leitura Estavel -> BAIXO)
+Requisicao: POST /api/telemetria
+Status HTTP: 200
+Resposta JSON:
+{
+  "probabilidade": 0.0,
+  "classificacao": "BAIXO",
+  "alerta": false,
+  "protocolos": [],
+  "protocolos_detalhados": [],
+  "paciente_id": "paciente-01",
+  "device_id": "esp32-uti-leito01",
+  "timestamp": "2026-11-12T12:22:44.683171+00:00"
+}
+
+>>> POST /api/telemetria (Leitura Critica FC>110 e SpO2<92 -> ALTO)
+Requisicao: POST /api/telemetria
+Status HTTP: 200
+Resposta JSON:
+{
+  "probabilidade": 0.85,
+  "classificacao": "ALTO",
+  "alerta": true,
+  "protocolos": [
+    "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+    "Se FC > 120 → iniciar monitoramento intensivo",
+    "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+    "Se risco sistêmico alto → ativar estado de emergência"
+  ],
+  "protocolos_detalhados": [
+    {
+      "id": "PROT-01",
+      "texto": "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+      "variavel": "spo2_media",
+      "valor_paciente": 87.0,
+      "limiar": "< 88%"
+    },
+    {
+      "id": "PROT-03",
+      "texto": "Se FC > 120 → iniciar monitoramento intensivo",
+      "variavel": "fc_media",
+      "valor_paciente": 124.0,
+      "limiar": "> 120 bpm"
+    },
+    {
+      "id": "PROT-07",
+      "texto": "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+      "variavel": "temperatura",
+      "valor_paciente": 38.4,
+      "limiar": "> 38°C"
+    },
+    {
+      "id": "PROT-10",
+      "texto": "Se risco sistêmico alto → ativar estado de emergência",
+      "variavel": "classificacao_risco",
+      "valor_paciente": "ALTO",
+      "limiar": "== ALTO"
+    }
+  ],
+  "paciente_id": "paciente-01",
+  "device_id": "esp32-uti-leito01",
+  "timestamp": "2026-11-12T12:22:44.701187+00:00"
+}
+
+>>> GET /api/pacientes/paciente-01/status
+Requisicao: GET /api/pacientes/paciente-01/status
+Status HTTP: 200
+Resposta JSON:
+{
+  "paciente_id": "paciente-01",
+  "ultima_leitura": {
+    "device_id": "esp32-uti-leito01",
+    "paciente_id": "paciente-01",
+    "fc_media": 124.0,
+    "temperatura": 38.4,
+    "spo2_media": 87.0,
+    "dados_completos": {
+      "idade_media": 62.0,
+      "carga_sistema": 60.0,
+      "tempo_espera": 40.0,
+      "pa_sistolica": 120.0,
+      "densidade_eventos": 3.0,
+      "eventos_24h": 2.0,
+      "disponibilidade_recursos": 60.0,
+      "fc_media": 124.0,
+      "temperatura": 38.4,
+      "spo2_media": 87.0
+    },
+    "probabilidade": 0.85,
+    "classe_prevista": 1,
+    "classificacao": "ALTO",
+    "alerta": true,
+    "protocolos": [
+      "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+      "Se FC > 120 → iniciar monitoramento intensivo",
+      "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+      "Se risco sistêmico alto → ativar estado de emergência"
+    ],
+    "protocolos_detalhados": [
+      {
+        "id": "PROT-01",
+        "texto": "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+        "variavel": "spo2_media",
+        "valor_paciente": 87.0,
+        "limiar": "< 88%"
+      },
+      {
+        "id": "PROT-03",
+        "texto": "Se FC > 120 → iniciar monitoramento intensivo",
+        "variavel": "fc_media",
+        "valor_paciente": 124.0,
+        "limiar": "> 120 bpm"
+      },
+      {
+        "id": "PROT-07",
+        "texto": "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+        "variavel": "temperatura",
+        "valor_paciente": 38.4,
+        "limiar": "> 38°C"
+      },
+      {
+        "id": "PROT-10",
+        "texto": "Se risco sistêmico alto → ativar estado de emergência",
+        "variavel": "classificacao_risco",
+        "valor_paciente": "ALTO",
+        "limiar": "== ALTO"
+      }
+    ],
+    "timestamp": "2026-11-12T12:22:44.701187+00:00",
+    "epoch_seconds": 1794486164.7011876
+  },
+  "risco": {
+    "probabilidade": 0.85,
+    "classe_prevista": 1,
+    "classificacao": "ALTO",
+    "alerta": true
+  },
+  "probabilidade": 0.85,
+  "classificacao": "ALTO",
+  "alerta": true,
+  "protocolos": [
+    "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+    "Se FC > 120 → iniciar monitoramento intensivo",
+    "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+    "Se risco sistêmico alto → ativar estado de emergência"
+  ],
+  "protocolos_detalhados": [
+    {
+      "id": "PROT-01",
+      "texto": "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+      "variavel": "spo2_media",
+      "valor_paciente": 87.0,
+      "limiar": "< 88%"
+    },
+    {
+      "id": "PROT-03",
+      "texto": "Se FC > 120 → iniciar monitoramento intensivo",
+      "variavel": "fc_media",
+      "valor_paciente": 124.0,
+      "limiar": "> 120 bpm"
+    },
+    {
+      "id": "PROT-07",
+      "texto": "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+      "variavel": "temperatura",
+      "valor_paciente": 38.4,
+      "limiar": "> 38°C"
+    },
+    {
+      "id": "PROT-10",
+      "texto": "Se risco sistêmico alto → ativar estado de emergência",
+      "variavel": "classificacao_risco",
+      "valor_paciente": "ALTO",
+      "limiar": "== ALTO"
+    }
+  ],
+  "idade_leitura_segundos": 0.51,
+  "idade_segundos": 0.51
+}
+
+>>> GET /api/pacientes/paciente-01/historico?limite=50
+Requisicao: GET /api/pacientes/paciente-01/historico?limite=50
+Status HTTP: 200
+Resposta JSON:
+{
+  "paciente_id": "paciente-01",
+  "total_armazenado": 2,
+  "limite": 50,
+  "leituras": [
+    {
+      "device_id": "esp32-uti-leito01",
+      "paciente_id": "paciente-01",
+      "fc_media": 124.0,
+      "temperatura": 38.4,
+      "spo2_media": 87.0,
+      "dados_completos": {
+        "idade_media": 62.0,
+        "carga_sistema": 60.0,
+        "tempo_espera": 40.0,
+        "pa_sistolica": 120.0,
+        "densidade_eventos": 3.0,
+        "eventos_24h": 2.0,
+        "disponibilidade_recursos": 60.0,
+        "fc_media": 124.0,
+        "temperatura": 38.4,
+        "spo2_media": 87.0
+      },
+      "probabilidade": 0.85,
+      "classe_prevista": 1,
+      "classificacao": "ALTO",
+      "alerta": true,
+      "protocolos": [
+        "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+        "Se FC > 120 → iniciar monitoramento intensivo",
+        "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+        "Se risco sistêmico alto → ativar estado de emergência"
+      ],
+      "protocolos_detalhados": [
+        {
+          "id": "PROT-01",
+          "texto": "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+          "variavel": "spo2_media",
+          "valor_paciente": 87.0,
+          "limiar": "< 88%"
+        },
+        {
+          "id": "PROT-03",
+          "texto": "Se FC > 120 → iniciar monitoramento intensivo",
+          "variavel": "fc_media",
+          "valor_paciente": 124.0,
+          "limiar": "> 120 bpm"
+        },
+        {
+          "id": "PROT-07",
+          "texto": "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+          "variavel": "temperatura",
+          "valor_paciente": 38.4,
+          "limiar": "> 38°C"
+        },
+        {
+          "id": "PROT-10",
+          "texto": "Se risco sistêmico alto → ativar estado de emergência",
+          "variavel": "classificacao_risco",
+          "valor_paciente": "ALTO",
+          "limiar": "== ALTO"
+        }
+      ],
+      "timestamp": "2026-11-12T12:22:44.701187+00:00",
+      "epoch_seconds": 1794486164.7011876
+    },
+    {
+      "device_id": "esp32-uti-leito01",
+      "paciente_id": "paciente-01",
+      "fc_media": 76.0,
+      "temperatura": 36.6,
+      "spo2_media": 98.0,
+      "dados_completos": {
+        "idade_media": 62.0,
+        "carga_sistema": 60.0,
+        "tempo_espera": 40.0,
+        "pa_sistolica": 120.0,
+        "densidade_eventos": 3.0,
+        "eventos_24h": 2.0,
+        "disponibilidade_recursos": 60.0,
+        "fc_media": 76.0,
+        "temperatura": 36.6,
+        "spo2_media": 98.0
+      },
+      "probabilidade": 0.0,
+      "classe_prevista": 0,
+      "classificacao": "BAIXO",
+      "alerta": false,
+      "protocolos": [],
+      "protocolos_detalhados": [],
+      "timestamp": "2026-11-12T12:22:44.683171+00:00",
+      "epoch_seconds": 1794486164.6831713
+    }
+  ]
+}
+
+>>> POST /api/pacientes/paciente-01/recomendacao (Pipeline Multiagente REAL Fase 6)
+Requisicao: POST /api/pacientes/paciente-01/recomendacao
+Status HTTP: 200
+Resposta JSON:
+{
+  "paciente_id": "paciente-01",
+  "probabilidade": 0.85,
+  "classificacao": "ALTO",
+  "protocolos_sugeridos": [
+    "Se SPO2 < 88% → iniciar suporte respiratório imediato",
+    "Se FC > 120 → iniciar monitoramento intensivo",
+    "Se temperatura > 38°C média → iniciar protocolo infeccioso",
+    "Se risco sistêmico alto → ativar estado de emergência"
+  ],
+  "acoes_operacionais": [
+    "Realizar testes de saturação de oxigênio e FC imediatamente.",
+    "Iniciar suporte respiratório na presença de SPO2 < 88%.",
+    "Iniciar monitoramento intensivo devido à FC de 124 bpm.",
+    "Implementar protocolo de controle infeccioso considerando a temperatura elevada.",
+    "Ativar o estado de emergência da unidade devido à classificação de risco alto."
+  ],
+  "justificativa": "O paciente apresenta uma saturação de O2 de 87.0% e FC de 124 bpm, ambos críticos, o que sugere a necessidade de intervenções imediatas. Adicionalmente, a temperatura está acima de 38°C, indicando a possibilidade de um quadro infeccioso, e a classificação de risco 'ALTO' exige a ativação do estado de emergência, considerando os recursos disponíveis na unidade.",
+  "aviso": "Esta avaliação é baseada em dados e modelos preditivos. As decisões finais devem ser tomadas pela equipe médica responsável.",
+  "gerado_em": "2026-11-12T12:23:06.380440+00:00"
+}
+
+>>> POST /api/pacientes/paciente-01/recomendacao (Rate Limit 30s -> 429)
+Requisicao: POST /api/pacientes/paciente-01/recomendacao
+Status HTTP: 429
+Resposta JSON:
+{
+  "detail": "Limite de frequência atingido para o paciente 'paciente-01': permitida apenas 1 recomendação a cada 30 segundos. Aguarde 8.8s."
+}
+
+>>> POST /api/chat (Turno 1 - LLM Real OpenAI)
+Requisicao: POST /api/chat
+Status HTTP: 200
+Resposta JSON:
+{
+  "session_id": "sessao_evidencia_local_01",
+  "resposta": "Os sinais de gravidade imediatos que você mencionou incluem:\n\n1. **Frequência Cardíaca (FC) de 124 bpm**: Este valor está acima do limite considerado normal (que é geralmente entre 60 e 100 bpm), indicando taquicardia. \n2. **Saturação de Oxigênio (SpO2) de 87%**: Este valor está abaixo do limite crítico de 92%, sugerindo hipoxemia, o que é um sinal de alerta vermelho.\n3. **Temperatura de 38.4°C**: Embora a febre não seja um sinal de alerta vermelho, ela pode indicar uma infecção ou outro processo inflamatório que requer investigação.\n\nDiante da FC elevada e da SpO2 baixa, é crucial que o paciente receba atendimento emergencial imediato, pois esses sinais podem indicar uma condição potencialmente grave.\n\nRecomendo que você atue rapidamente para garantir a segurança do paciente e busque assistência médica.\n\nNão substitui avaliação médica.",
+  "disclaimer": "Não substitui avaliação médica.",
+  "modelo": "gpt-4o-mini",
+  "historico_mensagens": 2
+}
+
+>>> POST /api/chat (Turno 2 - Historico em Memoria por session_id)
+Requisicao: POST /api/chat
+Status HTTP: 200
+Resposta JSON:
+{
+  "session_id": "sessao_evidencia_local_01",
+  "resposta": "O suporte de oxigênio é prioritário nos casos em que a saturação de oxigênio (SpO2) está abaixo de 92%, como no seu paciente, que apresenta SpO2 de 87%. Aqui estão algumas razões para a urgência desse suporte:\n\n1. **Hipoxemia**: A SpO2 de 87% indica que o paciente está com níveis insuficientes de oxigênio no sangue, o que pode levar a danos nos órgãos e tecidos. O oxigênio é essencial para a função celular e a manutenção da vida.\n\n2. **Comprometimento Respiratório**: A baixa saturação pode ser um sinal de comprometimento respiratório, que pode ocorrer devido a várias condições, como pneumonia, insuficiência respiratória ou outras patologias pulmonares. O suporte de oxigênio ajuda a melhorar a oxigenação e a aliviar a carga sobre o sistema respiratório.\n\n3. **Taquicardia**: A frequência cardíaca elevada (FC de 124 bpm) pode ser uma resposta do corpo à hipoxemia, tentando compensar a falta de oxigênio. Melhorar a oxigenação pode ajudar a normalizar a frequência cardíaca.\n\n4. **Prevenção de Complicações**: A administração de oxigênio pode prevenir complicações graves, como a acidose metabólica e a falência de múltiplos órgãos, que podem ocorrer se a hipoxemia não for tratada rapidamente.\n\nPortanto, a administração de oxigênio é uma intervenção crítica e deve ser realizada o mais rápido possível para estabilizar o paciente e melhorar sua condição.\n\nNão substitui avaliação médica.",
+  "disclaimer": "Não substitui avaliação médica.",
+  "modelo": "gpt-4o-mini",
+  "historico_mensagens": 4
+}
+
+================================================================================
+TODOS OS ENDPOINTS VALIDADOS COM SUCESSO NO SERVIDOR LOCAL.
+================================================================================
