@@ -150,7 +150,7 @@ def test_telemetria_exige_device_token_e_valida_faixas(
     """Garante que X-Device-Token inválido retorna 401 e valores fora de faixa retornam 422."""
     payload_valido = {
         "device_id": "esp32-uti-01",
-        "paciente_id": "pac-001",
+        "paciente_id": "PAC-001",
         "fc_media": 78.0,
         "temperatura": 36.6,
         "spo2_media": 97.0,
@@ -170,7 +170,7 @@ def test_telemetria_exige_device_token_e_valida_faixas(
         "/api/telemetria",
         json={
             "device_id": "esp32-uti-01",
-            "paciente_id": "pac-001",
+            "paciente_id": "PAC-001",
             "fc_media": 10.0,
             "temperatura": 36.6,
             "spo2_media": 105.0,

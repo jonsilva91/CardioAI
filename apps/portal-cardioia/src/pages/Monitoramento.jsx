@@ -33,7 +33,7 @@ function formatarHorario(isoString) {
 export default function Monitoramento() {
   const { token, logout } = useAuth();
 
-  const [pacienteId, setPacienteId] = useState("paciente-01");
+  const [pacienteId, setPacienteId] = useState("PAC-001");
   const [statusData, setStatusData] = useState(null);
   const [historico, setHistorico] = useState([]);
   const [carregandoInicial, setCarregandoInicial] = useState(true);
