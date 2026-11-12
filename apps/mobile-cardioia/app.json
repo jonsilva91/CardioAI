@@ -1,38 +1,37 @@
 {
   "expo": {
-    "name": "CardioAI",
+    "name": "CardioIA",
     "slug": "mobile-cardioia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#667eea"
-    },
-    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fiap.cardioia"
+      "bundleIdentifier": "br.com.fiap.cardioia"
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#667eea"
+        "backgroundColor": "#0f172a"
       },
-      "package": "com.fiap.cardioia",
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "CAMERA"
-      ]
+      "package": "br.com.fiap.cardioia",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "apiUrl": "http://192.168.0.10:8000"
-    }
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#0f172a"
+        }
+      ]
+    ]
   }
 }
