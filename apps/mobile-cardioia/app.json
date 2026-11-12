@@ -32,6 +32,12 @@
           "backgroundColor": "#0f172a"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a17e774b-5e85-48bd-ae65-a87226474a5f"
+      }
+    },
+    "owner": "jonsilva91"
   }
 }
