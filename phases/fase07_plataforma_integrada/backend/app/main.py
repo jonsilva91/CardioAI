@@ -16,7 +16,11 @@ from app.auth import (
     verificar_credenciais_demo,
 )
 from app.chat_service import processar_mensagem_chat
-from app.config import get_allowed_origins, has_openai_api_key
+from app.config import (
+    get_allowed_origins,
+    has_openai_api_key,
+    validar_configuracao_obrigatoria,
+)
 from app.risk_service import processar_telemetria, verificar_modelo_carregado
 from app.schemas import (
     ChatRequest,
@@ -34,7 +38,9 @@ from app.store import store
 
 
 def criar_app() -> FastAPI:
-    """Cria e configura a instância FastAPI com middlewares e rotas."""
+    """Cria e configura a instância FastAPI com middlewares e rotas, validando variáveis obrigatórias no startup."""
+    validar_configuracao_obrigatoria()
+
     application = FastAPI(
         title="CardioAI - Plataforma Integrada (Fase 7)",
         description=(

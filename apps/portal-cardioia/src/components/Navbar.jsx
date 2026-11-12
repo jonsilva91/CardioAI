@@ -19,6 +19,12 @@ export default function Navbar() {
       </div>
 
       <nav className={styles.links}>
+        <Link to="/monitoramento" className={isActive("/monitoramento")}>
+          Monitoramento
+        </Link>
+        <Link to="/assistente" className={isActive("/assistente")}>
+          Assistente IA
+        </Link>
         <Link to="/dashboard" className={isActive("/dashboard")}>
           Dashboard
         </Link>
@@ -27,9 +33,6 @@ export default function Navbar() {
         </Link>
         <Link to="/agendamentos" className={isActive("/agendamentos")}>
           Agendamentos
-        </Link>
-        <Link to="/assistente" className={isActive("/assistente")}>
-          Assistente
         </Link>
       </nav>
 

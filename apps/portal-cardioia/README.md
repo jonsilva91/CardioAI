@@ -1,6 +1,6 @@
-# Portal CardioIA — React + Vite
+# Portal CardioIA — React + Vite (Fase 7)
 
-Aplicação front-end do projeto CardioAI para visualização acadêmica de pacientes, métricas, agendamentos e assistente conversacional (Fase 5).
+Aplicação web do projeto CardioAI integrada ao Backend FastAPI da Fase 7 para monitoramento cardiológico IoT em tempo real, gráficos de série temporal (`recharts`), recomendação clínica do Sistema Multiagente (Fase 6) e assistente conversacional de triagem (`POST /api/chat`).
 
 ## Localização no repositório
 
@@ -10,42 +10,17 @@ apps/portal-cardioia/
 
 ## Funcionalidades
 
-- Autenticação simulada com rotas protegidas
-- Dashboard com métricas resumidas e pacientes em risco
-- Listagem de pacientes e agendamento de consultas
-- Assistente conversacional cardiológico integrado ao backend do Watson Assistant (Fase 5)
-- Gerenciamento de sessão individual por cliente com suporte a reinicialização ("Nova Conversa")
-- Navegação SPA com React Router
-
-## Estrutura Principal
-
-```text
-apps/portal-cardioia/
-├── .env.example              # Exemplo de variáveis de ambiente do front-end
-├── package.json
-├── vite.config.js
-├── index.html
-└── src/
-    ├── components/
-    │   ├── ChatAssistente.jsx          # Componente único, modular e consolidado de chat
-    │   ├── ChatAssistente.module.css   # Estilos centralizados do chat
-    │   ├── Navbar.jsx
-    │   ├── ProtectedRoute.jsx
-    │   └── StatCard.jsx
-    ├── config.js                       # Centralização de URLs do backend e endpoints
-    ├── contexts/
-    ├── data/
-    ├── pages/
-    │   ├── AssistenteChat/             # Página do assistente consumindo ChatAssistente
-    │   ├── Agendamentos.jsx
-    │   ├── Dashboard.jsx
-    │   ├── Login.jsx
-    │   └── Pacientes.jsx
-    ├── services/
-    ├── App.jsx
-    ├── main.jsx
-    └── routes.jsx
-```
+- Autenticação real com JWT (`POST /api/auth/login`), logout e rotas protegidas (redirecionamento automático em `401`)
+- Página `/monitoramento` como rota inicial após login:
+  - Indicador de risco em destaque (`BAIXO` / `MODERADO` / `ALTO` com cor e texto + probabilidade)
+  - Cards de BPM, SpO2, Temperatura e Horário da última leitura
+  - Lista de protocolos clínicos acionados
+  - Gráfico de série histórica com `recharts` (`GET /api/pacientes/{id}/historico`)
+  - Polling automático a cada 5 s com indicador `"Ao vivo / Sem dados novos há X s"`
+  - Botão **"Gerar recomendação com IA"** (`POST /api/pacientes/{id}/recomendacao`)
+  - Aviso `"Servidor acordando, aguarde..."` durante cold start do backend
+- Assistente conversacional integrado a `POST /api/chat` (OpenAI + memória por `session_id`)
+- Configuração SPA para deploy na Vercel (`vercel.json`)
 
 ## Configuração de Variáveis de Ambiente
 
@@ -55,21 +30,15 @@ Crie um arquivo `.env` baseado no `.env.example`:
 cp .env.example .env
 ```
 
-Conteúdo padrão do `.env`:
+Conteúdo de `.env.example`:
 
 ```env
-# URL base do servidor backend (Flask / Watson Assistant - Fase 5)
-VITE_BACKEND_URL=http://localhost:5001
+VITE_API_URL=https://cardioai-fase07-backend.onrender.com
 ```
-
-O arquivo `src/config.js` carrega essa configuração automaticamente, garantindo que nenhuma URL fique hardcoded no código.
 
 ## Credenciais de Acesso
 
-```text
-E-mail: admin@cardioia.com
-Senha: 123456
-```
+Utilize os valores configurados nas variáveis de ambiente `DEMO_EMAIL` e `DEMO_PASSWORD` do backend da Fase 7.
 
 ## Como Executar
 
@@ -78,16 +47,3 @@ cd apps/portal-cardioia
 npm install
 npm run dev
 ```
-
-Acesse a URL exibida no terminal, normalmente:
-
-```text
-http://localhost:5173
-```
-
-## Tecnologias
-
-- React 19
-- Vite
-- React Router DOM
-- CSS Modules

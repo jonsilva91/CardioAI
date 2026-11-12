@@ -12,10 +12,14 @@ exigido pelo modelo preditivo da Fase 6.
 
 from __future__ import annotations
 
+import logging
 import os
-import sys
 from pathlib import Path
+import secrets
+import sys
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 # Resolução de diretórios a partir da localização deste arquivo (app/config.py)
 APP_DIR = Path(__file__).resolve().parent
@@ -65,6 +69,14 @@ MAX_LEITURAS_POR_PACIENTE: int = 200
 RECOMENDACAO_COOLDOWN_SECONDS: float = 30.0
 DISCLAIMER_FIXO: str = "Não substitui avaliação médica."
 
+# Segredo JWT efêmero por processo (utilizado apenas quando APP_ENV=dev e JWT_SECRET está ausente)
+_DEV_JWT_SECRET: str | None = None
+
+
+def get_app_env() -> str:
+    """Retorna o ambiente de execução configurado em APP_ENV."""
+    return os.getenv("APP_ENV", "").strip().lower()
+
 
 def get_openai_api_key() -> str:
     """Retorna a chave da OpenAI configurada no ambiente (ou string vazia se ausente)."""
@@ -82,11 +94,28 @@ def get_openai_model() -> str:
 
 
 def get_jwt_secret() -> str:
-    """Retorna o segredo de assinatura JWT configurado em JWT_SECRET."""
-    return os.getenv(
-        "JWT_SECRET",
-        "cardioai-fase07-jwt-secret-key-default-32bytes-min",
-    ).strip()
+    """Retorna o segredo de assinatura JWT configurado em JWT_SECRET.
+
+    Se ausente/vazio:
+    - Em APP_ENV=dev: gera segredo aleatório por processo via secrets.token_urlsafe e emite warning.
+    - Caso contrário: lança RuntimeError informando que JWT_SECRET é obrigatório.
+    """
+    global _DEV_JWT_SECRET
+    secret = os.getenv("JWT_SECRET", "").strip()
+    if secret:
+        return secret
+
+    if get_app_env() == "dev":
+        if _DEV_JWT_SECRET is None:
+            _DEV_JWT_SECRET = secrets.token_urlsafe(32)
+            logger.warning(
+                "APP_ENV=dev e JWT_SECRET não definido: gerado JWT_SECRET aleatório efêmero para este processo."
+            )
+        return _DEV_JWT_SECRET
+
+    raise RuntimeError(
+        "Configuração obrigatória ausente: a variável de ambiente 'JWT_SECRET' deve ser definida (ou use APP_ENV=dev em desenvolvimento)."
+    )
 
 
 def get_jwt_algorithm() -> str:
@@ -103,23 +132,61 @@ def get_jwt_exp_minutes() -> int:
 
 
 def get_device_token() -> str:
-    """Retorna o token esperado no header X-Device-Token para ingestão IoT."""
-    return os.getenv("DEVICE_TOKEN", "cardioai-iot-device-token-2026").strip()
+    """Retorna o token obrigatório esperado no header X-Device-Token para ingestão IoT."""
+    token = os.getenv("DEVICE_TOKEN", "").strip()
+    if not token:
+        raise RuntimeError(
+            "Configuração obrigatória ausente: a variável de ambiente 'DEVICE_TOKEN' não está definida."
+        )
+    return token
 
 
 def get_demo_email() -> str:
-    """Retorna o e-mail do usuário de demonstração autorizado no login."""
-    return os.getenv("DEMO_EMAIL", "admin@cardioia.com").strip()
+    """Retorna o e-mail obrigatório do usuário de demonstração autorizado no login."""
+    email = os.getenv("DEMO_EMAIL", "").strip()
+    if not email:
+        raise RuntimeError(
+            "Configuração obrigatória ausente: a variável de ambiente 'DEMO_EMAIL' não está definida."
+        )
+    return email
 
 
 def get_demo_password() -> str:
-    """Retorna a senha do usuário de demonstração autorizado no login."""
-    return os.getenv("DEMO_PASSWORD", "123456").strip()
+    """Retorna a senha obrigatória do usuário de demonstração autorizado no login."""
+    password = os.getenv("DEMO_PASSWORD", "").strip()
+    if not password:
+        raise RuntimeError(
+            "Configuração obrigatória ausente: a variável de ambiente 'DEMO_PASSWORD' não está definida."
+        )
+    return password
 
 
 def get_allowed_origins() -> list[str]:
-    """Retorna a lista de origens permitidas pelo CORS a partir de ALLOWED_ORIGINS."""
-    raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000")
+    """Retorna a lista de origens permitidas pelo CORS a partir de ALLOWED_ORIGINS (padrão localhost)."""
+    raw = (
+        os.getenv("ALLOWED_ORIGINS", "").strip()
+        or "http://localhost:5173,http://localhost:3000"
+    )
     origins = [origin.strip() for origin in raw.split(",") if origin.strip()]
     return origins
 
+
+def validar_configuracao_obrigatoria() -> None:
+    """Valida no startup se todas as variáveis obrigatórias estão preenchidas (sem exibir valores)."""
+    faltantes: list[str] = []
+
+    if not os.getenv("JWT_SECRET", "").strip():
+        if get_app_env() == "dev":
+            get_jwt_secret()
+        else:
+            faltantes.append("JWT_SECRET")
+
+    for var_name in ("DEVICE_TOKEN", "DEMO_EMAIL", "DEMO_PASSWORD"):
+        if not os.getenv(var_name, "").strip():
+            faltantes.append(var_name)
+
+    if faltantes:
+        lista_str = ", ".join(faltantes)
+        raise RuntimeError(
+            f"Falha no startup do backend: variáveis de ambiente obrigatórias ausentes ou vazias: {lista_str}."
+        )

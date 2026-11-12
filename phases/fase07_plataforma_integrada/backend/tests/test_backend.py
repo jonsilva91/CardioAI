@@ -6,10 +6,19 @@ determinísticos REAIS da Fase 6, SEM realizar chamadas de rede para a API da Op
 
 from __future__ import annotations
 
+import logging
+import os
 from types import SimpleNamespace
 from fastapi.testclient import TestClient
 import pytest
 
+# Garante variáveis mínimas para o import inicial do módulo app.main caso não haja .env
+os.environ.setdefault("JWT_SECRET", "segredo-jwt-inicial-para-import-de-teste-32b")
+os.environ.setdefault("DEVICE_TOKEN", "token-iot-inicial-teste")
+os.environ.setdefault("DEMO_EMAIL", "clinico.teste@cardioai.local")
+os.environ.setdefault("DEMO_PASSWORD", "SenhaForteTeste!2026")
+
+import app.config as app_config
 from app.config import CENARIO_PADRAO, DISCLAIMER_FIXO
 from app.main import criar_app
 from app.store import store
@@ -17,11 +26,13 @@ import src.agents_system as fase06_agents
 
 
 @pytest.fixture(autouse=True)
-def limpar_estado_E_ambiente(monkeypatch: pytest.MonkeyPatch):
-    """Restaura variáveis de ambiente de teste e limpa o store em memória antes de cada teste."""
+def limpar_estado_e_ambiente(monkeypatch: pytest.MonkeyPatch):
+    """Define variáveis obrigatórias via monkeypatch e limpa o store antes de cada teste."""
     store.limpar_tudo()
-    monkeypatch.setenv("DEMO_EMAIL", "admin@cardioia.com")
-    monkeypatch.setenv("DEMO_PASSWORD", "123456")
+    app_config._DEV_JWT_SECRET = None
+    monkeypatch.setenv("APP_ENV", "test")
+    monkeypatch.setenv("DEMO_EMAIL", "clinico.teste@cardioai.local")
+    monkeypatch.setenv("DEMO_PASSWORD", "SenhaForteTeste!2026")
     monkeypatch.setenv("JWT_SECRET", "segredo-jwt-de-teste-unitario-com-mais-de-32-bytes")
     monkeypatch.setenv("DEVICE_TOKEN", "token-iot-teste-2026")
     monkeypatch.setenv("ALLOWED_ORIGINS", "http://localhost:5173,https://cardioai.vercel.app")
@@ -37,10 +48,10 @@ def client() -> TestClient:
 
 @pytest.fixture
 def auth_headers(client: TestClient) -> dict[str, str]:
-    """Autentica com o usuário de demo e retorna o cabeçalho Authorization Bearer."""
+    """Autentica com o usuário configurado no ambiente de teste e retorna Authorization Bearer."""
     resp = client.post(
         "/api/auth/login",
-        json={"email": "admin@cardioia.com", "senha": "123456"},
+        json={"email": "clinico.teste@cardioai.local", "senha": "SenhaForteTeste!2026"},
     )
     assert resp.status_code == 200
     token = resp.json()["access_token"]
@@ -51,6 +62,44 @@ def auth_headers(client: TestClient) -> dict[str, str]:
 def device_headers() -> dict[str, str]:
     """Retorna o cabeçalho X-Device-Token válido para o dispositivo IoT."""
     return {"X-Device-Token": "token-iot-teste-2026"}
+
+
+def test_startup_falha_quando_variaveis_obrigatorias_ausentes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Verifica que a aplicação falha no startup indicando claramente qual variável falta."""
+    for var_obrigatoria in ("JWT_SECRET", "DEVICE_TOKEN", "DEMO_EMAIL", "DEMO_PASSWORD"):
+        monkeypatch.setenv("JWT_SECRET", "segredo-jwt-de-teste-unitario-com-mais-de-32-bytes")
+        monkeypatch.setenv("DEVICE_TOKEN", "token-iot-teste-2026")
+        monkeypatch.setenv("DEMO_EMAIL", "clinico.teste@cardioai.local")
+        monkeypatch.setenv("DEMO_PASSWORD", "SenhaForteTeste!2026")
+        monkeypatch.setenv(var_obrigatoria, "")
+
+        with pytest.raises(RuntimeError) as exc_info:
+            criar_app()
+        assert var_obrigatoria in str(exc_info.value)
+
+
+def test_app_env_dev_gera_jwt_secret_aleatorio_mas_exige_demais_variaveis(
+    monkeypatch: pytest.MonkeyPatch,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Se APP_ENV=dev, gera JWT_SECRET aleatório e loga aviso; DEMO_* e DEVICE_TOKEN seguem obrigatórios."""
+    monkeypatch.setenv("APP_ENV", "dev")
+    monkeypatch.setenv("JWT_SECRET", "")
+    app_config._DEV_JWT_SECRET = None
+
+    with caplog.at_level(logging.WARNING):
+        app_dev = criar_app()
+        assert app_dev is not None
+        segredo_gerado = app_config.get_jwt_secret()
+        assert len(segredo_gerado) >= 32
+        assert "APP_ENV=dev" in caplog.text
+
+    # Mesmo em APP_ENV=dev, DEVICE_TOKEN e DEMO_* continuam obrigatórios
+    monkeypatch.setenv("DEVICE_TOKEN", "")
+    with pytest.raises(RuntimeError, match="DEVICE_TOKEN"):
+        criar_app()
 
 
 def test_health_endpoint_nunca_expoe_valor_da_chave(
@@ -80,7 +129,7 @@ def test_login_sucesso_e_falha(client: TestClient) -> None:
     """Testa login com credenciais válidas e rejeição (401) com senha inválida."""
     resp_ok = client.post(
         "/api/auth/login",
-        json={"email": "admin@cardioia.com", "senha": "123456"},
+        json={"email": "clinico.teste@cardioai.local", "senha": "SenhaForteTeste!2026"},
     )
     assert resp_ok.status_code == 200
     body = resp_ok.json()
@@ -89,7 +138,7 @@ def test_login_sucesso_e_falha(client: TestClient) -> None:
 
     resp_err = client.post(
         "/api/auth/login",
-        json={"email": "admin@cardioia.com", "senha": "senha-errada"},
+        json={"email": "clinico.teste@cardioai.local", "senha": "senha-errada"},
     )
     assert resp_err.status_code == 401
 
@@ -320,4 +369,3 @@ def test_cors_respeita_allowed_origins(client: TestClient) -> None:
         },
     )
     assert resp_bloqueada.headers.get("access-control-allow-origin") is None
-

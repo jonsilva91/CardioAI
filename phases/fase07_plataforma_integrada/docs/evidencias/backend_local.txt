@@ -44,7 +44,7 @@ Resposta JSON:
 {
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5c...[JWT_ASSINADO]",
   "token_type": "bearer",
-  "email": "admin@cardioia.com",
+  "email": "<DEMO_EMAIL_CONFIGURADO>",
   "expires_in": 28800
 }
 

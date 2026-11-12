@@ -13,24 +13,38 @@ export default function Login() {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [wakingUp, setWakingUp] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setError("");
+    setLoading(true);
+    setWakingUp(false);
 
-    const result = login(form.email, form.password);
+    const wakeTimer = setTimeout(() => {
+      setWakingUp(true);
+    }, 2000);
 
-    if (result.success) {
-      navigate("/dashboard");
-      return;
+    try {
+      const result = await login(form.email, form.password);
+
+      if (result.success) {
+        navigate("/monitoramento", { replace: true });
+        return;
+      }
+
+      setError(result.message);
+    } finally {
+      clearTimeout(wakeTimer);
+      setLoading(false);
+      setWakingUp(false);
     }
-
-    setError(result.message);
   }
 
   return (
@@ -38,7 +52,7 @@ export default function Login() {
       <div className={styles.card}>
         <h1>CardioIA</h1>
         <p className={styles.subtitle}>
-          Faça login para acessar o portal de cardiologia inteligente.
+          Faça login para acessar o portal de cardiologia inteligente (Fase 7).
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -47,9 +61,11 @@ export default function Login() {
             <input
               type="email"
               name="email"
-              placeholder="admin@cardioia.com"
+              placeholder="seu.email@hospital.org"
               value={form.email}
               onChange={handleChange}
+              disabled={loading}
+              required
             />
           </label>
 
@@ -58,21 +74,30 @@ export default function Login() {
             <input
               type="password"
               name="password"
-              placeholder="123456"
+              placeholder="Digite sua senha"
               value={form.password}
               onChange={handleChange}
+              disabled={loading}
+              required
             />
           </label>
 
+          {wakingUp && (
+            <p className={styles.subtitle}>
+              ⏳ Servidor acordando, aguarde alguns segundos...
+            </p>
+          )}
+
           {error && <p className={styles.error}>{error}</p>}
 
-          <button type="submit">Entrar</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Autenticando..." : "Entrar"}
+          </button>
         </form>
 
         <div className={styles.credentials}>
-          <strong>Credenciais de teste</strong>
-          <span>E-mail: admin@cardioia.com</span>
-          <span>Senha: 123456</span>
+          <strong>Autenticação JWT (Fase 7)</strong>
+          <span>Utilize as credenciais DEMO_EMAIL / DEMO_PASSWORD configuradas no backend.</span>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { useAuth } from "./contexts/useAuth";
 import Agendamentos from "./pages/Agendamentos";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import Monitoramento from "./pages/Monitoramento";
 import Pacientes from "./pages/Pacientes";
 import AssistenteChat from "./pages/AssistenteChat/AssistenteChat";
 
@@ -15,7 +16,20 @@ function RouterContent() {
       <Route
         path="/"
         element={
-          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />
+          isAuthenticated ? (
+            <Navigate to="/monitoramento" replace />
+          ) : (
+            <Login />
+          )
+        }
+      />
+
+      <Route
+        path="/monitoramento"
+        element={
+          <ProtectedRoute>
+            <Monitoramento />
+          </ProtectedRoute>
         }
       />
 

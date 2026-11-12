@@ -1,0 +1,354 @@
+.page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.content {
+  padding: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.titleGroup h2 {
+  font-size: 28px;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.titleGroup p {
+  color: #475569;
+  font-size: 14px;
+}
+
+.controlsGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.patientSelector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 6px 12px;
+}
+
+.patientSelector label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.patientSelector input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  width: 130px;
+}
+
+.liveBadge,
+.staleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.liveBadge {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.staleBadge {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.wakeBanner {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1e40af;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.errorBanner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.riskHero {
+  border-radius: 18px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  border-width: 2px;
+  border-style: solid;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.riskBaixo {
+  background: #f0fdf4;
+  border-color: #22c55e;
+  color: #14532d;
+}
+
+.riskModerado {
+  background: #fffbeb;
+  border-color: #f59e0b;
+  color: #78350f;
+}
+
+.riskAlto {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.riskLabelSmall {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.85;
+}
+
+.riskClassText {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 4px 0;
+}
+
+.riskSubText {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.riskProbBox {
+  text-align: right;
+}
+
+.riskProbValue {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.riskProbCaption {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.vitalCard {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.vitalHeader {
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.vitalNumber {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.vitalUnit {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 6px;
+}
+
+.vitalMeta {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.panel h3 {
+  font-size: 18px;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 280px;
+}
+
+.protocolList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.protocolItem {
+  background: #fff1f2;
+  border-left: 4px solid #e11d48;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: #881337;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.emptyProtocol {
+  color: #64748b;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.aiSection {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.aiHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.aiHeader h3 {
+  font-size: 20px;
+  color: #0f172a;
+  margin: 0;
+}
+
+.aiButton {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aiButton:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.aiButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.aiResult {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 12px;
+}
+
+.aiResult h4 {
+  color: #0f172a;
+  margin: 14px 0 8px;
+  font-size: 15px;
+}
+
+.aiResult ul {
+  margin: 0 0 12px 20px;
+  color: #334155;
+}
+
+.aiResult li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.aiJustification {
+  color: #1e293b;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.aiDisclaimer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+  font-style: italic;
+}
+
+@media (max-width: 920px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

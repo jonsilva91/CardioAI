@@ -1,27 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { API_ENDPOINTS } from "../config";
+import { useAuth } from "../contexts/useAuth";
 import styles from "./ChatAssistente.module.css";
 
 const INITIAL_MESSAGE = {
   id: 1,
   role: "bot",
-  text: "Olá! Sou o assistente virtual do CardioAI. Posso ajudar com dúvidas sobre sintomas, agendamento de consulta e resultados de ECG. Importante: este assistente não substitui avaliação médica e não fornece diagnóstico. Como posso ajudar?",
+  text: "Olá! Sou o assistente cardiológico de triagem do CardioIA. Posso auxiliar na interpretação de sinais vitais (BPM, SpO2, temperatura), avaliação inicial de sintomas e protocolos de risco. Não substitui avaliação médica.",
   urgent: false,
 };
 
 /**
- * Componente modular e reutilizável de Chat do Assistente CardioAI.
- * 
- * Centraliza todo o fluxo de mensagens, gerenciamento de sessão individual
- * com o Watson Assistant (Fase 5), tratamento de urgência e renderização.
+ * Componente de Chat do Assistente Cardiológico de Triagem integrado ao
+ * endpoint POST /api/chat do Backend da Fase 7 (OpenAI real + memória por session_id).
  */
 export function ChatAssistente({
-  title = "Assistente CardioAI (Fase 5)",
-  subtitle = "Triagem inicial · não substitui avaliação médica",
-  disclaimer = "Protótipo Não-Diagnóstico",
-  variant = "full", // "full" ou "widget"
+  title = "Assistente Cardiológico de Triagem (Fase 7)",
+  subtitle = "LLM OpenAI · Não substitui avaliação médica.",
+  disclaimer = "Não substitui avaliação médica.",
+  variant = "full",
   className = "",
 }) {
+  const { token, logout } = useAuth();
   const [sessionId, setSessionId] = useState(null);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [inputValue, setInputValue] = useState("");
@@ -55,46 +55,66 @@ export function ChatAssistente({
     setError(null);
 
     try {
+      const payload = {
+        mensagem: text,
+      };
+      if (sessionId) {
+        payload.session_id = sessionId;
+      }
+
       const res = await fetch(API_ENDPOINTS.chat, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          session_id: sessionId,
-        }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        throw new Error(`Servidor respondeu ${res.status}`);
+      if (res.status === 401) {
+        logout();
+        return;
       }
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      // Mantém a sessão individual sincronizada com o Watson Assistant
-      if (data.session_id) {
+      if (!res.ok) {
+        throw new Error(
+          data?.detail || `Servidor respondeu com status ${res.status}`
+        );
+      }
+
+      if (data?.session_id) {
         setSessionId(data.session_id);
       }
+
+      const textoResposta =
+        data?.resposta ??
+        data?.response ??
+        "Desculpe, não consegui gerar uma resposta.";
 
       const botMessage = {
         id: Date.now() + 1,
         role: "bot",
-        text: data.response ?? "Desculpe, não consegui gerar uma resposta.",
-        urgent: Boolean(data.urgent),
-        source: data.source,
+        text: textoResposta,
+        urgent:
+          textoResposta.toLowerCase().includes("emergência") ||
+          textoResposta.toLowerCase().includes("alerta vermelho"),
       };
 
       setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
-      console.error("Erro ao comunicar com o assistente:", err);
       setError(
-        "Não foi possível conectar ao backend do assistente. Verifique se o serviço está ativo.",
+        err.message ||
+          "Não foi possível conectar ao backend do assistente. Verifique se o serviço está ativo."
       );
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now() + 1,
           role: "bot",
-          text: "Desculpe, tive um problema técnico para responder. Tente novamente em instantes.",
+          text: "Desculpe, tive um problema técnico para responder. Tente novamente em instantes. Não substitui avaliação médica.",
           urgent: false,
         },
       ]);
@@ -103,25 +123,13 @@ export function ChatAssistente({
     }
   }
 
-  async function handleResetSession() {
-    if (sessionId) {
-      try {
-        await fetch(API_ENDPOINTS.sessionClose, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ session_id: sessionId }),
-        });
-      } catch (err) {
-        console.warn("Aviso ao encerrar sessão no backend:", err);
-      }
-    }
-
+  function handleResetSession() {
     setSessionId(null);
     setMessages([
       {
         id: Date.now(),
         role: "bot",
-        text: "Sessão reiniciada com sucesso. Como posso ajudar você agora?",
+        text: "Sessão reiniciada com sucesso. Como posso ajudar você agora? Não substitui avaliação médica.",
         urgent: false,
       },
     ]);
@@ -151,7 +159,7 @@ export function ChatAssistente({
               title={`ID da sessão: ${sessionId}`}
             >
               <span className={styles.sessionDot}>●</span>
-              Sessão: {sessionId.startsWith("local-") ? `Local (${sessionId.slice(6, 14)})` : `${sessionId.slice(0, 10)}...`}
+              Sessão: {sessionId.slice(0, 12)}...
             </span>
           )}
 
@@ -163,7 +171,7 @@ export function ChatAssistente({
             type="button"
             className={styles.resetButton}
             onClick={handleResetSession}
-            title="Encerrar sessão atual e iniciar nova conversa"
+            title="Iniciar nova conversa"
           >
             Nova Conversa
           </button>
@@ -182,7 +190,7 @@ export function ChatAssistente({
               }`}
             >
               {msg.urgent && (
-                <div className={styles.urgentTag}>⚠️ ATENÇÃO / EMERGÊNCIA</div>
+                <div className={styles.urgentTag}>⚠️ ATENÇÃO / TRIAGEM</div>
               )}
               {msg.text}
             </div>
@@ -192,7 +200,7 @@ export function ChatAssistente({
         {isTyping && (
           <div className={`${styles.messageRow} ${styles.bot}`}>
             <div className={styles.typingIndicator}>
-              CardioAI está digitando...
+              CardioIA está analisando...
             </div>
           </div>
         )}
@@ -209,7 +217,7 @@ export function ChatAssistente({
             className={styles.chatInput}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Digite sua mensagem (ex: sinto dor no peito, ou o que é classe V?)..."
+            placeholder="Digite sua dúvida clínica ou sintomas para triagem..."
             disabled={isTyping}
           />
           <button
