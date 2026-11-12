@@ -44,7 +44,7 @@ function obterTemaRisco(classificacao) {
 }
 
 export default function MonitoramentoScreen({ sessao, onLogout }) {
-  const [pacienteId, setPacienteId] = useState("paciente-01");
+  const [pacienteId, setPacienteId] = useState("PAC-001");
   const [statusDados, setStatusDados] = useState(null);
   const [carregandoStatus, setCarregandoStatus] = useState(true);
   const [atualizandoPull, setAtualizandoPull] = useState(false);
@@ -161,7 +161,7 @@ export default function MonitoramentoScreen({ sessao, onLogout }) {
             setRecomendacao(null);
             setErroIA(null);
           }}
-          placeholder="paciente-01"
+          placeholder="PAC-001"
           placeholderTextColor="#64748b"
           autoCapitalize="none"
         />

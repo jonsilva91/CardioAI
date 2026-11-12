@@ -65,7 +65,7 @@ export default function LoginScreen({ onLoginSuccess }) {
         <Text style={styles.label}>E-mail</Text>
         <TextInput
           style={styles.input}
-          placeholder="admin@cardioia.com"
+          placeholder="seu.email@hospital.org"
           placeholderTextColor="#94a3b8"
           keyboardType="email-address"
           autoCapitalize="none"

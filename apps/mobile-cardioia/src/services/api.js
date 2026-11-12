@@ -99,8 +99,10 @@ export async function loginUsuario(email, senha) {
   return data;
 }
 
-export async function buscarStatusPaciente(pacienteId, token) {
-  const idCodificado = encodeURIComponent(pacienteId.trim());
+export async function buscarStatusPaciente(pacienteId = "PAC-001", token) {
+  const idCodificado = encodeURIComponent(
+    (pacienteId || "PAC-001").trim()
+  );
   const response = await fetch(
     `${API_BASE_URL}/api/pacientes/${idCodificado}/status`,
     {
@@ -115,8 +117,10 @@ export async function buscarStatusPaciente(pacienteId, token) {
   return parseJsonOuErro(response);
 }
 
-export async function solicitarRecomendacaoIA(pacienteId, token) {
-  const idCodificado = encodeURIComponent(pacienteId.trim());
+export async function solicitarRecomendacaoIA(pacienteId = "PAC-001", token) {
+  const idCodificado = encodeURIComponent(
+    (pacienteId || "PAC-001").trim()
+  );
   const response = await fetch(
     `${API_BASE_URL}/api/pacientes/${idCodificado}/recomendacao`,
     {
